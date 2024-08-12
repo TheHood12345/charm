@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoMdHeadset } from "react-icons/io";
 import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 // import { BeatLoader } from "react-spinners"; // Ensure this package is installed
 
 export const SecondAdd = () => {
@@ -174,6 +175,7 @@ export const SecondAdd = () => {
 
           {/* Buttons with Loading Effect */}
           <div>
+            <Link to="/postadd">
             <button
               onClick={handleNextClick}
               className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center"
@@ -181,6 +183,7 @@ export const SecondAdd = () => {
             >
               {isLoadingNext ? <div className="spinner"></div> : "Next"}
             </button>
+            </Link>
             <button
               onClick={handlePreviousClick}
               className="bg-[#1DD55E] w-full rounded-md py-2 text-white flex items-center justify-center"
