@@ -1,9 +1,9 @@
-
+import { SuccessfuCard } from "./SucceessfuCard";
 
 const Successful = () => {
   return (
-    <div>
-      successful
+    <div className="flex items-center justify-center min-h-screen bg-gray-950 text-white overflow-hidden">
+   <SuccessfuCard/>
     </div>
   );
 }
