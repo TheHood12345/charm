@@ -30,7 +30,7 @@ const UserForm = () => {
   };
 
   return (
-    <div className="max-w-lg w-full mx-auto p-4">
+    <div className="max-w-lg w-full bg-gray-200 mx-auto p-4">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">

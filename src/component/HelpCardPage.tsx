@@ -3,7 +3,7 @@ import React from 'react';
 
 const HelpCardPage: React.FC = () => {
     return (
-        <div className="max-w-4xl min-h-screen mx-auto p-6 bg-white shadow-lg rounded-lg mt-2">
+        <div className="max-w-4xl bg-gray-200 h-auto mx-auto p-6  shadow-lg rounded-lg">
             <div className="mb-8">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Information</h2>
                 <p className="text-gray-700 mb-4">

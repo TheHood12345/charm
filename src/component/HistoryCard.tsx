@@ -7,7 +7,7 @@ interface CardProps{
 }
 const HistoryCard = ({ amount, type, date, address }:CardProps) => {
   return (
-    <div className="bg-white h-full shadow-lg rounded-lg p-6 max-w-sm mx-auto my-4">
+    <div className="bg-gray-200 min-h-full shadow-lg rounded-lg p-6 max-w-sm mx-auto my-4">
       <div className="mb-4 flex justify-between items-center py-5">
         <h2 className="text-xl font-semibold text-gray-800">Amount:</h2>
         <p className="text-gray-600">${amount}</p>

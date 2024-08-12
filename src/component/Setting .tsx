@@ -14,8 +14,8 @@ export const Setting = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-200 text-white overflow-hidden relative">
-      <div className="bg-[#1DD55E] text-white  w-full h-auto py-4 p-2">
+    <div className="flex flex-col min-h-screen bg-white text-white overflow-hidden ">
+      <div className="bg-[#1DD55E] text-white w-full h-auto py-4 p-2">
         <Link to="/subhead">
         <FaArrowLeftLong className="items-start" />
         </Link>
@@ -49,15 +49,15 @@ export const Setting = () => {
           </div>
          
         </div>
-        <div className='bg-gray-800 mt-4'>
+        <div className='mt-4'>
           <div>
           {openDropdown === 'profile' && (
-            <div className="flex flex-col w-full bg-white rounded-md shadow-lg mt-4">
+            <div className="flex flex-col w-full mt-4">
               <UserForm />
             </div>
           )}
           {openDropdown === 'order' && (
-            <div className="flex flex-col w-full bg-white rounded-md shadow-lg mt-4">
+            <div className="flex flex-col w-full mt-4">
               <button className="w-full py-4 px-2 text-left hover:bg-gray-100">
                 <HistoryCard amount="$3000" type="Usdt" date="12.88pm" address="12 uyo road"/>
               </button>
