@@ -60,13 +60,13 @@ export const SecondAdd = () => {
 
           {/* Progress Indicator */}
           <div className="flex py-3 mt-4 justify-center items-center">
-            <div className="h-5 w-5 rounded-full bg-blue-700 text-white flex justify-center items-center"></div>
-            <div className="h-1 w-[30%] bg-blue-700"></div>
-            <div className="h-5 w-5 rounded-full bg-gray-700 text-white flex justify-center items-center">
+            <div className="h-5 w-5 rounded-full bg-[#1DD55E] text-white flex justify-center items-center"></div>
+            <div className="h-1 w-[30%] bg-[#1DD55E]"></div>
+            <div className="h-5 w-5 rounded-full bg-[#1DD55E] text-white flex justify-center items-center">
               2
             </div>
-            <div className="h-1 w-[30%] bg-gray-700"></div>
-            <div className="h-5 w-5 rounded-full bg-gray-700 text-white flex justify-center items-center"></div>
+            <div className="h-1 w-[30%] bg-[#1DD55E]"></div>
+            <div className="h-5 w-5 rounded-full bg-[#1DD55E] text-white flex justify-center items-center"></div>
           </div>
         </div>
         <hr />
@@ -74,7 +74,7 @@ export const SecondAdd = () => {
         {/* Form Section */}
         <div className="bg-white text-black rounded-md py-4 mt-5 p-2 min-h-[500px]">
           {/* Amount to Trade */}
-          <div className="flex border rounded-md border-blue-700 w-full py-1 p-1 gap-2">
+          <div className="flex border rounded-md border-[#1DD55E] w-full py-1 p-1 gap-2">
             <input
               type="text"
               placeholder="Input Amount to Trade"
@@ -176,14 +176,14 @@ export const SecondAdd = () => {
           <div>
             <button
               onClick={handleNextClick}
-              className="bg-blue-700 w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center"
+              className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center"
               disabled={isLoadingNext}
             >
               {isLoadingNext ? <div className="spinner"></div> : "Next"}
             </button>
             <button
               onClick={handlePreviousClick}
-              className="bg-blue-700 w-full rounded-md py-2 text-white flex items-center justify-center"
+              className="bg-[#1DD55E] w-full rounded-md py-2 text-white flex items-center justify-center"
               disabled={isLoadingPrevious}
             >
               {isLoadingPrevious ? <div className="spinner"></div> : "Previous"}

@@ -68,8 +68,8 @@ export const Advert = () => {
         </div>
         <hr />
         <div className="bg-gray-800 text-white rounded-md py-4 px-2 mt-5">
-          <div className="bg-blue-700 p-2 flex justify-between items-center rounded-md">
-            <button className="bg-white font-bold text-sm px-5 rounded-md">
+          <div className="bg-[#1DD55E] p-2 flex justify-between items-center rounded-md">
+            <button className="bg-white font-bold text-sm px-5 rounded-md text-[#1DD55E]">
               BUY
             </button>
             <p className="font-bold text-sm">SELL</p>
@@ -121,14 +121,14 @@ export const Advert = () => {
           <hr />
           <div className="mt-8">
             <h1 className="text-lg font-bold">Set Your Trading Price</h1>
-            <div className="bg-blue-700 p-2 flex justify-between items-center rounded-md mt-2">
-              <button className="bg-white px-10 py-1 rounded-md">
+            <div className="bg-[#1DD55E] p-2 flex justify-between items-center rounded-md mt-2">
+              <button className="bg-white text-[#1DD55E] px-10 py-1 rounded-md">
                 Floating
               </button>
               <p className="text-white">Fixed</p>
             </div>
             <h1 className="mt-2">Tap to Set Your Trading Price Below</h1>
-            <div className="bg-blue-700 p-2 mt-2 w-full max-w-md mx-auto rounded-md flex justify-between items-center text-white">
+            <div className="bg-[#1DD55E] p-2 mt-2 w-full max-w-md mx-auto rounded-md flex justify-between items-center text-white">
               <button className="text-2xl px-2 py-1" onClick={handleDecrement}>
                 -
               </button>
@@ -146,7 +146,7 @@ export const Advert = () => {
               <h1 className="text-sm">NGN0</h1>
             </div>
             <button
-              className={`bg-blue-700 w-full mt-4 rounded-md py-2 text-white ${
+              className={`bg-[#1DD55E] w-full mt-4 rounded-md py-2 text-white ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
               onClick={handleNextClick}

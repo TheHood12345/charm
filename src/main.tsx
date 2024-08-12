@@ -198,6 +198,7 @@ const router = createBrowserRouter([
         element: (
           <>
             <Advert />
+            <Footer />
           </>
         ),
       },
