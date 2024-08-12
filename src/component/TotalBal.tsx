@@ -108,7 +108,7 @@ export const TotalBal: React.FC = () => {
           <input
             type="text"
             placeholder="Search"
-            className="w-full  h-full outline-none bg-transparent text-slate-200 font-bold text-sm mb-2 mt-2"
+            className="w-full h-full outline-none bg-transparent text-slate-200 font-bold text-sm mb-2 mt-2"
           />
         </div>
         <div className="py-4 rounded-lg flex justify-between items-center mt-4 p-5 text-lg w-full mb-2">

@@ -3,6 +3,7 @@ import { CiSettings } from "react-icons/ci";
 import { IoMdHeadset } from "react-icons/io";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const SubNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,9 @@ export const SubNav = () => {
 
         <div className="flex gap-4">
           <IoMdHeadset className="text-white" size={25} />
-          <CiSettings size={25} />
+         <Link to="/setting">
+         <CiSettings size={25} />
+         </Link>
         </div>
       </div>
     </div>
