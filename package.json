@@ -15,6 +15,7 @@
     "@types/redux": "^3.6.0",
     "axios": "^1.6.2",
     "dotenv": "^16.4.5",
+    "framer-motion": "^11.3.24",
     "keen-slider": "^6.8.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
