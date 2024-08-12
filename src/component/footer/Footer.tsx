@@ -1,5 +1,6 @@
-import { FaBaseball, FaGlassWater } from "react-icons/fa6";
 import { SiCoinmarketcap } from "react-icons/si";
+import { FaWallet } from "react-icons/fa";
+import { PiTrademarkFill } from "react-icons/pi";
 
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
@@ -18,12 +19,12 @@ const footerItmems = [
 
   {
     title: "Trade",
-    icons: <FaBaseball />,
+    icons: <PiTrademarkFill />,
     path: "/spot",
   },
   {
     title: "Wallet",
-    icons: <FaGlassWater />,
+    icons: <FaWallet />,
     path: "/asset",
   },
 ];
@@ -38,8 +39,8 @@ export const Footer = () => {
             className="text-white hover:text-orange-500 gap-2 flex items-center justify-center"
           >
             <Link to={item.path}>
-              <div>{item.icons}</div>
-              <p>{item.title}</p>
+              <div className="ml-3 text-[#1DD55E]">{item.icons}</div>
+              <p className="text-[#1DD55E]">{item.title}</p>
             </Link>
           </div>
         ))}
