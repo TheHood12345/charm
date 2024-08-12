@@ -11,7 +11,7 @@ export const MySlider = () => {
           </h1>
           <p className=" flex items-center gap-2">
             Earn a share of 9,000,000 A8 <br />
-            <button className="px-4 bg-orange-500 py-1 text-white rounded-full flex items-center justify-center">
+            <button className="px-4 bg-[#1DD55E] py-1 text-white rounded-full flex items-center justify-center">
               <FaArrowRight />
             </button>
           </p>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import pic from "../asset/chambit.png";
+import pic from "../asset/NEWLOGO-removebg-preview (1).png";
 
 export const GetStarted = () => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export const GetStarted = () => {
         <img
           src={pic}
           alt="Chambit Logo"
-          className="w-48 h-48 object-contain"
+          className="w-52 h-52 object-contain"
         />
         <h1 className="text-center mt-5 animate-bounce text-2xl">
           Welcome to Chambit
@@ -29,7 +29,7 @@ export const GetStarted = () => {
           <button
             onClick={handleGetStarted}
             className={`w-full py-2 rounded-md font-bold text-xl transition duration-300 ${
-              loading ? "bg-gray-500" : "bg-orange-500 hover:bg-blue-600"
+              loading ? "bg-gray-500" : "bg-[#1DD55E] hover:bg-blue-600"
             }`}
             disabled={loading}
           >

@@ -1,10 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import logo from "../asset/chambit.svg";
-import {useNavigate} from "react-router-dom";
+import logo from "../asset/NEWLOGO-removebg-preview (1).png";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
-
   let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -15,8 +14,7 @@ export const Signup = () => {
     phoneNumber: "",
     password: "",
     agreedToTerms: true,
-    country: ""
-    
+    country: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +25,6 @@ export const Signup = () => {
       [e.target.name]: e.target.value,
     });
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +39,7 @@ export const Signup = () => {
       console.log("Signup successful:", response.data.data.userId);
       localStorage.removeItem("userId");
       localStorage.setItem("userId", response.data.data.userId);
-      await navigate("/otp", {state: {formData}});
+      await navigate("/otp", { state: { formData } });
       // Handle successful signup (e.g., redirect to login page)
     } catch (err) {
       console.error("Signup failed:", err);
@@ -52,17 +49,20 @@ export const Signup = () => {
     }
   };
 
-
-  
   let [country, setCountry] = useState([]);
 
-  const fetchCountries = async()=>{
-    let res = await axios.get("https://backend.chambit.exchange/api/auth/country-list");
-    setCountry(Object.values(res.data)); 
+  const fetchCountries = async () => {
+    let res = await axios.get(
+      "https://backend.chambit.exchange/api/auth/country-list"
+    );
+    setCountry(Object.values(res.data));
   };
 
   return (
-    <div style={{height:"100%"}} className="flex bg-gray-950 text-white justify-center items-center py-20 px-4 h-screen">
+    <div
+      style={{ height: "100%" }}
+      className="flex bg-gray-950 text-white justify-center items-center py-20 px-4 h-screen"
+    >
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-6">
           <img src={logo} alt="Logo" className="h-[50px]" />
@@ -130,15 +130,18 @@ export const Signup = () => {
               onFocus={fetchCountries}
               className="w-full py-2 rounded-md border bg-transparent p-2 outline-none hover:border-green-500"
             >
-              <option disabled selected>Country</option>
-              {
-                country.map((coun,index)=>
-                  (
-                  <option key={index} value={coun} style={{color: "white", backgroundColor: "rgb(6, 10, 23)"}}>{coun}</option>
-                  )
-                )
-              }
-
+              <option disabled selected>
+                Country
+              </option>
+              {country.map((coun, index) => (
+                <option
+                  key={index}
+                  value={coun}
+                  style={{ color: "white", backgroundColor: "rgb(6, 10, 23)" }}
+                >
+                  {coun}
+                </option>
+              ))}
             </select>
           </div>
           <div className="mb-4">
@@ -166,11 +169,11 @@ export const Signup = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 rounded-lg py-2 mb-2 text-xl text-white font-bold cursor-pointer hover:bg-orange-500"
+            className="w-full bg-[#1DD55E] rounded-lg py-2 mb-2 text-xl text-white font-bold cursor-pointer hover:bg-orange-500"
           >
             {loading ? "Submitting details..." : "Submit"}
           </button>
-          
+
           <p className="py-2 text-center">
             Already have an account?{" "}
             <a href="/login" className="text-orange-500">
