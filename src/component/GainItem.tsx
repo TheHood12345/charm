@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Gainorder } from "./Gainorder";
 
 export const GainItem: React.FC = () => {
   const [highlightedIndex, setHighlightedIndex] = useState<number>(0); // "Hot" is highlighted by default
+  let bottomRef = useRef<HTMLDivElement | null>(null);
 
   const handleHighlight = (index: number) => {
     setHighlightedIndex(index);
+    bottomRef.current?.scrollIntoView({behavior:"smooth"})
   };
 
   const sliderItems = [
@@ -14,6 +16,11 @@ export const GainItem: React.FC = () => {
     { title: "Losers" },
     { title: "New" },
   ];
+  
+  let [gain, setGain] = useState(true);
+  let [lose, setLose] = useState(false);
+  let [hot1, setHot1] = useState(true);
+  let [new1, setNew1] = useState(false);
 
   return (
     <div className="bg-gray-950 text-white mt-3 py-4 h-auto mb-10 px-4">
@@ -27,7 +34,34 @@ export const GainItem: React.FC = () => {
                   ? "text-[#1DD55E]"
                   : "hover:text-[#1DD55E]"
               }`}
-              onClick={() => handleHighlight(index)}
+              onClick={() => {
+
+
+                if(item.title == "Gainers"){
+                  setGain(true);
+                  setLose(false);
+                  setHot1(false);
+                  setNew1(false);
+                }
+                if(item.title == "Losers"){
+                  setGain(false);
+                  setLose(true);
+                  setHot1(false);
+                  setNew1(false);
+                }
+                if(item.title == "Hot"){
+                  setGain(false);
+                  setLose(false);
+                  setHot1(true);
+                  setNew1(false);
+                }
+                if(item.title == "New"){
+                  setGain(false);
+                  setLose(false);
+                  setHot1(false);
+                  setNew1(true);
+                }
+                handleHighlight(index)}}
             >
               {item.title}
             </div>
@@ -35,7 +69,7 @@ export const GainItem: React.FC = () => {
         </div>
       </div>
       <div>
-        <Gainorder />
+        <Gainorder gainers={gain} losers={lose} hot1={hot1} new1={new1} />
       </div>
     </div>
   );

@@ -1,9 +1,12 @@
 import { FaArrowDown91, FaBatteryEmpty, FaCircle } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Long } from "./Long";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Chart = () => {
   const [value, setValue] = useState(0.00823);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleIncrement = () => {
     setValue((prevValue) => prevValue + 0.00001);
@@ -17,34 +20,42 @@ export const Chart = () => {
     setValue(0.00823);
   };
 
+  useEffect(()=>{
+
+    window.scrollTo(0,0);
+
+  },[]);
+
+
   return (
     <div className="flex justify-center items-center bg-gray-950 text-white p-4 overflow-y-auto">
       <div className="w-full max-w-sm min-h-screen h-auto mt-20">
         <div className="flex justify-between">
           <button className="bg-gray-500 w-1/2 py-2 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 transition">
-            Chart
-          </button>
-          <button className="bg-gray-800 w-1/2 py-2 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-600 transition">
             Trade
+          </button>
+          <button onClick={()=>{navigate("/orderbook")}} className="bg-gray-800 w-1/2 py-2 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-600 transition">
+            Chart
           </button>
         </div>
 
         <div className="flex justify-between mt-6 py-4">
           <div>
             <h1>
-              RPK/USDT{" "}
-              <span className="bg-green-300 rounded-md py-1 px-4">
-                +197.11%
+              {location.state?.choosen_coin.symbol.toUpperCase()}/USDT{" "}
+              
+              <span className={Math.round(location.state?.choosen_coin.priceChange) < 1? "bg-red-500":"bg-green-500"}bg-green-300 rounded-md py-1 px-4 style={{borderRadius:"3px",paddingLeft:"20px",paddingRight:"20px"}}>
+                {Math.round(location.state?.choosen_coin.priceChange) < 1? `${Math.round(location.state?.choosen_coin.priceChange)}%`: `+${Math.round(location.state?.choosen_coin.priceChange)}%`}
               </span>
             </h1>
           </div>
-          <div>
+          {/* <div>
             <h1 className="flex gap-4 justify-center items-center">
               <p className="text-green-600">0.00%</p>
               <h2>📅</h2>
               <p>...</p>
             </h1>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-between mt-5 gap-2">
