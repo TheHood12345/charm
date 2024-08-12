@@ -43,18 +43,18 @@ export const SwapComp = () => {
             </div>
             <div className="flex items-center gap-1">
               <FaWallet className="text-gray-100" />
-              <span className="text-[#fed503]">0</span>
+              <span className="text-[#1DD55E]">0</span>
             </div>
           </div>
           {dropdownOpen === "from" && (
             <div className="absolute top-16 left-0 right-0 bg-white py-4 p-4 rounded-lg shadow-lg text-slate-500 z-20">
               <div className="flex flex-col gap-2">
                 <div className="bg-slate-200 p-2 rounded-lg flex justify-between">
-                  <h1 className="text-[#fed503] font-bold">BNB</h1>
+                  <h1 className="text-[#1DD55E] font-bold">BNB</h1>
                   <p>0.00002</p>
                 </div>
                 <div className="bg-slate-400 p-2 rounded-lg flex justify-between">
-                  <h1 className="text-[#fed503] font-bold">DONS</h1>
+                  <h1 className="text-[#1DD55E] font-bold">DONS</h1>
                   <p>0.000</p>
                 </div>
               </div>
@@ -72,21 +72,21 @@ export const SwapComp = () => {
               <div className="absolute top-16 left-0 right-0 bg-white py-4 p-4 rounded-lg shadow-lg text-slate-500 z-20">
                 <div className="flex flex-col gap-2">
                   <div className="bg-slate-200 p-2 rounded-lg flex justify-between">
-                    <h1 className="text-[#fed503] font-bold">BNB</h1>
+                    <h1 className="text-[#1DD55E]font-bold">BNB</h1>
                     <p>0.00002</p>
                   </div>
                   <div className="bg-slate-400 p-2 rounded-lg flex justify-between">
-                    <h1 className="text-[#fed503] font-bold">DONS</h1>
+                    <h1 className="text-[#1DD55E]font-bold">DONS</h1>
                     <p>0.000</p>
                   </div>
                 </div>
               </div>
             )}
             <p>
-              0 <span className="text-[#fed503] cursor-pointer">Max</span>
+              0 <span className="text-[#1DD55E] cursor-pointer">Max</span>
             </p>
           </div>
-          <div className="absolute top-[260px] left-1/2 transform -translate-x-1/2 bg-[#fed503] rounded-full h-10 w-10 flex items-center justify-center z-30">
+          <div className="absolute top-[260px] left-1/2 transform -translate-x-1/2 bg-[#1DD55E] rounded-full h-10 w-10 flex items-center justify-center z-30">
             <LuArrowDownUp size={25} className="text-white" />
           </div>
         </div>
@@ -103,18 +103,18 @@ export const SwapComp = () => {
             </div>
             <div className="flex items-center gap-1">
               <FaWallet className="text-gray-100" />
-              <span className="text-[#fed503]">0</span>
+              <span className="text-[#1DD55E]">0</span>
             </div>
           </div>
           {dropdownOpen === "to" && (
             <div className="absolute top-16 left-0 right-0 bg-white py-4 p-4 rounded-lg shadow-lg text-slate-500 z-20">
               <div className="flex flex-col gap-2">
                 <div className="bg-slate-200 p-2 rounded-lg flex justify-between">
-                  <h1 className="text-[#fed503] font-bold">BNB</h1>
+                  <h1 className="text-[#1DD55E] font-bold">BNB</h1>
                   <p>0.00002</p>
                 </div>
                 <div className="bg-slate-400 p-2 rounded-lg flex justify-between">
-                  <h1 className="text-[#fed503] font-bold">DONS</h1>
+                  <h1 className="text-[#1DD55E] font-bold">DONS</h1>
                   <p>0.000</p>
                 </div>
               </div>
@@ -132,18 +132,18 @@ export const SwapComp = () => {
               <div className="absolute top-16 left-0 right-0 bg-white py-4 p-4 rounded-lg shadow-lg text-slate-500 z-20">
                 <div className="flex flex-col gap-2">
                   <div className="bg-slate-200 p-2 rounded-lg flex justify-between">
-                    <h1 className="text-[#fed503] font-bold">BNB</h1>
+                    <h1 className="text-[#1DD55E]font-bold">BNB</h1>
                     <p>0.00002</p>
                   </div>
                   <div className="bg-slate-400 p-2 rounded-lg flex justify-between">
-                    <h1 className="text-[#fed503] font-bold">DONS</h1>
+                    <h1 className="text-[#1DD55E] font-bold">DONS</h1>
                     <p>0.000</p>
                   </div>
                 </div>
               </div>
             )}
             <p>
-              0 <span className="text-[#fed503] cursor-pointer">Max</span>
+              0 <span className="text-[#1DD55E] cursor-pointer">Max</span>
             </p>
           </div>
         </div>
@@ -159,7 +159,7 @@ export const SwapComp = () => {
 
         <button
           onClick={handleContinue}
-          className="w-full py-4 rounded-xl text-white bg-[#fed503] text-xl transition-transform transform hover:scale-105"
+          className="w-full py-4 rounded-xl text-white bg-[#1DD55E] text-xl transition-transform transform hover:scale-105"
           disabled={isLoading}
         >
           {isLoading ? (
