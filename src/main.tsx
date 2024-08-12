@@ -31,6 +31,7 @@ import { NewPassword } from "./Login/new_password.tsx";
 import { Advert } from "./component/Advert.tsx";
 import { SecondAdd } from "./component/SeconAdd.tsx";
 import { PostAdd } from "./component/PostAdd.tsx";
+import { Setting } from "./component/Setting .tsx";
 
 let userToken = localStorage.getItem("userToken");
 
@@ -217,6 +218,15 @@ const router = createBrowserRouter([
           <>
             <PostAdd />
             <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/setting",
+        element: (
+          <>
+            <Setting />
+            {/* <Footer /> */}
           </>
         ),
       },

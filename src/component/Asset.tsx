@@ -18,13 +18,7 @@ type VisibilityState = {
   kok: boolean;
 };
 
-// const iconlist = [
-//   {
-//     name: "USDT",
-//     symbols: "$",
-//     subName: "Theater KOK",
-//   },
-// ];
+
 export const Asset = () => {
   const [isVisible, setIsVisible] = useState<VisibilityState>({
     totalEquity: true,
@@ -170,27 +164,27 @@ export const Asset = () => {
         </div>
         {/* third card */}
         <div className="py-4 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2 gap-4">
-          <div className="w-full py-4 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/depositdetails">
-              <FaTradeFederation />
+              <FaTradeFederation  className="ml-4"/>
               <p className="p-1 text-sm">Deposit</p>
             </Link>
           </div>
-          <div className="w-full py-4 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/withdrawal">
-              <FaTradeFederation />
+              <FaTradeFederation className="ml-6"/>
               <p className="p-1 text-sm">Withdraw</p>
             </Link>
           </div>
-          <div className="w-full py-4 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/swap">
-              <FaTradeFederation />
+              <FaTradeFederation className="ml-3"/>
               <p className="p-1 text-sm">Swap</p>
             </Link>
           </div>
-          <div className="w-full py-4 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="">
-              <FaTradeFederation />
+              <FaTradeFederation className="ml-3 "/>
               <p className="p-1 text-sm">Stack</p>
             </Link>
           </div>
