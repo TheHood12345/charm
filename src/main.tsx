@@ -226,7 +226,7 @@ const router = createBrowserRouter([
         element: (
           <>
             <Setting />
-            {/* <Footer /> */}
+           
           </>
         ),
       },

@@ -22,7 +22,7 @@ const dataCad = [
 export const RowCard = () => {
   return (
     <div className="bg-slate-500 mt-4 rounded-md py-4 p-2">
-      <div className="flex justify-between items-center text-sm">
+      <div className="flex justify-between items-center text-sm text-[#1DD55E]">
         {dataCad.map((item, index) => (
           <div key={index}>
             <p className="pl-3">{item.icon}</p>
