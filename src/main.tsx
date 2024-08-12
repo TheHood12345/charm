@@ -32,6 +32,7 @@ import { Advert } from "./component/Advert.tsx";
 import { SecondAdd } from "./component/SeconAdd.tsx";
 import { PostAdd } from "./component/PostAdd.tsx";
 import { Setting } from "./component/Setting .tsx";
+import Successful from "./component/Successful.tsx";
 
 let userToken = localStorage.getItem("userToken");
 
@@ -218,6 +219,15 @@ const router = createBrowserRouter([
           <>
             <PostAdd />
             <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/sucessful",
+        element: (
+          <>
+            <Successful />
+           
           </>
         ),
       },

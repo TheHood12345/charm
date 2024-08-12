@@ -109,7 +109,7 @@ export const PostAdd = () => {
           </div>
           <hr />
           <div>
-           <Link to="/secondaddvert">
+           <Link to="/sucessful">
            <button
               onClick={handlePostAd}
               className={`bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center ${
@@ -146,7 +146,7 @@ export const PostAdd = () => {
               )}
             </button>
            </Link>
-           <Link to="/addvert">
+           <Link to="/secondaddvert">
            <button className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center">
               Previous
             </button>

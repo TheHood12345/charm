@@ -184,13 +184,15 @@ export const SecondAdd = () => {
               {isLoadingNext ? <div className="spinner"></div> : "Next"}
             </button>
             </Link>
-            <button
+           <Link to="/addvert">
+           <button
               onClick={handlePreviousClick}
               className="bg-[#1DD55E] w-full rounded-md py-2 text-white flex items-center justify-center"
               disabled={isLoadingPrevious}
             >
               {isLoadingPrevious ? <div className="spinner"></div> : "Previous"}
             </button>
+           </Link>
           </div>
         </div>
       </div>
