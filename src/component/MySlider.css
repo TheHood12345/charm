@@ -1,0 +1,27 @@
+/* MySlider.css */
+ @keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.slider-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.slider-wrapper {
+  display: flex;
+  animation: slideLeft 10s linear infinite;
+}
+
+.slider-item {
+  flex: 0 0 100%;
+  /* Adjust the width as needed */
+ }  
+
+
