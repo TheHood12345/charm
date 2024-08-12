@@ -129,7 +129,7 @@ export const Swap = () => {
               </div>
             ) : (
               <>
-                <div>{item.icon}</div>
+                <div className="text-sm">{item.icon}</div>
                 <p className="text-sm">{item.title}</p>
               </>
             )}
