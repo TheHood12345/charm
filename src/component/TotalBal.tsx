@@ -18,6 +18,7 @@ interface User {
 export const TotalBal: React.FC = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [deposit, setDeposit] = useState(false);
+  // const [search, setSearch] = useState("");
   const [user /*setUser*/] = useState<User>({
     isAuthenticated: false,
     balance: null,
@@ -102,9 +103,10 @@ export const TotalBal: React.FC = () => {
   return (
     <div className="bg-gray-950 py-5 text-gray-100 ">
       <div className="max-w-sm overflow-y-auto bg-slate-950">
-        <div className="text-white px-2 m-2 bg-gray-700 rounded-lg border  mt-6 flex items-center gap-2 ">
+        <div className="text-white px-2 m-2 bg-gray-700 rounded-lg border mt-6 flex items-center gap-2 ">
           <input
             type="text"
+            // value={search}
             placeholder="search you coin"
             className="w-full bg-transparent outline-none text-sm"
           />

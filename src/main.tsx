@@ -34,7 +34,7 @@ import { PostAdd } from "./component/PostAdd.tsx";
 import { Setting } from "./component/Setting .tsx";
 import Successful from "./component/Successful.tsx";
 
-let userToken = localStorage.getItem("userToken");
+const userToken = localStorage.getItem("userToken");
 
 const router = createBrowserRouter([
   {
@@ -227,7 +227,6 @@ const router = createBrowserRouter([
         element: (
           <>
             <Successful />
-           
           </>
         ),
       },
@@ -236,7 +235,6 @@ const router = createBrowserRouter([
         element: (
           <>
             <Setting />
-           
           </>
         ),
       },
