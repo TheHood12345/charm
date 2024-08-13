@@ -33,6 +33,7 @@ import { SecondAdd } from "./component/SeconAdd.tsx";
 import { PostAdd } from "./component/PostAdd.tsx";
 import { Setting } from "./component/Setting .tsx";
 import Successful from "./component/Successful.tsx";
+import { GetStartedHeader } from "./component/GetStartedHeader.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: !userToken ? (
-          <GetStarted />
+          <>
+            <GetStartedHeader />
+            <GetStarted />
+            <Footer />
+          </>
         ) : (
           <>
             <Navbar />

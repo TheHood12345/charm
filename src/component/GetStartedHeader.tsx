@@ -1,11 +1,10 @@
-import { FaBell, FaCircleUser } from "react-icons/fa6";
+import { FaCircleUser } from "react-icons/fa6";
 import { IoMdHeadset } from "react-icons/io";
-
-import logo from "../../../asset/NEWLOGO-removebg-preview (1).png";
+import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+export const GetStartedHeader = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const userToken = localStorage.getItem("userToken");
@@ -40,7 +39,7 @@ export const Navbar = () => {
 
         <div className="flex gap-4 items-center">
           <IoMdHeadset className="text-white" size={25} />
-          <FaBell size={25} />
+          {/* <FaBell size={25} /> */}
         </div>
       </div>
     </div>
