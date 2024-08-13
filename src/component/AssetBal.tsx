@@ -1,12 +1,15 @@
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FaEquals } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export const AssetBal = () => {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="bg-black text-white py-2 fixed w-full top-0 left-0 right-0 z-10 ">
         <div className="p-2">
-          <FaArrowAltCircleLeft size={25} />
+          <Link to="/asset">
+            <FaArrowAltCircleLeft size={25} />
+          </Link>
         </div>
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-2xl mb-2">Asset Balance</h1>
