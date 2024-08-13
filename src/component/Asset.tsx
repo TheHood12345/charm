@@ -44,7 +44,7 @@ export const Asset = () => {
   const [p_total, set_p_total] = useState(-1);
   let p_t = 0;
 
-  let [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     const fetch1 = async () => {
@@ -99,7 +99,7 @@ export const Asset = () => {
     };
 
     fetch1();
-  }, []);
+  }, [total_balance, total_values]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-950 text-white p-4 overflow-y-auto">
@@ -238,7 +238,7 @@ export const Asset = () => {
                                 src={b1}
                                 style={{ width: "0px", height: "0px" }}
                                 onLoad={() => {
-                                  let a = p.usd * v.balance;
+                                  const a = p.usd * v.balance;
                                   p_t += a;
                                   set_p_total(p_t);
                                   //console.log(p_total);
