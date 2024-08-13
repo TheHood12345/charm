@@ -34,6 +34,7 @@ import { PostAdd } from "./component/PostAdd.tsx";
 import { Setting } from "./component/Setting .tsx";
 import Successful from "./component/Successful.tsx";
 import { GetStartedHeader } from "./component/GetStartedHeader.tsx";
+import { AssetBal } from "./component/AssetBal.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -232,6 +233,15 @@ const router = createBrowserRouter([
         element: (
           <>
             <Successful />
+          </>
+        ),
+      },
+      {
+        path: "/assetbal",
+        element: (
+          <>
+            <AssetBal />
+            <Footer />
           </>
         ),
       },

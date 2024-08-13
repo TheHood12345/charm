@@ -2,7 +2,7 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate, useLocation } from "react-router-dom";
 import Typewriter from "typewriter-effect";
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 // const textItems = [
@@ -25,24 +25,24 @@ export const DepositDetailPage = () => {
   };
 
   const location = useLocation();
-  let [blockchain,setBlockchain] = useState([{name:null}]);
-
+  const [blockchain, setBlockchain] = useState([{ name: null }]);
 
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
 
     if (userToken) {
       axios
-        .get(`https://chambsexchange.onrender.com/api/address/asset-blockchain/${location.state}`,
+        .get(
+          `https://chambsexchange.onrender.com/api/address/asset-blockchain/${location.state}`,
           {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        })
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        )
         .then((response) => {
           console.log("Blockchain API RESPONSE:", response.data);
           setBlockchain(response.data);
-          
         })
         .catch((error) => {
           console.error("Error fetching blockchain:", error);
@@ -50,10 +50,7 @@ export const DepositDetailPage = () => {
     } else {
       console.warn("No token found");
     }
-
-    
   }, []);
-
 
   return (
     <div className="flex justify-center items-center bg-gray-950 text-white overflow-y-auto">
@@ -86,21 +83,24 @@ export const DepositDetailPage = () => {
             </div>
           </div>
           <div className="p-2 mt-4">
-          {
-              blockchain.map((item,index)=>(
-                <div
-              key={index}
-              onClick={()=>{
-                navigate("/depositview", {state: {coin:`${location.state}`,network:`${item.name}`}});
-              }}
-              className="block p-2 cursor-pointer"
+            {blockchain.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => {
+                  navigate("/depositview", {
+                    state: {
+                      coin: `${location.state}`,
+                      network: `${item.name}`,
+                    },
+                  });
+                }}
+                className="block p-2 cursor-pointer"
               >
                 <p key={index} className="text-sm font-semibold mb-4">
-                   {item.name}
+                  {item.name}
                 </p>
-            </div>
-              ))
-            }
+              </div>
+            ))}
           </div>
         </div>
       </div>

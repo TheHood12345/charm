@@ -18,7 +18,6 @@ type VisibilityState = {
   kok: boolean;
 };
 
-
 export const Asset = () => {
   const [isVisible, setIsVisible] = useState<VisibilityState>({
     totalEquity: true,
@@ -35,22 +34,20 @@ export const Asset = () => {
     }));
   };
 
-  let [total_balance, set_total_balance] = useState(-1);
-  let [total_values, set_total_values] = useState([{currency:"CHAMBS",balance:-1}]);
+  const [total_balance, set_total_balance] = useState(-1);
+  const [total_values, set_total_values] = useState([
+    { currency: "CHAMBS", balance: -1 },
+  ]);
   //let [price, setPrice] = useState({symbol:"..",currentPrice:0});
-  let [prices, setPrices] = useState([{symbol:"..",usd:0,name:""}]);
+  const [prices, setPrices] = useState([{ symbol: "..", usd: 0, name: "" }]);
 
-  let [p_total, set_p_total] = useState(-1);
+  const [p_total, set_p_total] = useState(-1);
   let p_t = 0;
 
   let [checked, setChecked] = useState(false);
 
-
-
-
   useEffect(() => {
-
-    const fetch1 = async() =>{
+    const fetch1 = async () => {
       const userToken = localStorage.getItem("userToken");
 
       if (userToken) {
@@ -62,18 +59,18 @@ export const Asset = () => {
           })
           .then((response) => {
             console.log("API response main:", response.data);
-            
-            console.log(`total wallets: ${response.data.length}`)
+
+            console.log(`total wallets: ${response.data.length}`);
             console.log(`total balance: ${total_balance}`);
-            
+
             let t_bal = 0;
-            let t_val = [];
-  
-            for(let x=0; x<response.data.length; x++){
+            const t_val = [];
+
+            for (let x = 0; x < response.data.length; x++) {
               t_bal += response.data[x].balance;
               t_val.push(response.data[x]);
             }
-  
+
             set_total_balance(t_bal);
             set_total_values(t_val);
             console.log(t_val);
@@ -83,7 +80,7 @@ export const Asset = () => {
             console.error("Error fetching balance:", error);
           });
 
-          await axios
+        await axios
           .get("https://chambsexchange.onrender.com/api/spot/get-coins", {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -91,23 +88,18 @@ export const Asset = () => {
           })
           .then((response) => {
             console.log("API price response:", response.data);
-            setPrices(response.data);    
-
+            setPrices(response.data);
           })
           .catch((error) => {
             console.error("Error fetching price:", error);
           });
-
       } else {
         console.warn("No token found");
       }
-    }
+    };
 
     fetch1();
-
-    
   }, []);
-
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-950 text-white p-4 overflow-y-auto">
@@ -132,7 +124,8 @@ export const Asset = () => {
               {isVisible.totalEquity ? (
                 <>
                   <h1>
-                    {/*{total_balance} and */}{p_total} <span>USD</span>
+                    {/*{total_balance} and */}
+                    {p_total} <span>USD</span>
                   </h1>
                   {/* <p>=--BTC</p> */}
                 </>
@@ -166,25 +159,25 @@ export const Asset = () => {
         <div className="py-4 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2 gap-4">
           <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/depositdetails">
-              <FaTradeFederation  className="ml-4"/>
+              <FaTradeFederation className="ml-4" />
               <p className="p-1 text-sm">Deposit</p>
             </Link>
           </div>
           <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/withdrawal">
-              <FaTradeFederation className="ml-6"/>
+              <FaTradeFederation className="ml-6" />
               <p className="p-1 text-sm">Withdraw</p>
             </Link>
           </div>
           <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/swap">
-              <FaTradeFederation className="ml-3"/>
+              <FaTradeFederation className="ml-3" />
               <p className="p-1 text-sm">Swap</p>
             </Link>
           </div>
           <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="">
-              <FaTradeFederation className="ml-3 "/>
+              <FaTradeFederation className="ml-3 " />
               <p className="p-1 text-sm">Stack</p>
             </Link>
           </div>
@@ -194,68 +187,73 @@ export const Asset = () => {
           <div className="flex flex-col w-full">
             <h1>Crypto</h1>
             <div className="flex py-4 items-center gap-2">
-            <input type="checkbox" onChange={()=>{
-                setChecked(!checked);
-                console.log(checked)
-              }} className="p-2" />
+              <input
+                type="checkbox"
+                onChange={() => {
+                  setChecked(!checked);
+                  console.log(checked);
+                }}
+                className="p-2"
+              />
               <span className="text-sm">
-              {checked==false? "Hide zero balance customize collateral": "View all balances"}
+                {checked == false
+                  ? "Hide zero balance customize collateral"
+                  : "View all balances"}
               </span>
             </div>
-            
-            { 
-                total_values.sort((a,b)=>a.currency.localeCompare(b.currency)).map((v, index)=>(
 
-                  <div key={index} className="flex justify-between p-2" style={{display: v.balance==0 && checked==true? "none": "flex"}}>
+            {total_values
+              .sort((a, b) => a.currency.localeCompare(b.currency))
+              .map((v, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between p-2"
+                  style={{
+                    display:
+                      v.balance == 0 && checked == true ? "none" : "flex",
+                  }}
+                >
                   <div className="text-xl flex items-center justify-center">
                     <div className="h-4 w-4 rounded-full bg-green-500 flex justify-center items-center mb-5 mr-1 text-sm">
                       T
                     </div>
                     <div className="flex flex-col">
                       <span>{v.currency}</span>
-                      {
-
-                        prices.map((p)=>(
-                            p.symbol.toUpperCase() == v.currency.toUpperCase()? 
-                                <span className="text-sm ml-1">{p.name}</span>
-                            : null
-                        ))
-
-                      }
-
-                      
+                      {prices.map((p) =>
+                        p.symbol.toUpperCase() == v.currency.toUpperCase() ? (
+                          <span className="text-sm ml-1">{p.name}</span>
+                        ) : null
+                      )}
                     </div>
                   </div>
                   <div onClick={() => toggleVisibility("usdt")}>
                     {isVisible.usdt ? (
                       <>
                         <p>{v.balance}</p>
-                        {
-                          
-                          prices.map((p)=>(
-                            p.symbol.toUpperCase() == v.currency.toUpperCase()?
+                        {prices.map((p) =>
+                          p.symbol.toUpperCase() == v.currency.toUpperCase() ? (
                             <>
-                            <h5>= {p.usd * v.balance} USD</h5>
-                            <img src={b1} style={{width:"0px",height:"0px"}} onLoad={()=>{
-                              let a = p.usd * v.balance;
-                              p_t += a;
-                              set_p_total(p_t);
-                              //console.log(p_total);
-                            }}/>
+                              <h5>= {p.usd * v.balance} USD</h5>
+                              <img
+                                src={b1}
+                                style={{ width: "0px", height: "0px" }}
+                                onLoad={() => {
+                                  let a = p.usd * v.balance;
+                                  p_t += a;
+                                  set_p_total(p_t);
+                                  //console.log(p_total);
+                                }}
+                              />
                             </>
-
-                            : null
-                          ))
-                        }
+                          ) : null
+                        )}
                       </>
                     ) : (
                       <p>******</p>
                     )}
                   </div>
                 </div>
-                ))
-                
-              }  
+              ))}
           </div>
         </div>
       </div>
