@@ -1,20 +1,14 @@
 import { FaWallet } from "react-icons/fa6";
-import TypingEffect from 'react-typing-effect';
+import TypingEffect from "react-typing-effect";
 
-import {
-  
-  RiLoader4Fill,
-  RiEqualFill,
-} from "react-icons/ri";
+import { RiLoader4Fill, RiEqualFill } from "react-icons/ri";
 import { LuArrowDownUp } from "react-icons/lu";
 import { CgSwap } from "react-icons/cg";
 import { useState } from "react";
 
 export const SwapComp = () => {
- 
   const [isLoading, setIsLoading] = useState(false);
 
-  
   const handleContinue = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -25,14 +19,13 @@ export const SwapComp = () => {
   return (
     <div className="min-h-screen bg-slate-950 py-16 text-white relative">
       <div className="text-center py-2">
-      <h1 className="text-md mt-4 text-[#1DD55E]">
-          <TypingEffect 
+        <h1 className="text-md mt-4 text-[#1DD55E]">
+          <TypingEffect
             text={["SWAP your coin"]}
             speed={100}
             eraseSpeed={50}
             eraseDelay={1000}
             typingDelay={500}
-            
           />
         </h1>
       </div>
@@ -40,38 +33,65 @@ export const SwapComp = () => {
       <div className="mt-10 px-4">
         <div className="bg-gray-700 px-2 py-4 text-white rounded-lg relative ">
           <div className="flex justify-between items-center gap-2 mb-4">
-
-          <select name="" id="" className="py-2" style={
-            {backgroundColor:"transparent",fontSize:15,width:"80%",border:"none",color:""}
-          }>
-            <option selected disabled>From BNB Smart Chain</option>
-            <option value="Bnb">From BNB Smart Chain</option>
-            <option selected disabled>From BNB Smart Chain</option>
-          </select>
-          <div className="flex items-center gap-1">
-          <FaWallet size={14} className="cursor-pointer"
-              /><span className="text-[#1DD55E]">0</span>
-          </div> 
+            <select
+              name=""
+              id=""
+              className="py-2"
+              style={{
+                backgroundColor: "transparent",
+                fontSize: 15,
+                width: "80%",
+                border: "none",
+                color: "",
+              }}
+            >
+              <option selected disabled>
+                From BNB Smart Chain
+              </option>
+              <option value="Bnb">From BNB Smart Chain</option>
+              <option selected disabled>
+                From BNB Smart Chain
+              </option>
+            </select>
+            <div className="flex items-center gap-1">
+              <FaWallet size={14} className="cursor-pointer" />
+              <span className="text-[#1DD55E]">0</span>
+            </div>
           </div>
         </div>
-<div className="flex justify-center">
-  <p className="text-center rounded-full h-8 w-8 bg-[#1DD55E] flex items-center justify-center"><LuArrowDownUp size={16} className="text-white" /></p>
-</div>
-<div className="bg-gray-700 px-2 py-4 text-white rounded-lg relative mb-4">
-<div className="flex justify-between  gap-2 mb-4">
-<select name="" id="" className="py-2" style={
-  {backgroundColor:"transparent",fontSize:15,width:"80%",border:"1px",color:""}
-}>
-  <option selected disabled>To BNB Smart Chain</option>
-  <option value="Bnb">To BNB Smart Chain</option>
-  <option selected disabled>From BNB Smart Chain</option>
-</select>
-<div className="flex items-center gap-1">
-<FaWallet size={14} className="cursor-pointer"
-    /><span className="text-[#1DD55E]">0</span>
-</div> 
-</div>
-</div>
+        <div className="flex justify-center">
+          <p className="text-center rounded-full h-8 w-8 bg-[#1DD55E] flex items-center justify-center">
+            <LuArrowDownUp size={16} className="text-white" />
+          </p>
+        </div>
+        <div className="bg-gray-700 px-2 py-4 text-white rounded-lg relative mb-4">
+          <div className="flex justify-between  gap-2 mb-4">
+            <select
+              name=""
+              id=""
+              className="py-2"
+              style={{
+                backgroundColor: "transparent",
+                fontSize: 15,
+                width: "70%",
+                border: "1px",
+                color: "",
+              }}
+            >
+              <option selected disabled>
+                To BNB Smart Chain
+              </option>
+              <option value="Bnb">To BNB Smart Chain</option>
+              <option selected disabled>
+                From BNB Smart Chain
+              </option>
+            </select>
+            <div className="flex items-center gap-1">
+              <FaWallet size={14} className="cursor-pointer" />
+              <span className="text-[#1DD55E]">0</span>
+            </div>
+          </div>
+        </div>
         <div className="p-4 bg-gray-700 text-white rounded-lg mb-4">
           <div className="flex justify-between items-center text-sm">
             <RiLoader4Fill className="mr-2" />

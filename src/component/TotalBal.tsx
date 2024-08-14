@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaRegEyeSlash, FaRegEye, FaCircle } from "react-icons/fa6";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { MdCancel } from "react-icons/md";
 import axios from "axios";
 import { Swap } from "./Swap";
@@ -100,10 +102,11 @@ export const TotalBal: React.FC = () => {
   const toggleVisibility = () => {
     setIsHidden(!isHidden);
   };
+
   return (
     <div className="bg-gray-950 py-5 text-gray-100 ">
       <div className="max-w-sm overflow-y-auto bg-slate-950">
-        <div className="text-white px-2 m-2 bg-gray-700 rounded-lg border mt-6 flex items-center gap-2 ">
+        <div className="text-white px-4 ml-3  bg-gray-700 rounded-lg border mt-6 j justify-center flex items-center gap-2  ">
           <input
             type="text"
             // value={search}

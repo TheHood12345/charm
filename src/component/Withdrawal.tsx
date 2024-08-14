@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 // const itemList = [
 //   {
@@ -28,40 +28,30 @@ import axios from 'axios';
 //   },
 // ];
 
-
-
-
 export const Withdrawal = () => {
+  const [coin, setCoin] = useState([{ symbol: "eth", name: "Ethereum" }]);
 
-let [coin,setCoin] = useState([{symbol:"eth",name:"Ethereum"}]);
+  useEffect(() => {
+    const userToken = localStorage.getItem("userToken");
 
-
-useEffect(() => {
-  const userToken = localStorage.getItem("userToken");
-
-  if (userToken) {
-    axios
-      .get("https://chambsexchange.onrender.com/api/spot/get-coins",
-        {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      })
-      .then((response) => {
-        console.log("Deposit API RESPONSE:", response.data);
-        setCoin(response.data);
-        
-      })
-      .catch((error) => {
-        console.error("Error making deposit:", error);
-      });
-  } else {
-    console.warn("No token found");
-  }
-
-  
-}, []);
-
+    if (userToken) {
+      axios
+        .get("https://chambsexchange.onrender.com/api/spot/get-coins", {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((response) => {
+          console.log("Deposit API RESPONSE:", response.data);
+          setCoin(response.data);
+        })
+        .catch((error) => {
+          console.error("Error making deposit:", error);
+        });
+    } else {
+      console.warn("No token found");
+    }
+  }, []);
 
   const [selectedType, setSelectedType] = useState("Crypto");
   const [hide, setHide] = useState(false);
@@ -127,24 +117,21 @@ useEffect(() => {
 
           <div className=" p-2 cursor-pointer">
             {/* {hide ? ( */}
-              <div className="flex mt-5 flex-col ">
-                {coin.map((item, index) => (
-                  <Link to="/finalwithdrawal" state={item}>
-                    <div className="flex items-center mb-4 gap-1" key={index}>
-                      <p className="w-5 h-5 rounded-full bg-blue-500 mb-4 flex justify-center items-center text-sm">
-                        {""}
-                      </p>
-                      <p>
-                        {item.symbol}
-                        <h2 className="text-sm text-slate-500">
-                          {item.name}
-                        </h2>
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-                
-              </div>
+            <div className="flex mt-5 flex-col ">
+              {coin.map((item, index) => (
+                <Link to="/finalwithdrawal" state={item}>
+                  <div className="flex items-center mb-4 gap-1" key={index}>
+                    <p className="w-5 h-5 rounded-full bg-blue-500 mb-4 flex justify-center items-center text-sm">
+                      {""}
+                    </p>
+                    <p>
+                      {item.symbol}
+                      <h2 className="text-sm text-slate-500">{item.name}</h2>
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
             {/* ) : null} */}
           </div>
         </div>

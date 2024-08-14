@@ -35,6 +35,7 @@ import { Setting } from "./component/Setting .tsx";
 import Successful from "./component/Successful.tsx";
 import { GetStartedHeader } from "./component/GetStartedHeader.tsx";
 import { AssetBal } from "./component/AssetBal.tsx";
+import { ChambSters } from "./component/ChambSters.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -142,6 +143,16 @@ const router = createBrowserRouter([
           <>
             <Navbar />
             <Spot />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/chembsters",
+        element: (
+          <>
+            <Navbar />
+            <ChambSters />
             <Footer />
           </>
         ),

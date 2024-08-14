@@ -5,7 +5,7 @@ import { RiSwapFill } from "react-icons/ri";
 import { GiWantedReward } from "react-icons/gi";
 
 import { useState } from "react";
-import pic from "../asset/LOGO2.jpg";
+import pic from "../asset/LOGO.png";
 import { CgMoreO } from "react-icons/cg";
 
 type LoadingState = {
@@ -14,6 +14,8 @@ type LoadingState = {
   more: boolean;
   reward: boolean;
   Invite: boolean;
+  chembsters: boolean;
+  support: boolean;
 };
 
 const carditem = [
@@ -72,6 +74,28 @@ const carditem = [
     path: "/",
     loadingKey: "more",
   },
+  {
+    icon: (
+      <CgMoreO
+        size={30}
+        className="border border-white rounded-full text-[#1DD55E]"
+      />
+    ),
+    title: "Chembsters",
+    path: "/",
+    loadingKey: "chambsters",
+  },
+  {
+    icon: (
+      <CgMoreO
+        size={30}
+        className="border border-white rounded-full text-[#1DD55E]"
+      />
+    ),
+    title: "support",
+    path: "/",
+    loadingKey: "support",
+  },
 ];
 
 export const Swap = () => {
@@ -81,6 +105,8 @@ export const Swap = () => {
     more: false,
     reward: false,
     Invite: false,
+    chembsters: false,
+    support: false,
   });
 
   const navigate = useNavigate();
