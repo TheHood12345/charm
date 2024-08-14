@@ -1,12 +1,12 @@
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 //import { Long } from "./Long";
-import { FcFinePrint } from "react-icons/fc";
-import { TradeComponent } from "./TradeComponent";
+// import { FcFinePrint } from "react-icons/fc";
+// import { TradeComponent } from "./TradeComponent";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const Spot = () => {
+export const Spot11 = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dropdown, setDropdown] = useState(false);
@@ -14,6 +14,8 @@ export const Spot = () => {
   const [price, setPrice] = useState(4.0255);
   const [coin, set_coin] = useState(useState({symbol:"chambs",usd:0,priceChange:0}));
   const [coins, set_coins] = useState(useState([{symbol:"",usd:0,priceChange:0}]));
+
+  //let [coins, set_coins] = useState([{symbol:"",usd:0,priceChange:0}]);
 
   let [buy, setBuy] = useState(true);
   let [isBuying, setIsBuying] = useState(false);
@@ -41,6 +43,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   
 
   const userToken = localStorage.getItem("userToken");
+
 
   useEffect(()=>{
     window.scrollTo(0,0);
@@ -156,7 +159,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
     }
   
     const getSellBalance = async()=>{
-      await axios.get(`https://chambsexchange.onrender.com/api/trans/get-coin-balance/${asset}`,{
+      await axios.get(`https://chambsexchange.onrender.com/api/trans/get-coin-balance/${location.state.choosen_coin.symbol}`,{
         headers: {
           Authorization: `Bearer ${userToken}`
         }
@@ -167,7 +170,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
     }
 
     const getPriceChange = async()=>{
-      await axios.get(`https://chambsexchange.onrender.com/api/spot/get-coin/${asset}`,{
+      await axios.get(`https://chambsexchange.onrender.com/api/spot/get-coin/${location.state.choosen_coin.symbol}`,{
         headers: {
           Authorization: `Bearer ${userToken}`
         }
@@ -215,7 +218,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   },[]);
 
   useEffect(()=>{
-    axios.get("https://chambsexchange.onrender.com/api/spot/prices/chambs",{
+    axios.get(`https://chambsexchange.onrender.com/api/spot/prices/${location.state.choosen_coin.symbol}`,{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -228,7 +231,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   }, []);
 
   useEffect(()=>{
-    axios.get("https://chambsexchange.onrender.com/api/spot/spot-order/chambs",{
+    axios.get(`https://chambsexchange.onrender.com/api/spot/spot-order/${location.state.choosen_coin.symbol}`,{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -254,8 +257,8 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
         {/* subheader */}
         <div className="flex justify-between items-center mt-10">
           <h1 className="text-1xl">
-            {asset}/USDT{" "}
-            <span style={{paddingLeft:"10px",paddingRight:"10px"}} className={`text-sm ${t_change.priceChange < 1? "bg-red-600": "bg-green-600"} rounded-md`}>{t_change.priceChange? t_change.priceChange.toFixed(2): 0.00}%</span>
+            {location.state.choosen_coin.symbol.toUpperCase()}/USDT{" "}
+            <span style={{paddingLeft:"10px",paddingRight:"10px"}} className={`text-sm ${location.state.choosen_coin.priceChange < 1? "bg-red-600": "bg-green-600"} rounded-md`}>{location.state.choosen_coin.priceChange? location.state.choosen_coin.priceChange.toFixed(2): "0.00"}%</span>
           </h1>
           {/* <p>200x</p> */}
           {/* <div className="flex gap-2">
@@ -276,7 +279,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
                 <div>
                   <h1>Amount</h1>
                   <p className="text-center">
-                      ({asset.toUpperCase()})
+                      ({location.state.choosen_coin.symbol.toUpperCase()})
                   </p>
                 </div>
               </div>
@@ -288,7 +291,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
                   spot_order.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
                     <>
                     {
-                      item.asset == "CHAMBS" && item.tradeType == "sell" && index < 10?
+                      item.asset == location.state.choosen_coin.symbol.toUpperCase() && item.tradeType == "sell" && index < 10?
                       <div key={index} className="flex justify-between ">
                         <h1 className="text-red-600">{item.limitPrice.toFixed(3)}</h1>
                         <p>{item.amount.toFixed(1)}</p>
@@ -312,7 +315,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
                 spot_order.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
                   <>
                   {
-                    item.asset == "CHAMBS" && item.tradeType == "buy" && index < 10?
+                    item.asset == location.state.choosen_coin.symbol.toUpperCase() && item.tradeType == "buy" && index < 10?
                     <div key={index} className="flex justify-between ">
                       <h1 className="text-green-600">{item.limitPrice.toFixed(3)}</h1>
                       <p>{item.amount.toFixed(1)}</p>
@@ -444,7 +447,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
             </div> */}
             <div style={{overflow:"none"}} className="bg-gray-800 mt-4 py-2 rounded-md">
               <div className="flex justify-center items-center px-2 text-white">
-                <h1 className="text-xl">{buy == true? <span>{`${b_bal.balance.toFixed(1)}`} <span style={{color:"yellow",fontSize:"8px"}}>USDT Available</span></span>: <span>{`${s_bal.balance.toFixed(1)}`} <span style={{color:"yellow",fontSize:"8px"}}> CHAMBS Available</span></span>}</h1>
+                <h1 className="text-xl">{buy == true? <span>{`${b_bal.balance.toFixed(1)}`} <span style={{color:"yellow",fontSize:"8px"}}>USDT Available</span></span>: <span>{`${s_bal.balance.toFixed(1)}`} <span style={{color:"yellow",fontSize:"8px"}}> {location.state.choosen_coin.symbol.toUpperCase()} Available</span></span>}</h1>
               </div>
             </div>
 
@@ -502,9 +505,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
 
         </div>
         
-        {
-          
-        }
+        
         
       </div>
       

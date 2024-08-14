@@ -2,7 +2,7 @@ import {
   FaEye,
   FaEyeSlash,
   FaTradeFederation,
-  FaWallet,
+  
 } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -34,6 +34,10 @@ export const Asset = () => {
       [key]: !prevState[key],
     }));
   };
+
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[]);
 
   let [total_balance, set_total_balance] = useState(-1);
   let [total_values, set_total_values] = useState([{currency:"CHAMBS",balance:-1}]);
@@ -147,7 +151,7 @@ export const Asset = () => {
           <div className="mb-16 text-sm text-green-700">0.00%</div>
         </div>
         {/* second card */}
-        <div className="py-4 bg-gray-800 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2">
+        {/* <div className="py-4 bg-gray-800 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2">
           <p>Wallet balance</p>
           {isVisible.walletBalance ? (
             <FaWallet
@@ -161,7 +165,7 @@ export const Asset = () => {
             />
           )}
           {isVisible.walletBalance ? <p>0.00 USD</p> : <p>******</p>}
-        </div>
+        </div> */}
         {/* third card */}
         <div className="py-4 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2 gap-4">
           <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
@@ -199,11 +203,11 @@ export const Asset = () => {
                 console.log(checked)
               }} className="p-2" />
               <span className="text-sm">
-              {checked==false? "Hide zero balance customize collateral": "View all balances"}
+              {checked==false? "Hide zero balance": "View all balance"}
               </span>
             </div>
             
-            { 
+            {/* { 
                 total_values.sort((a,b)=>a.currency.localeCompare(b.currency)).map((v, index)=>(
 
                   <div key={index} className="flex justify-between p-2" style={{display: v.balance==0 && checked==true? "none": "flex"}}>
@@ -226,6 +230,7 @@ export const Asset = () => {
                       
                     </div>
                   </div>
+
                   <div onClick={() => toggleVisibility("usdt")}>
                     {isVisible.usdt ? (
                       <>
@@ -255,9 +260,63 @@ export const Asset = () => {
                 </div>
                 ))
                 
-              }  
+              }   */}
           </div>
+
         </div>
+        {/* <p>jj</p>qqqqqqqq222222222222222222222222222222222222222222222222222222222222222222222222 */}
+
+        <div style={{marginTop:"0px",width:"100%",paddingRight:"10px",paddingLeft:"10px",paddingBottom:"40px",paddingTop:"10px",backgroundColor:'black'}}>
+
+          {
+            total_values.sort((a,b)=>a.currency.localeCompare(b.currency)).map((v, index)=>(
+              
+            <div key={index} style={{display: v.balance==0 && checked==true? "none": "flex"}} className="flex justify-between items-center py-2">
+            <div className="text-sm">
+              <h2>{v.currency}</h2>
+
+              {
+
+              prices.map((p)=>(
+                p.symbol.toUpperCase() == v.currency.toUpperCase()? 
+                <span className="text-sm ml-1">{p.name} {/*v.balance.toFixed(2)*/}</span>
+              : null
+              ))
+
+              }
+            </div>
+            <div className="flex gap-4 flex justify-between items-center py-5">
+              <h2 style={{color:"green",fontWeight:"bold"}}>{v.balance.toFixed(2)}</h2>
+              {
+              prices.map((p)=>(
+                            p.symbol.toUpperCase() == v.currency.toUpperCase()?
+                            <>
+                            <h5 style={{opacity: "0.7",paddingLeft:"20px",paddingRight:"20px"}} className="bg-green-900">{(p.usd * v.balance).toFixed(2)} USD</h5>
+                            <img src={b1} style={{width:"0px",height:"0px"}} onLoad={()=>{
+                              let a = p.usd * v.balance;
+                              p_t += a;
+                              set_p_total(p_t);
+                            }}/>
+                            </>
+
+                            : null
+                          ))
+                          }
+              {/* <button style={{opacity: "0.4"}} className={`px-2 ${item.tradeType == "buy"? "bg-green-800": "bg-red-800"} text-white font-bold py-2 rounded-md`}>
+                  Pending..
+              </button> */}
+              {/* <Link to="/orderbook">
+                <button className="px-2 bg-green-600 text-white font-bold py-2 rounded-md">
+                  +184.33%
+                </button>
+              </Link> */}
+            </div>
+          </div>
+            ))
+          }
+
+        </div>
+
       </div>
     </div>
   );

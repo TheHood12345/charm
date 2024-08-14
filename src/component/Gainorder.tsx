@@ -12,7 +12,7 @@ interface options{
 export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
 
   const userToken = localStorage.getItem("userToken");
-  let [coins, set_coins] = useState([{symbol:"",usd:0,priceChange:0}]);
+  let [coins, set_coins] = useState([{symbol:"CHAMBS",usd:0,priceChange:0}]);
 
   //const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
               {/* <div>volume</div> */}
               </h4>
               <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-              <Link to="/chart" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+              <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
               <button className={`px-8 bg-red-500 py-2 rounded-lg`}>
                 {coin.priceChange? Math.round(coin.priceChange): 0}%
               </button>
@@ -87,7 +87,7 @@ export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
               {/* <div>volume</div> */}
               </h4>
               <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-              <Link to="/chart" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+              <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
               <button className={`px-8 bg-green-500 py-2 rounded-lg`}>
                 {coin.priceChange? Math.round(coin.priceChange): 0}%
               </button>
@@ -107,7 +107,7 @@ export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
                 {/* <div>volume</div> */}
                 </h4>
                 <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-                <Link to="/chart" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+                <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
                 <button className={`px-8 ${coin.priceChange < 1 ? "bg-red-500": "bg-green-500"} py-2 rounded-lg`}>
                   {coin.priceChange? Math.round(coin.priceChange): 0}%
                 </button>
@@ -122,7 +122,7 @@ export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
                   {/* <div>volume</div> */}
                   </h4>
                   <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-                  <Link to="/chart" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+                  <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
                   <button className={`px-8 ${coin.priceChange < 1 ? "bg-red-500": "bg-green-500"} py-2 rounded-lg`}>
                     {coin.priceChange? Math.round(coin.priceChange): 0}%
                   </button>
@@ -143,7 +143,7 @@ export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
                   {/* <div>volume</div> */}
                   </h4>
                   <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-                  <Link to="/chart" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+                  <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
                   <button className={`px-8 ${coin.priceChange < 1 ? "bg-red-500": "bg-green-500"} py-2 rounded-lg`}>
                     {coin.priceChange? Math.round(coin.priceChange): 0}%
                   </button>
@@ -158,7 +158,7 @@ export const Gainorder: React.FC<options> = ({gainers, losers, hot1, new1}) => {
                     {/* <div>volume</div> */}
                     </h4>
                     <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-                    <Link to="/chart" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+                    <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
                     <button className={`px-8 ${coin.priceChange < 1 ? "bg-red-500": "bg-green-500"} py-2 rounded-lg`}>
                       {coin.priceChange? Math.round(coin.priceChange): 0}%
                     </button>

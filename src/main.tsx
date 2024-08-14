@@ -33,6 +33,8 @@ import { SecondAdd } from "./component/SeconAdd.tsx";
 import { PostAdd } from "./component/PostAdd.tsx";
 import { Setting } from "./component/Setting .tsx";
 
+import { Spot11 } from "./component/Spot11.tsx";
+
 let userToken = localStorage.getItem("userToken");
 
 const router = createBrowserRouter([
@@ -138,7 +140,19 @@ const router = createBrowserRouter([
             <Footer />
           </>
         ),
+      }
+      ,
+      {
+        path: "/spot11",
+        element: (
+          <>
+            <Navbar />
+            <Spot11 />
+            <Footer />
+          </>
+        ),
       },
+
       {
         path: "/orderbook",
         element: (

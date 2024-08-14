@@ -27,6 +27,10 @@ export const TotalBal: React.FC = () => {
     setDeposit(!deposit);
   };
 
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[]);
+
   let [total_balance, set_total_balance] = useState(0);
 
   let [total_values, set_total_values] = useState([
