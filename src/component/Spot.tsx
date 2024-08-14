@@ -1,19 +1,19 @@
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 //import { Long } from "./Long";
-import { FcFinePrint } from "react-icons/fc";
-import { TradeComponent } from "./TradeComponent";
+// import { FcFinePrint } from "react-icons/fc";
+// import { TradeComponent } from "./TradeComponent";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 export const Spot = () => {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  //const [open, setOpen] = useState(false);
+  const [loading] = useState(false);
   const [dropdown, setDropdown] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+  //const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(4.0255);
-  const [coin, set_coin] = useState(useState({symbol:"chambs",usd:0,priceChange:0}));
-  const [coins, set_coins] = useState(useState([{symbol:"",usd:0,priceChange:0}]));
+  //const [coin, set_coin] = useState(useState({symbol:"chambs",usd:0,priceChange:0}));
+  //const [coins, set_coins] = useState(useState([{symbol:"",usd:0,priceChange:0}]));
 
   let [buy, setBuy] = useState(true);
   let [isBuying, setIsBuying] = useState(false);
@@ -21,7 +21,7 @@ export const Spot = () => {
   const location = useLocation();
 let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
 
-  let [asset, setAsset] = useState(`${location.state === null? "CHAMBS": location.state.choosen_coin.symbol}`);
+  let [asset] = useState(`${location.state === null? "CHAMBS": location.state.choosen_coin.symbol}`);
   let [orderType, setOrderType] = useState("limit");
   let [tradeType, setTradeType] = useState("buy");
   let [limitPrice, setLimitPrice] = useState(0.0000);
@@ -109,17 +109,17 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
     setDropdown(!dropdown);
   };
 
-  const handleSubmit = () => {
-    setOpen(!open);
-  };
+  // const handleSubmit = () => {
+  //   setOpen(!open);
+  // };
 
-  const handleSell = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      // Add your logic here after the loading effect
-    }, 2000); // Adjust the timeout duration as needed
-  };
+  // const handleSell = () => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     // Add your logic here after the loading effect
+  //   }, 2000); // Adjust the timeout duration as needed
+  // };
 
   // const increaseQuantity = () => {
   //   setQuantity(quantity + 1);
