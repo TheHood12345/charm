@@ -9,7 +9,7 @@ export const PtopSell = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false); // Ensure loading state is reset after navigation
-      navigate("/buydetails");
+      navigate("/selldetail");
     }, 2000); // Adjust the timeout duration as needed
   };
 

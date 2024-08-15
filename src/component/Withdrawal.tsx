@@ -5,29 +5,6 @@ import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-// const itemList = [
-//   {
-//     symbol: "$",
-//     name: "11 HNCH",
-//     network: "1linch Network",
-//   },
-//   {
-//     symbol: "$",
-//     name: "11 HNCH",
-//     network: "1linch Network",
-//   },
-//   {
-//     symbol: "$",
-//     name: "11 HNCH",
-//     network: "1linch Network",
-//   },
-//   {
-//     symbol: "$",
-//     name: "11 HNCH",
-//     network: "1linch Network",
-//   },
-// ];
-
 export const Withdrawal = () => {
   const [coin, setCoin] = useState([{ symbol: "eth", name: "Ethereum" }]);
 

@@ -7,7 +7,7 @@ import { BsStars } from "react-icons/bs";
 import { FaArrowRight } from "react-icons/fa6";
 // import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 
-const SellDetail = () => {
+const BuyDetails = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +26,7 @@ const SellDetail = () => {
     <div className="flex flex-col min-h-screen bg-gray-950 text-white overflow-hidden">
       <div className="py-3 fixed top-0 w-full bg-gray-950 z-10">
         <div className="flex justify-between items-center p-2">
-          <Link to="/ptopsell">
+          <Link to="/pp">
             <FaArrowLeft size={20} />
           </Link>
           <h1>Sell USDT</h1>
@@ -82,7 +82,7 @@ const SellDetail = () => {
                 <div className="mt-4">
                   <h1 className="text-xl">Payment Method</h1>
                   <div className="bg-slate-900 py-4 mt-2 p-2 rounded-md flex items-center justify-between">
-                    <h1 className="text-xl">Bank Transfer</h1>
+                    <h1 className="text-xl">Payment Details</h1>
                     <IoMdArrowDropdown size={25} onClick={handleClick} />
                   </div>
                   {open && (
@@ -124,12 +124,12 @@ const SellDetail = () => {
                 <div className="mt-4">
                   <button
                     className={`w-full py-4 rounded-md ${
-                      loading ? "bg-gray-500" : "bg-orange-600"
+                      loading ? "bg-gray-500" : "bg-[#1DD55E]"
                     } text-white`}
                     onClick={handleSellClick}
                     disabled={loading}
                   >
-                    {loading ? "Processing..." : "Sell"}
+                    {loading ? "Processing..." : "Buy"}
                   </button>
                 </div>
                 <div className="mt-4">
@@ -186,4 +186,4 @@ const SellDetail = () => {
   );
 };
 
-export default SellDetail;
+export default BuyDetails;
