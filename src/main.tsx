@@ -39,6 +39,9 @@ import { ChambSters } from "./component/ChambSters.tsx";
 import { PtopSell } from "./component/PtopSell.tsx";
 import SellDetail from "./component/SellDetail.tsx";
 import BuyDetails from "./component/BuyDetails.tsx";
+import PayDetails from "./component/PayDetails.tsx";
+import PaymentCompleted from "./component/PaymentCompleted.tsx";
+import CancelOrder from "./component/CancelOrder.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -167,6 +170,32 @@ const router = createBrowserRouter([
             {/* <Navbar /> */}
             <BuyDetails />
             <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/payment",
+        element: (
+          <>
+            {/* <Navbar /> */}
+            <PayDetails />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/paycompleted",
+        element: (
+          <>
+            <PaymentCompleted />
+          </>
+        ),
+      },
+      {
+        path: "/cancelorder",
+        element: (
+          <>
+            <CancelOrder />
           </>
         ),
       },

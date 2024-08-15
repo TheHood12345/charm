@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { IoMdArrowDropdown, IoMdHeadset } from "react-icons/io";
+import { IoMdHeadset } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { BsStars } from "react-icons/bs";
 import { FaArrowRight } from "react-icons/fa6";
 // import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 
 const BuyDetails = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  // const handleClick = () => {
+  //   setOpen(!open);
+  // };
 
   const handleSellClick = () => {
     setLoading(true);
@@ -29,7 +29,7 @@ const BuyDetails = () => {
           <Link to="/pp">
             <FaArrowLeft size={20} />
           </Link>
-          <h1>Sell USDT</h1>
+          <h1>Buy USDT</h1>
           <IoMdHeadset size={20} />
         </div>
         <hr className="mb-4" />
@@ -78,7 +78,7 @@ const BuyDetails = () => {
                     <p>0 USDT</p>
                   </div>
                 </div>
-
+                {/* 
                 <div className="mt-4">
                   <h1 className="text-xl">Payment Method</h1>
                   <div className="bg-slate-900 py-4 mt-2 p-2 rounded-md flex items-center justify-between">
@@ -119,18 +119,20 @@ const BuyDetails = () => {
                       </div>
                     </div>
                   )}
-                </div>
+                </div> */}
                 {/* button */}
                 <div className="mt-4">
-                  <button
-                    className={`w-full py-4 rounded-md ${
-                      loading ? "bg-gray-500" : "bg-[#1DD55E]"
-                    } text-white`}
-                    onClick={handleSellClick}
-                    disabled={loading}
-                  >
-                    {loading ? "Processing..." : "Buy"}
-                  </button>
+                  <Link to="/payment">
+                    <button
+                      className={`w-full py-4 rounded-md ${
+                        loading ? "bg-gray-500" : "bg-[#1DD55E]"
+                      } text-white`}
+                      onClick={handleSellClick}
+                      disabled={loading}
+                    >
+                      {loading ? "Processing..." : "Buy"}
+                    </button>
+                  </Link>
                 </div>
                 <div className="mt-4">
                   <p className="text-slate-300">
