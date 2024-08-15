@@ -78,49 +78,7 @@ const BuyDetails = () => {
                     <p>0 USDT</p>
                   </div>
                 </div>
-                {/* 
-                <div className="mt-4">
-                  <h1 className="text-xl">Payment Method</h1>
-                  <div className="bg-slate-900 py-4 mt-2 p-2 rounded-md flex items-center justify-between">
-                    <h1 className="text-xl">Payment Details</h1>
-                    <IoMdArrowDropdown size={25} onClick={handleClick} />
-                  </div>
-                  {open && (
-                    <div className="mt-2 bg-slate-800 rounded-md p-2">
-                      <div className="py-1">
-                        <label className="block text-sm text-slate-300">
-                          Account Name
-                        </label>
-                        <input
-                          type="text"
-                          className="w-full bg-transparent border border-gray-600 rounded-md p-2"
-                          placeholder="Enter account name"
-                        />
-                      </div>
-                      <div className="py-1">
-                        <label className="block text-sm text-slate-300">
-                          Bank Name
-                        </label>
-                        <input
-                          type="text"
-                          className="w-full bg-transparent border border-gray-600 rounded-md p-2"
-                          placeholder="Enter bank name"
-                        />
-                      </div>
-                      <div className="py-1">
-                        <label className="block text-sm text-slate-300">
-                          Account Number
-                        </label>
-                        <input
-                          type="number"
-                          className="w-full bg-transparent border border-gray-600 rounded-md p-2"
-                          placeholder="Enter your account number"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div> */}
-                {/* button */}
+
                 <div className="mt-4">
                   <Link to="/payment">
                     <button
