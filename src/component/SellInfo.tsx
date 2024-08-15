@@ -3,7 +3,7 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const PayDetails = () => {
+const Sellinfo = () => {
   return (
     <motion.div
       className="flex flex-col min-h-screen bg-gray-950 text-white"
@@ -77,7 +77,7 @@ const PayDetails = () => {
           transition={{ duration: 0.5 }}
         >
           <div className="flex justify-between">
-            <div className="ml-2">Buy USDT</div>
+            <div className="ml-2">Seller USDT</div>
             <div className="border py-2 px-2 rounded-s-full border-orange-600 flex items-center justify-center gap-2 text-xl">
               <FaMessage size={20} /> Contact Seller
             </div>
@@ -176,4 +176,4 @@ const PayDetails = () => {
   );
 };
 
-export default PayDetails;
+export default Sellinfo;
