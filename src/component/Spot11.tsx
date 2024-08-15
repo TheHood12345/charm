@@ -255,7 +255,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
         </div>
 
         {/* subheader */}
-        <div className="flex justify-between items-center mt-10">
+        <Link to="/market" className="flex justify-between items-center mt-10">
           <h1 className="text-1xl">
             {location.state.choosen_coin.symbol.toUpperCase()}/USDT{" "}
             <span style={{paddingLeft:"10px",paddingRight:"10px"}} className={`text-sm ${location.state.choosen_coin.priceChange < 1? "bg-red-600": "bg-green-600"} rounded-md`}>{location.state.choosen_coin.priceChange? location.state.choosen_coin.priceChange.toFixed(2): "0.00"}%</span>
@@ -265,7 +265,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
             <h1>icon</h1>
             <p>..</p>
           </div> */}
-        </div>
+        </Link>
         {/* trade side component */}
 
         <div className="min-h-[500px] bg-black p-4 rounded-md mt-5 text-black flex justify-between gap-2">
@@ -421,7 +421,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
               <div className="flex justify-between items-center px-2 text-white">
                 
                 
-                <input type="number" value={Number(amount)} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} />
+                <input type="number" className="no_spinner1" value={Number(amount)} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} />
                 <h1 style={{color:"yellow",fontSize:"10px"}}>{buy == true? "USDT": asset}</h1>
                 
               </div>
@@ -432,7 +432,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
               <div className="flex justify-between items-center px-2 text-white">
                 
                 
-                <input type="number" value={buy==true? Math.round(chambs_value): Math.round(usdt_value)} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} min={0} />
+                <input type="number" className="no_spinner1" value={buy==true? Math.round(chambs_value): Math.round(usdt_value)} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} min={0} />
                 <h1 style={{color:"yellow",fontSize:"10px"}}>{buy == true? asset: "USDT"}</h1>
                 
               </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion"; // Import motion from Framer Motion
 import { FaArrowLeftLong, FaCheck } from "react-icons/fa6";
 import { IoMdHeadset } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 // Typing effect component
 const TypingText = ({ text }: { text: string }) => {
@@ -108,7 +109,8 @@ export const PostAdd = () => {
           </div>
           <hr />
           <div>
-            <button
+           <Link to="/sucessful">
+           <button
               onClick={handlePostAd}
               className={`bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
@@ -143,9 +145,12 @@ export const PostAdd = () => {
                 "Post Ad"
               )}
             </button>
-            <button className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center">
+           </Link>
+           <Link to="/secondaddvert">
+           <button className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center">
               Previous
             </button>
+           </Link>
           </div>
         </div>
       </div>

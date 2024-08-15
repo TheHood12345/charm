@@ -1,28 +1,29 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { IoMdHeadset } from "react-icons/io";
 import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { MdArrowDropDown } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export const Advert = () => {
   const [assetOpen, setAssetOpen] = useState(false);
   const [fiatOpen, setFiatOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [percentage, setPercentage] = useState(100.0);
   const [conditionMet, setConditionMet] = useState(false); // For condition
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleNextClick = () => {
-    setLoading(true);
-    // Simulate an API call or any other async operation
-    setTimeout(() => {
-      setLoading(false);
-      if (conditionMet) {
-        navigate("/secondaddvert"); // Route to the new page
-      }
-    }, 2000);
-  };
+  // const handleNextClick = () => {
+  //   setLoading(true);
+  //   // Simulate an API call or any other async operation
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     if (conditionMet) {
+  //       navigate("/secondaddvert"); // Route to the new page
+  //     }
+  //   }, 2000);
+  // };
 
   const handleDecrement = () => {
     setPercentage((prev) => Math.max(prev - 1, 0)); // Prevent going below 0
@@ -38,7 +39,9 @@ export const Advert = () => {
     <div className="flex flex-col min-h-screen bg-gray-950 text-white overflow-hidden">
       <div className="py-3 fixed top-0 w-full bg-gray-950 z-10">
         <div className="flex justify-between items-center p-2">
-          <FaArrowLeftLong size={20} />
+          <Link to="/pp">
+            <FaArrowLeftLong size={20} />
+          </Link>
           <img src={logo} alt="Logo" className="h-10 object-contain" />
           <IoMdHeadset size={20} />
         </div>
@@ -145,15 +148,19 @@ export const Advert = () => {
               <h1 className="text-sm">NGNNaN</h1>
               <h1 className="text-sm">NGN0</h1>
             </div>
-            <button
-              className={`bg-[#1DD55E] w-full mt-4 rounded-md py-2 text-white ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={handleNextClick}
-              disabled={loading}
-            >
-              {loading ? "Loading..." : "Next"}
-            </button>
+            <Link to="/secondaddvert">
+              <button
+                className="bg-[#1dd55e] w-full mt-4 rounded-md py-2 text-white"
+                // className={`bg-[#1DD55E] w-full mt-4 rounded-md py-2 text-white ${
+                //   loading ? "opacity-50 cursor-not-allowed" : ""
+                // }`}
+                // onClick={handleNextClick}
+                // disabled={loading}
+              >
+                Next
+                {/* {loading ? "Loading..." : "Next"} */}
+              </button>
+            </Link>
           </div>
         </div>
       </div>

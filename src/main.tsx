@@ -32,10 +32,13 @@ import { Advert } from "./component/Advert.tsx";
 import { SecondAdd } from "./component/SeconAdd.tsx";
 import { PostAdd } from "./component/PostAdd.tsx";
 import { Setting } from "./component/Setting .tsx";
+import Successful from "./component/Successful.tsx";
+import { GetStartedHeader } from "./component/GetStartedHeader.tsx";
+import { AssetBal } from "./component/AssetBal.tsx";
 
 import { Spot11 } from "./component/Spot11.tsx";
 
-let userToken = localStorage.getItem("userToken");
+const userToken = localStorage.getItem("userToken");
 
 const router = createBrowserRouter([
   {
@@ -45,7 +48,11 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: !userToken ? (
-          <GetStarted />
+          <>
+            <GetStartedHeader />
+            <GetStarted />
+            <Footer />
+          </>
         ) : (
           <>
             <Navbar />
@@ -236,11 +243,27 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/sucessful",
+        element: (
+          <>
+            <Successful />
+          </>
+        ),
+      },
+      {
+        path: "/assetbal",
+        element: (
+          <>
+            <AssetBal />
+            <Footer />
+          </>
+        ),
+      },
+      {
         path: "/setting",
         element: (
           <>
             <Setting />
-            {/* <Footer /> */}
           </>
         ),
       },

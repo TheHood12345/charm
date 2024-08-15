@@ -6,7 +6,7 @@ export const MySlider = () => {
     <div className="slider-container bg-gray-950 text-white py-6 shadow-md mt-3 px-4">
       <div className="slider-wrapper">
         <div className="slider-item">
-          <h1 className="text-sm font-bold">
+          <h1 className="text-sm text-start font-bold">
             A8 Launchpool: Stake A8, USDT, or MTN to
           </h1>
           <p className=" flex items-center gap-2">

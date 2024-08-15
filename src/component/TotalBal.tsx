@@ -18,6 +18,7 @@ interface User {
 export const TotalBal: React.FC = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [deposit, setDeposit] = useState(false);
+  // const [search, setSearch] = useState("");
   const [user /*setUser*/] = useState<User>({
     isAuthenticated: false,
     balance: null,
@@ -30,15 +31,15 @@ export const TotalBal: React.FC = () => {
   useEffect(()=>{
     window.scrollTo(0,0);
   },[]);
+  
+  const [total_balance, set_total_balance] = useState(0);
 
-  let [total_balance, set_total_balance] = useState(0);
-
-  let [total_values, set_total_values] = useState([
+  const [total_values, set_total_values] = useState([
     { currency: "CHAMBS", balance: -1 },
   ]);
-  let [prices, setPrices] = useState([{ symbol: "..", usd: 0, name: "" }]);
+  const [prices, setPrices] = useState([{ symbol: "..", usd: 0, name: "" }]);
 
-  let [p_total, set_p_total] = useState(-1);
+  const [p_total, set_p_total] = useState(-1);
   let p_t = 0;
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export const TotalBal: React.FC = () => {
             console.log(`total balance: ${total_balance}`);
 
             let t_bal = 0;
-            let t_val = [];
+            const t_val = [];
 
             for (let x = 0; x < response.data.length; x++) {
               t_bal += response.data[x].balance;
@@ -94,7 +95,7 @@ export const TotalBal: React.FC = () => {
     };
 
     fetch1();
-  }, []);
+  }, [total_balance, total_values]);
 
   useEffect(() => {
     console.log("User state updated:", user); // Log user state updates
@@ -103,17 +104,17 @@ export const TotalBal: React.FC = () => {
   const toggleVisibility = () => {
     setIsHidden(!isHidden);
   };
-
   return (
     <div className="bg-gray-950 py-5 text-gray-100 ">
       <div className="max-w-sm overflow-y-auto bg-slate-950">
-        <div className="text-white px-2 m-2 bg-transparent rounded-lg border bg-slate-700 mt-6 flex items-center gap-2 ">
-          <CiSearch />
+        <div className="text-white px-2 m-2 bg-gray-700 rounded-lg border mt-6 flex items-center gap-2 ">
           <input
             type="text"
-            placeholder="Search"
-            className="w-full h-full outline-none bg-transparent text-slate-200 font-bold text-sm mb-2 mt-2"
+            // value={search}
+            placeholder="search you coin"
+            className="w-full bg-transparent outline-none text-sm"
           />
+          <CiSearch />
         </div>
         <div className="py-4 rounded-lg flex justify-between items-center mt-4 p-5 text-lg w-full mb-2">
           <div>
@@ -134,7 +135,7 @@ export const TotalBal: React.FC = () => {
                           src={b1}
                           style={{ width: "0px", height: "0px" }}
                           onLoad={() => {
-                            let a = p.usd * v.balance;
+                            const a: number = p.usd * v.balance;
                             p_t += a;
                             set_p_total(p_t);
                             //console.log(p_total);

@@ -65,19 +65,19 @@ export const Market = () => {
         {
           coins.map((coin,index)=>(
 
-            <div key={index} style={{marginLeft:"10px",display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginTop:"20px"}} className="flex justify-around pb-2 items-center w-full">
+            <Link to="/spot11" state={{"choosen_coin":coin}} key={index} style={{marginLeft:"10px",display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginTop:"20px"}} className="flex justify-around pb-2 items-center w-full">
                 <h4 style={{width:"40%"}}>
                   <div>{coin.symbol.toUpperCase()}/USDT</div>
                 {/* <div>volume</div> */}
                 </h4>
                 <p className="px-4" style={{width:"30%"}}>{coin.usd}</p>
-                <Link to="/spot11" state={{"choosen_coin":coin}} style={{width:"30%"}}>
+                <div style={{width:"30%"}}>
                 <button className={`px-8 ${coin.priceChange < 1 ? "bg-red-500": "bg-green-500"} py-2 rounded-lg`}>
                   {coin.priceChange? Math.round(coin.priceChange): 0}%
                 </button>
-                </Link>
-  
                 </div>
+  
+                </Link>
 
           ))
         }

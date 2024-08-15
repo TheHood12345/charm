@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom";
+
 export const PtoP = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-950 text-white p-4 overflow-y-auto">
       <div className="w-full max-w-sm min-h-screen mt-20 flex flex-col ">
-        <div className="mt-4">
+        <div className="mt-4 flex items-center justify-between">
           <h1 className="text-2xl py-2 mb-4 font-bold">P2P Trading</h1>
+          <Link to="/addvert">
+          <h1 className="text-2xl mb-2 text-[#1DD55E]">Create Ad</h1>
+          </Link>
         </div>
         <div className="flex justify-between">
           <div className="flex gap-5">
