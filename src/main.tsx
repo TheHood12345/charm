@@ -35,6 +35,13 @@ import { Setting } from "./component/Setting .tsx";
 import Successful from "./component/Successful.tsx";
 import { GetStartedHeader } from "./component/GetStartedHeader.tsx";
 import { AssetBal } from "./component/AssetBal.tsx";
+import { ChambSters } from "./component/ChambSters.tsx";
+import { PtopSell } from "./component/PtopSell.tsx";
+import SellDetail from "./component/SellDetail.tsx";
+import BuyDetails from "./component/BuyDetails.tsx";
+import PayDetails from "./component/PayDetails.tsx";
+import PaymentCompleted from "./component/PaymentCompleted.tsx";
+import CancelOrder from "./component/CancelOrder.tsx";
 
 import { Spot11 } from "./component/Spot11.tsx";
 
@@ -139,6 +146,62 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/ptopsell",
+        element: (
+          <>
+            <Navbar />
+            <PtopSell />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/selldetail",
+        element: (
+          <>
+            {/* <Navbar /> */}
+            <SellDetail />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/buydetails",
+        element: (
+          <>
+            {/* <Navbar /> */}
+            <BuyDetails />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/payment",
+        element: (
+          <>
+            {/* <Navbar /> */}
+            <PayDetails />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "/paycompleted",
+        element: (
+          <>
+            <PaymentCompleted />
+          </>
+        ),
+      },
+      {
+        path: "/cancelorder",
+        element: (
+          <>
+            <CancelOrder />
+          </>
+        ),
+      },
+      {
         path: "/spot",
         element: (
           <>
@@ -160,6 +223,16 @@ const router = createBrowserRouter([
         ),
       },
 
+      {
+        path: "/chembster",
+        element: (
+          <>
+            <Navbar />
+            <ChambSters />
+            <Footer />
+          </>
+        ),
+      },
       {
         path: "/orderbook",
         element: (

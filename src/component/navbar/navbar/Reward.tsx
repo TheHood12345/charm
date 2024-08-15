@@ -1,4 +1,5 @@
 import { IoDiamondOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export const Reward = () => {
   return (
@@ -14,10 +15,16 @@ export const Reward = () => {
           </div>
         </div>
         <div className=" w-full bg-slate-900 rounded-md">
-          <h1 className="ml-2 text-sm mt-4 text-[#1DD55E] ">Invite 2 Qualified Referee</h1>
-          <button className="border p-1 mt-4 mb-4 rounded-md bg-slate-950 ml-2 text-[#1DD55E]">
-            Accept
-          </button>
+          <h1 className="ml-2 text-sm mt-4 text-white ">
+            Claim off $1000 every 30days{" "}
+            <span className="text-[#1DD55E]">Chambit WEB</span> Exchange and
+            share 70% of it daily transaction fees with active traders
+          </h1>
+          <Link to="/chembster">
+            <button className="border p-2 mt-4 mb-4 rounded-md bg-slate-950 ml-2 text-[#1DD55E]">
+              Join Now
+            </button>
+          </Link>
         </div>
       </div>
       <div className="flex bg-slate-800 rounded-md">
@@ -30,10 +37,14 @@ export const Reward = () => {
           </div>
         </div>
         <div className=" w-full bg-slate-900 ">
-          <h1 className="ml-2 text-sm mt-4 text-[#1DD55E]">Invite 10 Qualified Referee</h1>
-          <button className="border p-1 mt-4 mb-4 rounded-md bg-slate-950 ml-2 text-[#1DD55E]">
-            Accept
-          </button>
+          <h1 className="ml-2 text-sm mt-4 text-white">
+            Refer 10 people to win more
+          </h1>
+          <Link to="/chembster">
+            <button className="border p-2 mt-4 mb-4 rounded-md bg-slate-950 ml-2 text-[#1DD55E]">
+              Accept
+            </button>
+          </Link>
         </div>
       </div>
     </div>

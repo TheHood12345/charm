@@ -11,7 +11,6 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 export const SwapComp = () => {
- 
   const [isLoading, setIsLoading] = useState(false);
   const userToken = localStorage.getItem("userToken");
   const [coins, set_coins] = useState(["loading"]);
@@ -31,7 +30,7 @@ export const SwapComp = () => {
   const navigate = useNavigate();
 
   const [quote, setQuote] = useState({amount:0,received:0,buyToSell:0});
-  const [is_previewed,set_is_previewed] = useState(false);
+  //const [is_previewed,set_is_previewed] = useState(false);
 
 
 
@@ -71,7 +70,6 @@ export const SwapComp = () => {
   },[]);
 
   const makeSwap = async()=>{
-    setIsLoading(true);
 
     await axios.post("https://chambsexchange.onrender.com/api/swap/execute-swap",{
       sellAsset: swap_from,
@@ -116,14 +114,13 @@ export const SwapComp = () => {
   return (
     <div className="min-h-screen bg-slate-950 py-16 text-white relative">
       <div className="text-center py-2">
-      <h1 className="text-md mt-4 text-[#1DD55E]">
-          <TypingEffect 
+        <h1 className="text-md mt-4 text-[#1DD55E]">
+          <TypingEffect
             text={["SWAP your coin"]}
             speed={100}
             eraseSpeed={50}
             eraseDelay={1000}
             typingDelay={500}
-            
           />
         </h1>
       </div>
