@@ -36,6 +36,7 @@ import Successful from "./component/Successful.tsx";
 import { GetStartedHeader } from "./component/GetStartedHeader.tsx";
 import { AssetBal } from "./component/AssetBal.tsx";
 import { ChambSters } from "./component/ChambSters.tsx";
+import { PtopSell } from "./component/PtopSell.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -138,6 +139,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/ptopsell",
+        element: (
+          <>
+            <Navbar />
+            <PtopSell />
+            <Footer />
+          </>
+        ),
+      },
+      {
         path: "/spot",
         element: (
           <>
@@ -148,7 +159,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/chembsters",
+        path: "/chembster",
         element: (
           <>
             <Navbar />

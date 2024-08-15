@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export const PtoP = () => {
+export const PtopSell = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,9 +24,11 @@ export const PtoP = () => {
         </div>
         <div className="flex justify-between">
           <div className="flex gap-5">
-            <h1 className="text-[#1DD55E] font-bold">Buy</h1>
+            <Link to="/pp">
+              <h1 className="text-[#fff] font-bold">Buy</h1>
+            </Link>
             <Link to="/ptopsell">
-              <h2 className="font-bold">Sell</h2>
+              <h2 className="font-bold text-[#d51d1d]">Sell</h2>
             </Link>
           </div>
           <button className="px-5 rounded-md bg-gray-400">NGN</button>
@@ -48,7 +50,7 @@ export const PtoP = () => {
         </div>
 
         <div className="min-h-screen">
-          {[1, 2, 3, 4].map((item) => (
+          {[1, 2, 3, 4, 5].map((item) => (
             <div className="mt-10" key={item}>
               <div className="flex justify-between gap-4">
                 <div className="flex gap-1">
@@ -70,9 +72,9 @@ export const PtoP = () => {
                   <h1>637 Orders | 92%</h1>
                   <button
                     onClick={handleBuyClick}
-                    className="px-10 bg-[#1DD55E] py-2 rounded-md mt-20"
+                    className="px-10 bg-[#d51d1d] py-2 rounded-md mt-20"
                   >
-                    Buy
+                    Sell
                   </button>
                 </div>
               </div>
@@ -100,9 +102,9 @@ export const PtoP = () => {
                 <h1>637 Orders | 92%</h1>
                 <button
                   onClick={handleBuyClick}
-                  className="px-10 bg-[#1DD55E] py-2 rounded-md mt-20"
+                  className="px-10 bg-[#d51d1d] py-2 rounded-md mt-20"
                 >
-                  Buy
+                  Sell
                 </button>
               </div>
             </div>
@@ -112,7 +114,7 @@ export const PtoP = () => {
 
         {loading && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="border-t-transparent border-solid animate-spin border-[#1DD55E] border-4 rounded-full h-12 w-12"></div>
+            <div className="border-t-transparent border-solid animate-spin border-[#d51d1d] border-4 rounded-full h-12 w-12"></div>
           </div>
         )}
       </div>

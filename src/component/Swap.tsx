@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { RiUserAddLine } from "react-icons/ri";
 import { RiSwapFill } from "react-icons/ri";
-
+import { TbWorldWww } from "react-icons/tb";
 import { GiWantedReward } from "react-icons/gi";
 
 import { useState } from "react";
@@ -65,13 +65,13 @@ const carditem = [
   },
   {
     icon: (
-      <CgMoreO
+      <TbWorldWww
         size={30}
         className="border border-white rounded-full text-[#1DD55E]"
       />
     ),
     title: "More",
-    path: "/",
+    path: "",
     loadingKey: "more",
   },
   {
@@ -82,7 +82,7 @@ const carditem = [
       />
     ),
     title: "Chembsters",
-    path: "/",
+    path: "/subhead",
     loadingKey: "chambsters",
   },
   {
@@ -155,7 +155,14 @@ export const Swap = () => {
               </div>
             ) : (
               <>
-                <div className="text-sm">{item.icon}</div>
+                {index == 4 ? (
+                  <a href="https://.w3.com" target="_blank" className="text-sm">
+                    {item.icon}
+                  </a>
+                ) : (
+                  <div className="text-sm">{item.icon}</div>
+                )}
+
                 <p className="text-sm">{item.title}</p>
               </>
             )}
