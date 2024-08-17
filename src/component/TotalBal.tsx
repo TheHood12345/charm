@@ -7,7 +7,7 @@ import axios from "axios";
 import { Swap } from "./Swap";
 import { MySlider } from "./MySlider";
 import { GainItem } from "./GainItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 
 import b1 from "./button.jpg";
@@ -33,6 +33,8 @@ export const TotalBal: React.FC = () => {
   useEffect(()=>{
     window.scrollTo(0,0);
   },[]);
+
+  const navigate = useNavigate();
   
   const [total_balance, set_total_balance] = useState(0);
 
@@ -43,10 +45,31 @@ export const TotalBal: React.FC = () => {
 
   const [p_total, set_p_total] = useState(0);
   let p_t = 0;
+  
+  const userToken = localStorage.getItem("userToken");
+
+
+  useEffect(()=>{
+    const checkToken = async()=>{
+      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }).then((response)=>{
+        if(response.data.loginCheck == false){
+          navigate("/");
+        }
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+
+    checkToken();
+  },[]);
 
   useEffect(() => {
     const fetch1 = async () => {
-      const userToken = localStorage.getItem("userToken");
+      
 
       if (userToken) {
         await axios

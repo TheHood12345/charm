@@ -5,7 +5,7 @@ import {
   
 } from "react-icons/fa6";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import b1 from "./button.jpg";
@@ -38,6 +38,9 @@ export const Asset = () => {
     window.scrollTo(0,0);
   },[]);
 
+
+
+  const navigate = useNavigate();
   const [total_balance, set_total_balance] = useState(-1);
   const [total_values, set_total_values] = useState([{currency:"CHAMBS",balance:-1}]);
   //let [price, setPrice] = useState({symbol:"..",currentPrice:0});
@@ -48,10 +51,30 @@ export const Asset = () => {
 
   const [checked, setChecked] = useState(false);
 
+  const userToken = localStorage.getItem("userToken");
+
+
+  useEffect(()=>{
+    const checkToken = async()=>{
+      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }).then((response)=>{
+        if(response.data.loginCheck == false){
+          navigate("/");
+        }
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+
+    checkToken();
+  },[]);
+
   useEffect(() => {
     const fetch1 = async () => {
-      const userToken = localStorage.getItem("userToken");
-
+      
       if (userToken) {
         await axios
           .get("https://chambsexchange.onrender.com/api/trans/get-wallet", {

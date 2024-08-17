@@ -1,5 +1,5 @@
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 //import { Long } from "./Long";
 // import { FcFinePrint } from "react-icons/fc";
 // import { TradeComponent } from "./TradeComponent";
@@ -19,9 +19,10 @@ export const Spot11 = () => {
 
   let [buy, setBuy] = useState(true);
   let [isBuying, setIsBuying] = useState(false);
+  const navigate = useNavigate()
 
   const location = useLocation();
-let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
+  let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
 
   let [asset] = useState(`${location.state === null? "CHAMBS": location.state.choosen_coin.symbol}`);
   let [orderType, setOrderType] = useState("limit");
@@ -43,6 +44,24 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   
 
   const userToken = localStorage.getItem("userToken");
+
+  useEffect(()=>{
+    const checkToken = async()=>{
+      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }).then((response)=>{
+        if(response.data.loginCheck == false){
+          navigate("/");
+        }
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+
+    checkToken();
+  },[]);
 
 
   useEffect(()=>{

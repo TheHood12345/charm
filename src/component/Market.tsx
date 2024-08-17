@@ -3,17 +3,36 @@ import { FaSpeakerDeck } from "react-icons/fa6";
 //import { GreenBtn } from "./GreenBtn";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Market = () => {
 
   const userToken = localStorage.getItem("userToken");
-  let [coins, set_coins] = useState([{symbol:"CHAMBS",usd:0,priceChange:0}]);
+  const [coins, set_coins] = useState([{symbol:"CHAMBS",usd:0,priceChange:0}]);
+  const navigate = useNavigate();
 
   //const navigate = useNavigate();
 
   useEffect(()=>{
     window.scrollTo(0,0);
+  },[]);
+
+  useEffect(()=>{
+    const checkToken = async()=>{
+      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }).then((response)=>{
+        if(response.data.loginCheck == false){
+          navigate("/");
+        }
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+
+    checkToken();
   },[]);
 
   useEffect(()=>{
