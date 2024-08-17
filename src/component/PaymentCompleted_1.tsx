@@ -118,9 +118,9 @@ const PaymentCompleted_1 = () => {
             <button style={{opacity:0.1,fontWeight:"bold"}} className="bg-red-700 w-full py-2 rounded-md mt-4">
               Dispute
             </button>:
-            <button style={{opacity:1,fontWeight:"bold"}} className="bg-red-700 w-full py-2 rounded-md mt-4">
+            <a href="https://t.me/@chambsteam" target="_blank" style={{opacity:1,fontWeight:"bold",textDecoration:"none"}} className="bg-red-700 w-full py-2 rounded-md mt-4">
               Dispute
-            </button>
+            </a>
           }
           
         </div>
