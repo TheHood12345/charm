@@ -31,6 +31,14 @@ export const Login = () => {
         console.log("Login successful:", response.data);
         localStorage.removeItem("userToken");
         localStorage.setItem("userToken", response.data.token);
+        localStorage.removeItem("userCurrency");
+        localStorage.setItem("userCurrency", response.data.existingUser.countryCurrency);
+        localStorage.removeItem("userBankName");
+        localStorage.setItem("userBankName", response.data.existingUser.bankName);
+        localStorage.removeItem("userAccountName");
+        localStorage.setItem("userAccountName", response.data.existingUser.accountName);
+        localStorage.removeItem("userAccountNumber");
+        localStorage.setItem("userAccountNumber", response.data.existingUser.accountNumber);
         navigate("/home");
       }
       // Handle successful login (e.g., store tokens, redirect)

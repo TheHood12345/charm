@@ -414,7 +414,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
             {/* <p className="text-white py-2">${price.toFixed(2)}</p> */}
             <input type="range"  onChange={handle_drag}  max={100} min={0} style={{width:"100%",height:"3px",borderColor:"red"}}/>
                     
-            <div style={{marginTop: "0px",display:"flex",alignItems:"center",justifyContent:"center"}} className="bg-gray-800 mt-4 py-2 rounded-md">
+            <div style={{marginTop: "0px",marginBottom:"10px",display:"flex",alignItems:"center",justifyContent:"center"}} className="bg-gray-800 mt-4 py-2 rounded-md">
               <div className="flex justify-between items-center px-2 text-white">
                 
                 

@@ -44,6 +44,7 @@ import PaymentCompleted from "./component/PaymentCompleted.tsx";
 import CancelOrder from "./component/CancelOrder.tsx";
 
 import { Spot11 } from "./component/Spot11.tsx";
+import PaymentCompleted_1 from "./component/PaymentCompleted_1.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -190,6 +191,14 @@ const router = createBrowserRouter([
         element: (
           <>
             <PaymentCompleted />
+          </>
+        ),
+      },
+      {
+        path: "/paycompleted_1",
+        element: (
+          <>
+            <PaymentCompleted_1 />
           </>
         ),
       },

@@ -1,19 +1,18 @@
 import { FaArrowLeft, FaCopy, FaMessage } from "react-icons/fa6";
 import { Link, useLocation,useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 
-const PaymentCompleted = () => {
+const PaymentCompleted_1 = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [min,setMin] = useState(15);
+  const [min,setMin] = useState(9);
   const [sec,setSec] = useState(59);
   const [loading,setLoading] = useState(false);
+  const [dispute, setDispute] = useState(false);
 
-  const [paid, setPaid] = useState(false);
-
-  const userToken = localStorage.getItem("userToken");
+  //const userToken = localStorage.getItem("userToken");
 
   useEffect(()=>{
 
@@ -25,7 +24,7 @@ const PaymentCompleted = () => {
           setSec(59);
         }else{
           clearInterval(timeInterval);
-          cancelRequest();
+          setDispute(true);
         }
       },1000);
 
@@ -33,32 +32,12 @@ const PaymentCompleted = () => {
   
   },[min,sec]);
 
-  const cancelRequest = async()=>{
-    setLoading(true);
-    await axios.post("https://chambsexchange.onrender.com/api/trade/cancel-trade",{
-      tradeId: location.state._id
-    },{
-      headers: {
-        Authorization: `Bearer ${userToken}`
-      }
-    }).then((response)=>{
-      console.log("cancelled",response.data);
-      setLoading(false);
-      if(response.data.message == "Trade canceled successfully"){
-        navigate("/pp")
-      }
-      
-    }).catch((err)=>{
-      console.log(err);
-      setLoading(false);
-    });
-  }
-
+  
   return (
     <div className="flex flex-col min-h-screen bg-gray-950 text-white overflow-hidden">
       <div className="py-3 fixed top-0 w-full bg-gray-950 z-10">
         <div className="flex justify-between items-center p-2">
-          <Link to="/pp">
+          <Link to="/pp ">
             <FaArrowLeft size={20} />
           </Link>
         </div>
@@ -67,21 +46,21 @@ const PaymentCompleted = () => {
       <div className="flex-1 p-4 pt-20">
         <div className="flex justify-between items-center">
           <div className="text-xl">
-            <h1>Complete Your Payment</h1>
-            <p>Within:</p>
+            <h1>Please wait for</h1>
+            <p>release of payment</p>
           </div>
           <div className="flex gap-2">
-            <div className="h-5 w-5 bg-red-600 p-5 flex justify-center items-center rounded-md">
+            <div className="h-5 w-5 bg-green-600 p-5 flex justify-center items-center rounded-md">
               {min}
             </div>
-            <div className="h-5 w-5 bg-red-600 p-5 flex justify-center items-center rounded-md">
+            <div className="h-5 w-5 bg-green-600 p-5 flex justify-center items-center rounded-md">
               {sec}
             </div>
           </div>
         </div>
         <p className="mt-3 text-sm text-slate-500">
-          Please complete your payment within 15:00. Otherwise,the order will be
-          automatically canceled.
+          Please wait for payment release . If funds are not received before the 9:00 countdown expires, disputes will be
+          automatically enabled.
         </p>
         {/* <div className="mt-4">
           <div className="bg-slate-900 rounded-md p-2  py-2">
@@ -111,31 +90,18 @@ const PaymentCompleted = () => {
               <div className="mt-4">
                 <div className="bg-slate-800 bg-gray-800 rounded-md"  style={{width:"100%",paddingTop:"10px",paddingBottom:"10px",paddingLeft:"10px",paddingRight:"10px",height:"100%"}}>
                   <div className="flex justify-between mt-2">
-                    <h1 style={{color:"gray",fontWeight:"bold"}}>NAME</h1>
-                    <p style={{fontWeight:"bold"}} className="text-white flex items-center gap-1">
-                       {location.state.accountName} <FaCopy style={{color:"green",marginLeft:"3px"}} onClick={()=>{navigator.clipboard.writeText(`${location.state.accountName}`).then(()=>{console.log("copied")})}}/>
-                    </p>
+                    
                   </div>
                   <div className="flex justify-between mt-2">
-                    <h1 style={{color:"gray",fontWeight:"bold"}}>Account Number</h1>
-                    <p style={{fontWeight:"bold"}} className="text-white flex items-center gap-1">
-                      {location.state.accountNumber} <FaCopy style={{color:"green",marginLeft:"3px"}} onClick={()=>{navigator.clipboard.writeText(`${location.state.accountNumber}`).then(()=>{console.log("copied")})}}/>
-                    </p>
+                    
                   </div>
                   
                   <div className="flex justify-between mt-2">
-                    <h1 style={{color:"gray",fontWeight:"bold"}}>Bank Name</h1>
-                    <p style={{fontWeight:"bold"}} className="text-white flex items-center gap-1">
-                      {location.state.bankName} <FaCopy style={{color:"green",marginLeft:"3px"}} onClick={()=>{navigator.clipboard.writeText(`${location.state.bankName}`).then(()=>{console.log("copied")})}}/>
-                    </p>
+                
                   </div>
 
                   <div className="flex justify-between mt-2">
-                    <h1 style={{color:"gray",fontWeight:"bold"}}>Order No.</h1>
-                    <p style={{fontWeight:"bold"}} className="text-white flex gap-2 justify-center items-center">
-                       {location.state.orderNumber}
-                      <FaCopy style={{color:"green",marginLeft:"3px"}} onClick={()=>{navigator.clipboard.writeText(`${location.state.orderNumber}`).then(()=>{console.log("copied")})}} />
-                    </p>
+                    
                   </div>
                 </div>
                 
@@ -145,20 +111,18 @@ const PaymentCompleted = () => {
           <p className="mt-3 text-sm text-slate-500">
           Please click the button below only after you have made the payment.
         </p>
-          <Link to="/paycompleted_1" className="">
-            <button className="bg-green-700 w-full py-2 rounded-md mt-4">
-              I have paid
+          <Link to="/home" className="">
+            <button style={{fontWeight:"bold"}} className="bg-green-700 w-full py-2 rounded-md mt-4">
+              I have received my payment
             </button>
           </Link>
           {
-            loading?
-            <button style={{opacity:0.8}} className="bg-red-700 w-full py-2 rounded-md mt-4">
-              Canceling...
+            dispute == false?
+            <button style={{opacity:0.1,fontWeight:"bold"}} className="bg-red-700 w-full py-2 rounded-md mt-4">
+              Dispute
             </button>:
-            <button onClick={()=>{
-              cancelRequest();
-            }} className="bg-red-700 w-full py-2 rounded-md mt-4">
-              Cancel Request
+            <button style={{opacity:1,fontWeight:"bold"}} className="bg-red-700 w-full py-2 rounded-md mt-4">
+              Dispute
             </button>
           }
           
@@ -169,4 +133,4 @@ const PaymentCompleted = () => {
   );
 };
 
-export default PaymentCompleted;
+export default PaymentCompleted_1;

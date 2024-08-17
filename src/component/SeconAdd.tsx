@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdHeadset } from "react-icons/io";
 import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import { BeatLoader } from "react-spinners"; // Ensure this package is installed
 
 export const SecondAdd = () => {
@@ -11,9 +11,14 @@ export const SecondAdd = () => {
   const [maxValue, setMaxValue] = useState(0);
   const [paymentTime, setPaymentTime] = useState(15);
 
+  const location = useLocation();
+
   // State for loading
   const [isLoadingNext, setIsLoadingNext] = useState(false);
   const [isLoadingPrevious, setIsLoadingPrevious] = useState(false);
+
+
+
 
   // Handlers for incrementing/decrementing
   const incrementMinValue = () => setMinValue(minValue + 1);
@@ -22,6 +27,12 @@ export const SecondAdd = () => {
   const decrementMaxValue = () => setMaxValue(maxValue - 1);
   const incrementPaymentTime = () => setPaymentTime(paymentTime + 1);
   const decrementPaymentTime = () => setPaymentTime(paymentTime - 1);
+
+  const [amount, setAmount] = useState(0);
+  const [minOrderLimit, setMinOrderLimit] = useState(2000);
+  const [maxOrderLimit, setMaxOrderLimit] = useState(2000);
+
+  const [elapsTime, setElapsTime] = useState(15);
 
   // Simulate a loading action
   const handleNextClick = async () => {
@@ -41,13 +52,17 @@ export const SecondAdd = () => {
       // Handle action completion
     }, 2000); // 2 seconds delay
   };
+  
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-950 text-white overflow-hidden">
       {/* Header */}
       <div className="py-3 fixed top-0 w-full bg-gray-950 z-10">
         <div className="flex justify-between items-center p-2">
-          <FaArrowLeftLong size={20} />
+        <Link to="/addvert">
+        <FaArrowLeftLong size={20} />
+        </Link>
+          
           <img src={logo} alt="Logo" className="h-10 object-contain" />
           <IoMdHeadset size={20} />
         </div>
@@ -73,36 +88,39 @@ export const SecondAdd = () => {
         <hr />
 
         {/* Form Section */}
-        <div className="bg-white text-black rounded-md py-4 mt-5 p-2 min-h-[500px]">
+        <div style={{backgroundColor:"rgba(0,0,0,0.3)"}} className="bg-white text-black rounded-md py-4 mt-5 p-2 min-h-[500px]">
           {/* Amount to Trade */}
-          <div className="flex border rounded-md border-[#1DD55E] w-full py-1 p-1 gap-2">
+          <div style={{width:"80%",marginBottom:"0px"}} className={`flex border rounded-md border-[#1DD55E] w-full py-1 p-1 gap-2`}>
             <input
-              type="text"
-              placeholder="Input Amount to Trade"
-              className="flex-1 outline-none text-sm border-none placeholder:p-1"
+              type="number"
+              placeholder="Amount" value={amount} onChange={async(event: React.ChangeEvent<HTMLInputElement>)=>{
+                setAmount(Number(event.target.value));
+              }}
+              style={{width:"80%",backgroundColor:"transparent",color:"white"}}
+              className="flex-1 outline-none text-sm border-none placeholder:p-1 no_spinner1"
             />
-            <h1>NGN</h1>
+            <h1 style={{width:"20%",color:"white",fontWeight:"bold"}}>{location.state.assetToTrade}</h1>
           </div>
 
           {/* Price Information */}
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <h1></h1>
             <h1 className="text-sm">NAN USD</h1>
-          </div>
+          </div> */}
 
           {/* Order Limit */}
-          <h1 className="text-sm">Order Limit</h1>
-          <div className="flex justify-between items-center mt-2">
+          {/* <h1 className="text-sm">Order Limit</h1> */}
+          <div className="flex justify-between items-center mt-2" style={{color:"white"}}>
             <h1>Min</h1>
             <h1>Max</h1>
           </div>
 
           {/* Min and Max Inputs with Increment/Decrement Buttons */}
           <div className="flex gap-4">
-            <div className="w-1/2 flex border border-blue-700 rounded-md p-1 items-center">
+            <div style={{borderColor:"transparent"}} className={`w-1/2 flex border rounded-md p-1 items-center`}>
               <button
-                onClick={decrementMinValue}
-                className="bg-gray-300 px-2 py-1 rounded-l-md"
+                onClick={decrementMinValue} style={{color:"white"}}
+                className="bg-[#1DD55E] px-2 py-1 rounded-l-md"
               >
                 -
               </button>
@@ -113,17 +131,17 @@ export const SecondAdd = () => {
                 readOnly
               />
               <button
-                onClick={incrementMinValue}
-                className="bg-gray-300 px-2 py-1 rounded-r-md"
+                onClick={incrementMinValue} style={{color:"white"}}
+                className="bg-[#1DD55E] px-2 py-1 rounded-r-md"
               >
                 +
               </button>
-              <span>NGN</span>
+              <span style={{color:"white",fontWeight:"bold"}}>NGN</span>
             </div>
-            <div className="w-1/2 flex border border-blue-700 rounded-md p-1 items-center">
+            <div style={{borderColor:"transparent"}} className={`w-1/2 flex border rounded-md p-1 items-center`}>
               <button
-                onClick={decrementMaxValue}
-                className="bg-gray-300 px-2 py-1 rounded-l-md"
+                onClick={decrementMaxValue} style={{color:"white"}}
+                className="bg-[#1DD55E] px-2 py-1 rounded-l-md"
               >
                 -
               </button>
@@ -134,27 +152,27 @@ export const SecondAdd = () => {
                 readOnly
               />
               <button
-                onClick={incrementMaxValue}
-                className="bg-gray-300 px-2 py-1 rounded-r-md"
+                onClick={incrementMaxValue} style={{color:"white"}}
+                className="bg-[#1DD55E] px-2 py-1 rounded-r-md"
               >
                 +
               </button>
-              <span>NGN</span>
+              <span style={{color:"white",fontWeight:"bold"}}>NGN</span>
             </div>
           </div>
 
           {/* Additional Information */}
-          <div className="flex justify-between items-center">
+          {/* <div className="flex justify-between items-center">
             <h1 className="text-sm">NAN USDT</h1>
             <h1 className="text-sm">NAN USDT</h1>
-          </div>
+          </div> */}
 
           {/* Payment Time Limit */}
-          <h1 className="mt-2">Payment Time Limit</h1>
-          <div className="w-full h-full p-1 mt-4 py-1 rounded-md border border-blue-700 flex items-center">
+          <h1 className="mt-1" style={{color:"white",marginTop:"10px"}}>Payment Time Limit</h1>
+          <div className="w-full h-full p-1 mt-4 py-1 rounded-md  flex items-center" style={{marginTop:"0px"}}>
             <button
-              onClick={decrementPaymentTime}
-              className="bg-gray-300 px-2 py-1 rounded-l-md"
+              onClick={decrementPaymentTime} style={{color:"white"}}
+              className="bg-[#1DD55E] px-2 py-1 rounded-l-md"
             >
               -
             </button>
@@ -166,8 +184,8 @@ export const SecondAdd = () => {
               readOnly
             />
             <button
-              onClick={incrementPaymentTime}
-              className="bg-gray-300 px-2 py-1 rounded-r-md"
+              onClick={incrementPaymentTime} style={{color:"white"}}
+              className="bg-[#1DD55E] px-2 py-1 rounded-r-md"
             >
               +
             </button>
@@ -175,9 +193,9 @@ export const SecondAdd = () => {
 
           {/* Buttons with Loading Effect */}
           <div>
-            <Link to="/postadd">
+            <Link to="/postadd" state = {{isSell:location.state.is_sell, assetToTrade:location.state.assetToTrade, priceMargin:location.state.priceMargin, adType: location.state.adType, amount:amount, minOrderLimit:minValue, maxOrderLimit:maxValue, elapsTime:paymentTime}}>
             <button
-              onClick={handleNextClick}
+              onClick={handleNextClick}  style={{backgroundImage:"linear-gradient(black,rgb(11, 34, 11))"}}
               className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center"
               disabled={isLoadingNext}
             >
@@ -186,7 +204,7 @@ export const SecondAdd = () => {
             </Link>
            <Link to="/addvert">
            <button
-              onClick={handlePreviousClick}
+              onClick={handlePreviousClick}  style={{backgroundImage:"linear-gradient(black,rgb(11, 34, 11))"}}
               className="bg-[#1DD55E] w-full rounded-md py-2 text-white flex items-center justify-center"
               disabled={isLoadingPrevious}
             >

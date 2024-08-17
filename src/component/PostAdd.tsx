@@ -1,53 +1,138 @@
 import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { motion } from "framer-motion"; // Import motion from Framer Motion
+// import { motion } from "framer-motion"; // Import motion from Framer Motion
 import { FaArrowLeftLong, FaCheck } from "react-icons/fa6";
 import { IoMdHeadset } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 // Typing effect component
-const TypingText = ({ text }: { text: string }) => {
-  const characters = Array.from(text);
-  return (
-    <motion.p
-      className="text-xs text-[#1DD55E] font-bold mt-2"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      {characters.map((char, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.05 }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </motion.p>
-  );
-};
+// const TypingText = ({ text }: { text: string }) => {
+//   const characters = Array.from(text);
+//   return (
+//     <motion.p
+//       className="text-xs text-[#1DD55E] font-bold mt-2"
+//       initial={{ opacity: 0 }}
+//       animate={{ opacity: 1 }}
+//       transition={{ duration: 1 }}
+//     >
+//       {characters.map((char, index) => (
+//         <motion.span
+//           key={index}
+//           initial={{ opacity: 0, x: 10 }}
+//           animate={{ opacity: 1, x: 0 }}
+//           transition={{ delay: index * 0.05 }}
+//         >
+//           {char}
+//         </motion.span>
+//       ))}
+//     </motion.p>
+//   );
+// };
 
 export const PostAdd = () => {
-  const [loading, setLoading] = useState(false);
 
-  const handlePostAd = () => {
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const userToken = localStorage.getItem("userToken");
+
+  const createAd = async()=>{
     setLoading(true);
-    // Simulate a network request
-    setTimeout(() => {
+    await axios.post("https://chambsexchange.onrender.com/api/ad/sell-ad",{
+        assetToTrade: location.state.assetToTrade,
+        priceType: "float",
+        priceMargin: location.state.priceMargin,
+        amount: location.state.amount,
+        elapsTime: location.state.elapsTime,
+        bankName: localStorage.getItem("userBankName"),
+        blockchain: "binance",
+        accountName: localStorage.getItem("userAccountName"),
+        accountNumber: localStorage.getItem("userAccountNumber"),
+        minOrderLimit: location.state.minOrderLimit,
+        maxOrderLimit: location.state.maxOrderLimit,
+        status: "online",
+        adType: location.state.adType
+  },{
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    }).then((response)=>{
       setLoading(false);
-      // Handle post ad logic here
-    }, 2000);
+      navigate("/sucessful");
+      console.log("res ads",response.data)}).catch((err)=>{
+        setLoading(false);
+        console.log(err)});
+  }
+
+
+  const buyAd = async()=>{
+    setLoading(true);
+    await axios.post("https://chambsexchange.onrender.com/api/ad/buy-ad",{
+        assetToTrade: location.state.assetToTrade,
+        priceType: "float",
+        priceMargin: location.state.priceMargin,
+        amount: location.state.amount,
+        elapsTime: 15,//location.state.elapsTime,
+        blockchain: "binance",
+        minOrderLimit: location.state.minOrderLimit,
+        maxOrderLimit: location.state.maxOrderLimit,
+        status: "online",
+        adType: location.state.adType
+  },{
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    }).then((response)=>{
+      setLoading(false);
+      navigate("/sucessful");
+      console.log("buy ads",response.data)}).catch((err)=>{
+        setLoading(false);
+        console.log(err)});
+  }
+
+
+
+
+  const handlePostAd = async() => {
+
+    if(location.state.adType == "buy"){
+      await buyAd();
+    }
+    if(location.state.adType == "sell"){
+      await createAd();
+    }
   };
+
+  useEffect(()=>{
+    console.log("is_sell", location.state.is_sell);
+    console.log("assetToTrade: ",location.state.assetToTrade);
+    console.log("priceMargin: ", location.state.priceMargin);
+
+    console.log("amount",location.state.amount);
+    console.log("minOrderLimit", location.state.minOrderLimit);
+    console.log("maxOrderLimit",location.state.maxOrderLimit);
+    console.log("elapsTime",location.state.elapsTime);
+
+    console.log("adType",location.state.adType);
+
+  },[]);
+
+
+
+
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-950 text-white overflow-hidden">
       <div className="py-3 fixed top-0 w-full bg-gray-950 z-10">
         <div className="flex justify-between items-center p-2">
-          <FaArrowLeftLong size={20} />
+        <Link to="/addvert">
+            <FaArrowLeftLong size={20} />
+        </Link>
+          
           <img src={logo} alt="Logo" className="h-10 object-contain" />
           <IoMdHeadset size={20} />
         </div>
@@ -79,37 +164,37 @@ export const PostAdd = () => {
           />
           <hr />
           <div className="mb-4">
-            <h1 className="text-lg font-bold">Counterparty Conditions</h1>
-            <TypingText text="Adding counterparty requirements will reduce the exposure of your Ad" />
+            {/* <h1 className="text-lg font-bold">Counterparty Conditions</h1>
+            <TypingText text="Adding counterparty requirements will reduce the exposure of your Ad" /> */}
             <div className="mt-4">
               <input type="checkbox" className="mr-2" />
               <span className="text-sm">Completed KYC</span>
             </div>
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <input type="checkbox" className="mr-2" />
               <span className="text-sm">Registered 0 days(s) ago</span>
-            </div>
-            <div className="mt-2">
+            </div> */}
+            {/* <div className="mt-2">
               <input type="checkbox" className="mr-2" />
               <span className="text-sm">Holding more than 0.01 BTC</span>
-            </div>
+            </div> */}
           </div>
           <hr />
           <div className="mb-4">
             <div className="mt-2">
-              <input type="radio" className="mr-2" />
+              <input type="radio" checked disabled className="mr-2" />
               <span className="text-sm">Online</span>
             </div>
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <input type="radio" className="mr-2" />
               <span className="text-sm">
                 Offline now. Publish manually later.
               </span>
-            </div>
+            </div> */}
           </div>
           <hr />
           <div>
-           <Link to="/sucessful">
+           {/* <Link to="/sucessful"> */}
            <button
               onClick={handlePostAd}
               className={`bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center ${
@@ -141,16 +226,23 @@ export const PostAdd = () => {
                     ></path>
                   </svg>
                 </>
-              ) : (
-                "Post Ad"
-              )}
+              ) :
+              location.state.adType == "sell"?
+              (
+                "Post Sell Ad"
+              ):
+              (
+                "Post Buy Ad"
+              )
+            
+            }
             </button>
-           </Link>
-           <Link to="/secondaddvert">
+           {/* </Link> */}
+           {/* <Link to="/secondaddvert">
            <button className="bg-[#1DD55E] w-full mb-1 mt-4 rounded-md py-2 text-white flex items-center justify-center">
               Previous
             </button>
-           </Link>
+           </Link> */}
           </div>
         </div>
       </div>

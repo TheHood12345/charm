@@ -37,11 +37,11 @@ export const TotalBal: React.FC = () => {
   const [total_balance, set_total_balance] = useState(0);
 
   const [total_values, set_total_values] = useState([
-    { currency: "CHAMBS", balance: -1 },
+    { currency: "CHAMBS", balance: 0 },
   ]);
   const [prices, setPrices] = useState([{ symbol: "..", usd: 0, name: "" }]);
 
-  const [p_total, set_p_total] = useState(-1);
+  const [p_total, set_p_total] = useState(0);
   let p_t = 0;
 
   useEffect(() => {
@@ -154,7 +154,7 @@ export const TotalBal: React.FC = () => {
                   ? "****"
                   : //: user.isAuthenticated
                     //? user.balance
-                    p_total}{" "}
+                    p_total.toFixed(4)}{" "}
                 <span>USD</span>
               </h1>
             </div>
