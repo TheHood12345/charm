@@ -20,7 +20,7 @@ export const NewPassword = () => {
     setError(null);
 
     try {
-      const response = await axios.post("https://backend.chambit.exchange/api/users/reset-passord", {
+      const response = await axios.post("https://chambsexchange.onrender.com/api/users/reset-passord", {
         token,
         newPassword
       });

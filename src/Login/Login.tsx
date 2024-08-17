@@ -20,7 +20,7 @@ export const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://backend.chambit.exchange/api/auth/signin",
+        "https://chambsexchange.onrender.com/api/auth/signin",
         {
           email,
           password,

@@ -18,7 +18,7 @@ export const ForgotPassword = ()=>{
     setError(null);
 
     try {
-      const response = await axios.post("https://backend.chambit.exchange/api/users/reset-passord-link", {
+      const response = await axios.post("https://chambsexchange.onrender.com/api/users/reset-passord-link", {
         email
       });
       console.log("Login successful:", response.data);

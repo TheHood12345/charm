@@ -25,7 +25,7 @@ export const Otp = ()=>{
    
         try {
           const response = await axios.post(
-            "https://backend.chambit.exchange/api/auth/sendotp",
+            "https://chambsexchange.onrender.com/api/auth/sendotp",
             {
               "userId": userId,
               "otp": otpInput

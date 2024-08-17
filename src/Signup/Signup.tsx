@@ -33,7 +33,7 @@ export const Signup = () => {
 
     try {
       const response = await axios.post(
-        "https://backend.chambit.exchange/api/auth/signup",
+        "https://chambsexchange.onrender.com/api/auth/signup",
         formData
       );
       console.log("Signup successful:", response.data.data.userId);
