@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const PtoP = () => {
-  const loading = useState(false);
+  //const loading = useState(false);
   const navigate = useNavigate();
 
   // const handleBuyClick = () => {
@@ -180,12 +180,12 @@ export const PtoP = () => {
       
           {/* Additional items omitted for brevity */}
         </div>
-
+{/* 
         {loading && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="border-t-transparent border-solid animate-spin border-[#1DD55E] border-4 rounded-full h-12 w-12"></div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
