@@ -1,4 +1,4 @@
-import { FaArrowLeft, FaCopy, FaMessage } from "react-icons/fa6";
+import { FaArrowLeft, FaCopy } from "react-icons/fa6";
 import { Link, useLocation,useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,8 +10,6 @@ const PaymentCompleted = () => {
   const [min,setMin] = useState(15);
   const [sec,setSec] = useState(59);
   const [loading,setLoading] = useState(false);
-
-  const [paid, setPaid] = useState(false);
 
   const userToken = localStorage.getItem("userToken");
 

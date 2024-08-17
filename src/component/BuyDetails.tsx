@@ -21,12 +21,7 @@ const BuyDetails = () => {
   //   setOpen(!open);
   // };
 
-  const handleSellClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
+
   
   const handleChange = (event: ChangeEvent<HTMLInputElement>)=>{
     setAmount(event.target.value);
@@ -50,7 +45,7 @@ const BuyDetails = () => {
       }else{
         console.log("expired");
       }
-    }).catch((err)=>{
+    }).catch(()=>{
       setLoading(false);
       console.log("id1: ",location.state.id1);
       console.log("amount: ",amount);

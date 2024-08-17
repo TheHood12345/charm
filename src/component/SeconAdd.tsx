@@ -29,10 +29,6 @@ export const SecondAdd = () => {
   const decrementPaymentTime = () => setPaymentTime(paymentTime - 1);
 
   const [amount, setAmount] = useState(0);
-  const [minOrderLimit, setMinOrderLimit] = useState(2000);
-  const [maxOrderLimit, setMaxOrderLimit] = useState(2000);
-
-  const [elapsTime, setElapsTime] = useState(15);
 
   // Simulate a loading action
   const handleNextClick = async () => {

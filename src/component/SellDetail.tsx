@@ -10,24 +10,15 @@ import axios from "axios";
 
 
 const SellDetail = () => {
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   const location = useLocation();
   const userToken = localStorage.getItem("userToken");
   const navigate = useNavigate();
   const [amount, setAmount] = useState<number | string>("");
 
-  const handleSellClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
+
 
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>)=>{
@@ -54,7 +45,7 @@ const SellDetail = () => {
       }else{
         console.log("expired");
       }
-    }).catch((err)=>{
+    }).catch(()=>{
       setLoading(false);
       console.log("id1: ",location.state.id1);
       console.log("amount: ",amount);

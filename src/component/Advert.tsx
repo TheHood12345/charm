@@ -10,23 +10,11 @@ import axios from "axios";
 export const Advert = () => {
   const [assetOpen, setAssetOpen] = useState(false);
   const [fiatOpen, setFiatOpen] = useState(false);
-  const [percentage, setPercentage] = useState(100.0);
-  const [conditionMet, setConditionMet] = useState(false);
 
   const userToken = localStorage.getItem("userToken");
 
   const [assetToTrade, setAssetToTrade] = useState("USDT");
-  const [priceType, setPriceType] = useState("float");
   const [priceMargin, setPriceMargin] = useState(100);
-  const [amount, setAmount] = useState(4000);
-  const [elapsTime, setElapsTime] = useState(15);
-  const [bankName, setBankName] = useState("Opay");
-  const [accountName, setAccountName] = useState("Muekara Tor");
-  const [accountNumber, setAccountNumber] = useState("7014970207");
-  const [minOrderLimit, setMinOrderLimit] = useState(2000);
-  const [maxOrderLimit, setMaxOrderLimit] = useState(2000);
-  const [status, setStatus] = useState("online");
-  const [adType, setAdType] = useState("sell");
 
   const [is_sell,set_is_sell] = useState(true);
 
@@ -94,14 +82,12 @@ const createAd = async()=>{
 
   
 
-  const handleDecrement = () => {
-    setPercentage((prev) => Math.max(prev - 1,50)); // Prevent going below 0
+  const handleDecrement = () => { // Prevent going below 0
     setPriceMargin((prev) => Math.max(prev - 1,50));
    // setConditionMet((prev) => prev || percentage <= 0); // Update condition based on percentage
   };
 
-  const handleIncrement = () => {
-    setPercentage((prev) => Math.min(prev + 1, 105)); // Prevent going above 100
+  const handleIncrement = () => { // Prevent going above 100
     setPriceMargin((prev) => Math.min(prev + 1, 105));
    // setConditionMet((prev) => prev || percentage >= 100); // Update condition based on percentage
   };
@@ -127,7 +113,7 @@ const createAd = async()=>{
           <div className="flex py-3 mt-4 justify-center items-center">
             <div
               className={`h-5 w-5 rounded-full ${
-                conditionMet ? "bg-green-700" : "bg-green-700"
+                 "bg-green-700" 
               } text-white flex justify-center items-center transition-all duration-300`}
             >
               1
