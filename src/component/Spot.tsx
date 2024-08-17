@@ -1,5 +1,5 @@
 import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 //import { Long } from "./Long";
 // import { FcFinePrint } from "react-icons/fc";
 // import { TradeComponent } from "./TradeComponent";
@@ -41,9 +41,29 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   
 
   const userToken = localStorage.getItem("userToken");
+  const navigate = useNavigate();
 
   useEffect(()=>{
     window.scrollTo(0,0);
+  },[]);
+
+  useEffect(()=>{
+    const checkToken = async()=>{
+      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      }).then((response)=>{
+        if(response.data.loginCheck == false){
+          localStorage.removeItem("userToken");
+          navigate("/");
+        }
+      }).catch((err)=>{
+        console.log(err);
+      });
+    }
+
+    checkToken();
   },[]);
 
 

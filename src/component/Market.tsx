@@ -25,6 +25,7 @@ export const Market = () => {
         }
       }).then((response)=>{
         if(response.data.loginCheck == false){
+          localStorage.removeItem("userToken");
           navigate("/");
         }
       }).catch((err)=>{

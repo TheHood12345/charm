@@ -53,6 +53,7 @@ export const Spot11 = () => {
         }
       }).then((response)=>{
         if(response.data.loginCheck == false){
+          localStorage.removeItem("userToken");
           navigate("/");
         }
       }).catch((err)=>{
