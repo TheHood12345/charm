@@ -50,7 +50,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   const userToken = localStorage.getItem("userToken");
 
   const userId = localStorage.getItem("userId");
-  const [logout, setLogout] = useState(false);
+  const [logout] = useState(false);
 
   useEffect(()=>{
     const checkToken = async()=>{
