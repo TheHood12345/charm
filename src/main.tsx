@@ -359,6 +359,22 @@ const router = createBrowserRouter([
           </>
         ),
       },
+      {
+        path: "*",
+        element: !userToken ? (
+          <>
+            <GetStartedHeader />
+            <GetStarted />
+            <Footer />
+          </>
+        ): (
+          <>
+            <Navbar />
+            <Home />
+            <Footer />
+          </>
+        )
+      }
     ],
   },
 ]);

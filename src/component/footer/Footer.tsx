@@ -20,7 +20,7 @@ const footerItmems = [
   {
     title: "Trade",
     icons: <PiTrademarkFill />,
-    path: "/spot",
+    path: "/spot?pair=CHAMBS/USD",
   },
   {
     title: "Wallet",

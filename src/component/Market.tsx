@@ -3,33 +3,38 @@ import { FaSpeakerDeck } from "react-icons/fa6";
 //import { GreenBtn } from "./GreenBtn";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Market = () => {
 
   const userToken = localStorage.getItem("userToken");
   const [coins, set_coins] = useState([{symbol:"CHAMBS",usd:0,priceChange:0}]);
-  const navigate = useNavigate();
 
-  //const navigate = useNavigate();
 
   useEffect(()=>{
     window.scrollTo(0,0);
   },[]);
 
+  const userId = localStorage.getItem("userId");
+  const [logout, setLogout] = useState(false);
+
   useEffect(()=>{
     const checkToken = async()=>{
-      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+      await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        userId: userId
+      },{
         headers: {
           Authorization: `Bearer ${userToken}`
         }
       }).then((response)=>{
-        if(response.data.loginCheck == false){
+        if(response.data.message == "yes"){
           localStorage.removeItem("userToken");
-          navigate("/");
+          setLogout(true);
+          //navigate("/");
+          console.log("logged out");
         }
       }).catch((err)=>{
-        console.log(err);
+        console.log("log in or out errot:",err);
       });
     }
 
@@ -85,7 +90,7 @@ export const Market = () => {
         {
           coins.map((coin,index)=>(
 
-            <Link to="/spot11" state={{"choosen_coin":coin}} key={index} style={{marginLeft:"10px",display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginTop:"20px"}} className="flex justify-around pb-2 items-center w-full">
+            <Link to={logout == false? `/spot11?pair=${coin.symbol.toUpperCase()}/USDT`: "/login"} state={{"choosen_coin":coin}} key={index} style={{marginLeft:"10px",display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginTop:"20px"}} className="flex justify-around pb-2 items-center w-full">
                 <h4 style={{width:"40%"}}>
                   <div>{coin.symbol.toUpperCase()}/USDT</div>
                 {/* <div>volume</div> */}

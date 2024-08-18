@@ -54,19 +54,26 @@ export const Asset = () => {
   const userToken = localStorage.getItem("userToken");
 
 
+  const userId = localStorage.getItem("userId");
+  //const [logout, setLogout] = useState(false);
+
   useEffect(()=>{
     const checkToken = async()=>{
-      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
+      await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
+        userId: userId
+      },{
         headers: {
           Authorization: `Bearer ${userToken}`
         }
       }).then((response)=>{
-        if(response.data.loginCheck == false){
+        if(response.data.message == "yes"){
           localStorage.removeItem("userToken");
-          navigate("/");
+          //setLogout(true);
+          navigate("/login");
+          console.log("logged out");
         }
       }).catch((err)=>{
-        console.log(err);
+        console.log("log in or out errot:",err);
       });
     }
 

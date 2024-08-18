@@ -29,8 +29,13 @@ export const Login = () => {
 
       if (response.data.message == "Welcome back") {
         console.log("Login successful:", response.data);
+
         localStorage.removeItem("userToken");
         localStorage.setItem("userToken", response.data.token);
+
+        localStorage.removeItem("userId");
+        localStorage.setItem("userId", response.data.existingUser._id);
+        
         localStorage.removeItem("userCurrency");
         localStorage.setItem("userCurrency", response.data.existingUser.countryCurrency);
         localStorage.removeItem("userBankName");
@@ -39,7 +44,7 @@ export const Login = () => {
         localStorage.setItem("userAccountName", response.data.existingUser.accountName);
         localStorage.removeItem("userAccountNumber");
         localStorage.setItem("userAccountNumber", response.data.existingUser.accountNumber);
-        navigate("/home");
+        navigate("/spot");
       }
       // Handle successful login (e.g., store tokens, redirect)
     } catch (err) {

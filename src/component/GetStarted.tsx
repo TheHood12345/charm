@@ -106,7 +106,7 @@ export const GetStarted = () => {
           <Link to="/signup" onClick={() => handleLoading("signup")}>
             <button className="px-10 bg-gray-200 text-black py-3 rounded-md">
               {loading.signup ? (
-                <span className="loader">Loadding</span>
+                <span className="loader">Loading</span>
               ) : (
                 "Signup"
               )}
