@@ -8,7 +8,7 @@ import axios from "axios";
 
 export const Spot11 = () => {
   //const [open, setOpen] = useState(false);
-  const [loading] = useState(false);
+  // const [loading] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   //const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(4.0255);
@@ -19,6 +19,7 @@ export const Spot11 = () => {
 
   let [buy, setBuy] = useState(true);
   let [isBuying, setIsBuying] = useState(false);
+  const [is_deleting, set_is_deleting] = useState(false);
   const navigate = useNavigate()
 
   const location = useLocation();
@@ -30,8 +31,8 @@ export const Spot11 = () => {
   let [limitPrice, setLimitPrice] = useState(0.0000);
   let [amount, setAmount] = useState(0);
   let [amountType, setAmountType] = useState("USDT");
-  let [usdt_value, set_usdt_value] = useState(0);
-  let [chambs_value, set_chambs_value] = useState(0);
+  let [usdt_value, set_usdt_value] = useState<any>();
+  let [chambs_value, set_chambs_value] = useState<any>();
 
   let [b_bal,set_b_bal] = useState({currency:"",balance:-1});
   let [s_bal,set_s_bal] = useState({currency:"",balance:-1});
@@ -39,30 +40,64 @@ export const Spot11 = () => {
   let [spot_order, set_spot_order] = useState([{tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
   
   let [chambsPrice, setChambsPrice] = useState({currentPrice:0});
-  let [singlePrice, setSinglePrice] = useState([{pair:"",tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
+  let [singlePrice, setSinglePrice] = useState([{pair:"",tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z",_id:""}]);
 
   
 
   const userToken = localStorage.getItem("userToken");
+  //const userId = localStorage.getItem("userId");
+
+  const [logout] = useState(false);
+
 
   useEffect(()=>{
-    const checkToken = async()=>{
-      await axios.get("https://chambsexchange.onrender.com/api/auth/check-logout",{
-        headers: {
-          Authorization: `Bearer ${userToken}`
-        }
-      }).then((response)=>{
-        if(response.data.loginCheck == false){
-          localStorage.removeItem("userToken");
-          navigate("/");
-        }
-      }).catch((err)=>{
-        console.log(err);
-      });
+    const storedTime = localStorage.getItem("startTime");
+    const currentTime = new Date().getTime();
+  
+    if(storedTime){
+      if(24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)) <= 0){
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/");
+      }else{
+        const timer = setTimeout(()=>{
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/");
+        },24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)));
+  
+        return clearTimeout(timer);
+      }
+    }else{
+      navigate("/");
     }
+    },[]);
 
-    checkToken();
-  },[]);
+  // useEffect(()=>{
+  //   const checkToken = async()=>{
+  //     await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
+  //       userId: userId
+  //     },{
+  //       headers: {
+  //         token: `Bearer ${userToken}`
+  //       }
+  //     }).then((response)=>{
+  //       if(response.data.expired == "yes"){
+  //         localStorage.removeItem("userToken");
+  //         //setLogout(true);
+  //         navigate("/");
+  //         console.log("expired");
+  //       }else if(response.data.expired == "no"){
+  //         //setLogout(false);
+  //         console.log("not expired.. still logged in");
+  //       }
+  //     }).catch((err)=>{
+  //       console.log("log in or out errot:",err);
+  //     });
+  //   }
+
+  //   checkToken();
+  // },[]);
 
 
   useEffect(()=>{
@@ -214,6 +249,9 @@ export const Spot11 = () => {
     //set_drag_value((Number(event.target.value)/100) * us_balance.balance);
     //set_drag_value(Number(event.target.value));
     setAmount(Number(event.target.value));
+    
+  }
+  const handle_blur: React.ChangeEventHandler<HTMLInputElement> = () => {
     if(buy == true){
       let x = Number(amount) / Number(t_change.currentPrice);
       set_chambs_value(x);
@@ -263,7 +301,21 @@ export const Spot11 = () => {
     });
   }, []);
 
-//https://chambsexchange.onrender.com/api/spot/spot-order/bnb
+  const cancelAll = async()=>{
+    set_is_deleting(true);
+    await axios.delete(`https://chambsexchange.onrender.com/api/spot/cancel-order/asset/${asset}`,{
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    }).then((res)=>{
+      console.log(res);
+      set_is_deleting(false);
+    }).catch((err)=>{
+      console.log(err);
+      set_is_deleting(false);
+    });
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-950 text-white p-4 overflow-y-auto">
       <div className="w-full max-w-sm min-h-screen mt-20 flex flex-col">
@@ -435,13 +487,13 @@ export const Spot11 = () => {
             }
 
             {/* <p className="text-white py-2">${price.toFixed(2)}</p> */}
-            <input type="range"  onChange={handle_drag}  max={100} min={0} style={{width:"100%",height:"3px",borderColor:"red"}}/>
+            <input type="range"  onChange={handle_drag} min={0} max={buy == true? b_bal.balance.toFixed(1): s_bal.balance.toFixed(1)} style={{width:"100%",height:"3px",borderColor:"red"}}/>
                     
             <div style={{marginTop: "0px",marginBottom:"10px",display:"flex",alignItems:"center",justifyContent:"center"}} className="bg-gray-800 mt-4 py-2 rounded-md">
               <div className="flex justify-between items-center px-2 text-white">
                 
                 
-                <input type="number" className="no_spinner1" value={Number(amount)} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} />
+              <input type="number" className="no_spinner1" value={Number(amount)} onBlur={handle_blur} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} />
                 <h1 style={{color:"yellow",fontSize:"10px"}}>{buy == true? "USDT": asset}</h1>
                 
               </div>
@@ -452,7 +504,7 @@ export const Spot11 = () => {
               <div className="flex justify-between items-center px-2 text-white">
                 
                 
-                <input type="number" className="no_spinner1" value={buy==true? Math.round(chambs_value): Math.round(usdt_value)} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}} min={0} />
+              <input type="number" className="no_spinner1" value={buy==true? chambs_value: usdt_value} onChange={handle_drag} style={{color:"white",fontWeight:"bold",backgroundColor:"transparent",width: "100%"}}/>
                 <h1 style={{color:"yellow",fontSize:"10px"}}>{buy == true? asset: "USDT"}</h1>
                 
               </div>
@@ -489,9 +541,11 @@ export const Spot11 = () => {
 
             <div className="mt-4">
               <button
-                onClick={makeSpot} style={{fontWeight:"bold"}}
+                onClick={
+                    makeSpot
+                } style={{fontWeight:"bold",opacity:`${isBuying==true ? 0.3: 1}`}}
                 className={`${buy==true? "bg-green-700": "bg-red-700"} w-full py-2 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-10`}
-                disabled={loading}
+                disabled={isBuying}
               >
                 {isBuying==true ? "Processing Request" : buy==true? "BUY": "SELL"}
               </button>
@@ -500,27 +554,48 @@ export const Spot11 = () => {
         </div>
         <div style={{marginTop:"40px",width:"100%",paddingRight:"10px",paddingLeft:"10px",paddingBottom:"40px",paddingTop:"40px",backgroundColor:'black'}}>
 
-          {
-            singlePrice.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
-              // <p>{item.pair}</p>
-            <div key={index} className="flex justify-between items-center py-5">
-            <div className="text-sm">
-              <h2>{item.pair}</h2>
-              <span>{item.limitPrice}+</span>
-            </div>
-            <div className="flex gap-4">
-              <h2>{item.amount.toFixed(2)}</h2>
-              <button style={{opacity: "0.4"}} className={`px-2 ${item.tradeType == "buy"? "bg-green-800": "bg-red-800"} text-white font-bold py-2 rounded-md`}>
-                  Pending..
-              </button>
-              {/* <Link to="/orderbook">
-                <button className="px-2 bg-green-600 text-white font-bold py-2 rounded-md">
-                  +184.33%
-                </button>
-              </Link> */}
-            </div>
+
+        {
+          logout == false?
+          (<div style={{marginTop:"40px",width:"100%",paddingRight:"10px",paddingLeft:"10px",paddingBottom:"40px",paddingTop:"40px",backgroundColor:'black'}}>
+          <div style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+          <h2 style={{textAlign:"end",cursor:"pointer",color: "white",paddingLeft:"20px",paddingRight:"20px",borderRadius:"5px",fontWeight:"bold"}}>Assets</h2>
+            <p onClick={
+              cancelAll
+            } style={{textAlign:"end",cursor:"pointer",color:"red",paddingLeft:"20px",paddingRight:"20px",borderRadius:"5px",fontWeight:"bold"}}>Cancel all</p>
           </div>
-            ))
+
+        {
+              singlePrice.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                // <p>{item.pair}</p>
+              <div key={index} className="flex justify-between items-center py-5">
+              <div className="text-sm">
+                <h2  style={{opacity:`${is_deleting == true? 0.2: 1}`}}>{item.pair}</h2>
+                <span  style={{opacity:`${is_deleting == true? 0.2: 1}`}}>{item.limitPrice}+</span>
+              </div>
+              <div className="flex gap-4">
+                <h2  style={{opacity:`${is_deleting == true? 0.2: 1}`}}>{item.amount.toFixed(2)}</h2>
+                <button style={{opacity: `${is_deleting == true? 0.2: 0.4}`}} className={`px-2 ${item.tradeType == "buy"? "bg-green-800": "bg-red-800"} text-white font-bold py-2 rounded-md`}>
+                    Pending..
+                </button>
+                <button onClick={async()=>{
+                  set_is_deleting(true);
+                  await axios.delete(`https://chambsexchange.onrender.com/api/spot/cancel-order/:${item._id}`,{
+                    headers: {
+                      Authorization: `Bearer ${userToken}`
+                    }
+                  }).then((res)=>{set_is_deleting(false);console.log(res.data)}).catch((e)=>{set_is_deleting(false);console.log("some error: ",e)});
+                }} style={{backgroundColor:"red",borderRadius:"100px"}} className={`px-2 ${item.tradeType == "buy"? "bg-green-800": "bg-red-800"} text-white font-bold py-2 rounded-md`}>
+                    x
+                </button>
+              </div>
+            </div>
+              ))
+            }
+  
+            </div>):
+            null
+  
           }
 
         </div>

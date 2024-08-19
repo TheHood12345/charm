@@ -18,7 +18,7 @@ export const Reward = () => {
           <h1 className="ml-2 text-sm mt-4 text-white ">
             Claim off $1000 every 30days{" "}
             <span className="text-[#1DD55E]">Chambit WEB</span> Exchange and
-            share 70% of it daily transaction fees with active traders
+            share 40% of it daily transaction fees with active traders
           </h1>
           <Link to="/chembster">
             <button className="border p-2 mt-4 mb-4 rounded-md bg-slate-950 ml-2 text-[#1DD55E]">
@@ -31,16 +31,16 @@ export const Reward = () => {
         <div className="w-[40%] bg-gray-700 p-1 text-sm rounded-md">
           <IoDiamondOutline />
           <div className="text-[#1DD55E]">
-            <h1>1000 USDT</h1>
-            <p>Worth of</p>
+            <h1>HODL</h1>
+            <p>CONTEST</p>
             <p className="text-slate-500">Position</p>
           </div>
         </div>
         <div className=" w-full bg-slate-900 ">
           <h1 className="ml-2 text-sm mt-4 text-white">
-            Refer 10 people to win more
+            Buy and hold chambs coin for 30 days to earn amazing USDT rewards
           </h1>
-          <Link to="/chembster">
+          <Link to="/spot?pair=CHAMBS/USDT">
             <button className="border p-2 mt-4 mb-4 rounded-md bg-slate-950 ml-2 text-[#1DD55E]">
               Accept
             </button>

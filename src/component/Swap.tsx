@@ -59,9 +59,9 @@ const carditem = [
         className="border border-white rounded-full text-[#1DD55E]"
       />
     ),
-    title: "Reward",
+    title: "Play to earn",
     path: "/",
-    loadingKey: "reward",
+    loadingKey: "play",
   },
   {
     icon: (
@@ -70,7 +70,7 @@ const carditem = [
         className="border border-white rounded-full text-[#1DD55E]"
       />
     ),
-    title: "More",
+    title: "Instant Loan",
     path: "",
     loadingKey: "more",
   },
@@ -81,7 +81,7 @@ const carditem = [
         className="border border-white rounded-full text-[#1DD55E]"
       />
     ),
-    title: "Chembsters",
+    title: "Rewards",
     path: "/subhead",
     loadingKey: "chambsters",
   },
@@ -156,7 +156,11 @@ export const Swap = () => {
             ) : (
               <>
                 {index == 4 ? (
-                  <a href="https://.w3.com" target="_blank" className="text-sm">
+                  <a
+                    href="https://lemonfi.app/"
+                    // target="_blank"
+                    className="text-sm"
+                  >
                     {item.icon}
                   </a>
                 ) : (

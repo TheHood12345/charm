@@ -5,7 +5,8 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home } from "./page/Home.tsx";
 import { Login } from "./Login/Login.tsx";
-import { Signup } from "./Signup/Signup.tsx";
+//import { Signup } from "./Signup/Signup.tsx";
+import { Signup2 } from "./Signup/Signup2.tsx";
 import { Market } from "./component/Market.tsx";
 import { Asset } from "./component/Asset.tsx";
 import { SwapComp } from "./component/SwapComp.tsx";
@@ -45,6 +46,7 @@ import CancelOrder from "./component/CancelOrder.tsx";
 
 import { Spot11 } from "./component/Spot11.tsx";
 import PaymentCompleted_1 from "./component/PaymentCompleted_1.tsx";
+import SpinToWin from "./games/spin.tsx";
 
 const userToken = localStorage.getItem("userToken");
 
@@ -91,7 +93,7 @@ const router = createBrowserRouter([
         path: "/signup",
         element: (
           <>
-            <Signup />
+            <Signup2 />
             <Footer />
           </>
         ),
@@ -358,6 +360,12 @@ const router = createBrowserRouter([
             <Footer />
           </>
         ),
+      },
+      {
+        path: "/games/spin",
+        element: (
+          <SpinToWin/>
+        )
       },
       {
         path: "*",

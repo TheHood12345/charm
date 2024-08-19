@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import pic from "../asset/images.png";
 import UserForm from "./UserForm";
 import HistoryCard from "./HistoryCard";
 import HelpCardPage from "./HelpCardPage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Setting = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -13,6 +13,12 @@ export const Setting = () => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
+  useEffect(()=>{
+    handleDropdownToggle("profile");
+  }, []);
+
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col min-h-screen bg-white text-white overflow-hidden ">
       <div className="bg-[#1DD55E] text-white w-full h-auto py-4 p-2">
@@ -20,14 +26,18 @@ export const Setting = () => {
           <Link to="/subhead">
             <FaArrowLeftLong className="items-start" />
           </Link>
-          <button className="bg-black text-white px-4 border-none rounded-md items-center py-2">
+          <button onClick={()=>{
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/");
+          }} className="bg-black text-white px-4 border-none rounded-md items-center py-2">
             logout
           </button>
         </div>
         <div className="flex justify-center flex-col items-center">
           <img src={pic} alt="Profile" className="w-20 h-auto rounded-full" />
-          <h1 className="text-slate-800">Umoren Victor</h1>
-          <p className="text-slate-800 mb-4">umorenism@gmail.com</p>
+          <h1 className="text-slate-800">{localStorage.getItem("userAccountName")}</h1>
+          {/* <p className="text-slate-800 mb-4">umorenism@gmail.com</p> */}
         </div>
       </div>
       <div className="px-3 mt-4 absolute w-full top-[170px]">
@@ -40,14 +50,14 @@ export const Setting = () => {
               Profile
             </button>
             <button onClick={() => handleDropdownToggle("order")} className="">
-              Order History
+              KYC
             </button>
-            <button
+            {/* <button
               onClick={() => handleDropdownToggle("history")}
               className=""
             >
               Help
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="mt-4">

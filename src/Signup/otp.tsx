@@ -7,8 +7,8 @@ export const Otp = ()=>{
 
     let [loading, setLoading] = useState(false);
     let location = useLocation();
-    let {formData} = location.state;
-    let userId = useState(localStorage.getItem("userId"));
+    // let {formData} = location.state;
+    // let userId = useState(localStorage.getItem("userId"));
 
     let [res, setRes] = useState();
     let [otpInput, setOtpInput] = useState("");
@@ -25,10 +25,10 @@ export const Otp = ()=>{
    
         try {
           const response = await axios.post(
-            "https://chambsexchange.onrender.com/api/auth/sendotp",
+            "https://chambsexchange.onrender.com/api/auth/verify-otp",
             {
-              "userId": userId,
-              "otp": otpInput
+              email: location.state.email,
+              otp: otpInput
             }
           );
           console.log("OTP response:", response.data);
@@ -49,10 +49,9 @@ export const Otp = ()=>{
     
         try {
           const response = await axios.post(
-            "https://backend.chambit.exchange/api/auth/resendotp",
+            "https://chambsexchange.onrender.com/api/auth/resendotp",
             {
-              "userId": userId,
-              "email": formData.email
+              "email": location.state.email
             }
           );
           console.log("OTP response:", response.data);
@@ -66,12 +65,13 @@ export const Otp = ()=>{
 
     return (
         <div style={{flexDirection:"column"}} className="flex bg-gray-950 text-white justify-center items-center py-20 px-4 h-screen">
-
-            <h2>{res} An OTP has been sent to your email, <span style={{color:"rgb(143, 98, 44)"}}>{formData.email}</span></h2>
-            <h2>Enter the OTP in the box below</h2>
-
           
-            <input type="text" name="otp" value={otpInput} onChange={handleOptInputChange} style={{backgroundColor: "rgb(6, 10, 23)",color:"orange",fontWeight:"bold",border:"2px solid white",marginTop:"20px",paddingTop:"30px",paddingBottom:"30px",paddingLeft:"30px", paddingRight:"30px", textAlign:"center"}}></input>
+          <div style={{width:"100%",display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center",paddingLeft:"30px",paddingRight:"30px"}}>
+            <h2>An OTP has been sent to your email, <span style={{color:"rgb(143, 98, 44)"}}>{location.state.email}</span></h2>
+            <address>Enter the OTP in the box below</address>
+          </div>
+          
+            <input type="text" name="otp" value={otpInput} onChange={handleOptInputChange} style={{backgroundColor: "rgb(6, 10, 23)",color:"orange",fontWeight:"bold",border:"2px solid white",marginTop:"20px",paddingTop:"20px",paddingBottom:"20px",paddingLeft:"20px", paddingRight:"20px", textAlign:"center"}}></input>
 
             <button
             type="submit"
@@ -80,7 +80,7 @@ export const Otp = ()=>{
             onClick={enterOtp}
             className="w-full bg-blue-600 rounded-lg py-2 mb-2 text-xl text-white font-bold cursor-pointer hover:bg-orange-500"
             >
-            {loading ? "Creating Account..." : "Create Account"}
+            {loading ? "Creating Account..." : "Complete"}
             </button>
             
             <p style={{color:"red",marginTop:"10px"}}>{res == "FAILED"? "OTP Failed.. Retry": ""}</p>

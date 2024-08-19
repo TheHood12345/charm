@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { RiDeleteBin5Line } from "react-icons/ri";
+//import { RiDeleteBin5Line } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { FaCircle } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,14 +10,16 @@ export const DepositeCrypto = () => {
   const [selectedType, setSelectedType] = useState("Crypto");
   const navigate = useNavigate();
 
-  let [coin,setCoin] = useState([{symbol:"eth",name:"Ethereum"}]);
+  //let [coin,setCoin] = useState([{symbol:"eth",name:"Ethereum"}]);
+
+  let [coins,setCoins] = useState([""]);
 
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
 
     if (userToken) {
       axios
-        .get("https://chambsexchange.onrender.com/api/spot/get-coins",
+        .get("https://chambsexchange.onrender.com/api/address/all-unique-curerency",
           {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -25,7 +27,7 @@ export const DepositeCrypto = () => {
         })
         .then((response) => {
           console.log("Deposit API RESPONSE:", response.data);
-          setCoin(response.data);
+          setCoins(response.data);
           
         })
         .catch((error) => {
@@ -52,7 +54,7 @@ export const DepositeCrypto = () => {
                   placeholder="Please select your preferred pairs"
                 />
               </div>
-              <p>Cancel</p>
+              <Link to="/home">Cancel</Link>
             </div>
             <div className="mb-3 flex gap-3 mt-4 text-start pl-3">
               <button
@@ -82,44 +84,70 @@ export const DepositeCrypto = () => {
 
         <div className="min-h-screen overflow-y-auto w-full max-w-sm h-auto mt-24">
           <div className="mt-4">
-            <div className="flex items-center justify-between p-2">
+            {/* <div className="flex items-center justify-between p-2">
               <h1>Search History</h1>
               <RiDeleteBin5Line />
-            </div>
+            </div> */}
             <div className="p-2 flex gap-4">
-              <Link to="/depositcrypto">
-                <button className="px-2 bg-slate-700 rounded-md">PIXFI</button>
+              <Link to="/depositcrypto" state="TON">
+                <button className="px-2 bg-slate-700 rounded-md">TON</button>
               </Link>
-              <Link to="/depositcrypto">
+              <Link to="/depositcrypto" state="USDT">
                 <button className="px-2 bg-slate-700 rounded-md">USDT</button>
               </Link>
-              <Link to="/depositcrypto">
+              <Link to="/depositcrypto" state="BNB">
                 <button className="px-2 bg-slate-700 rounded-md">BNB</button>
               </Link>
-              <Link to="/depositcrypto">
-                <button className="px-2 bg-slate-700 rounded-md">SQL</button>
+              <Link to="/depositcrypto" state="SOL">
+                <button className="px-2 bg-slate-700 rounded-md">SOL</button>
               </Link>
             </div>
           </div>
           {
-          coin.map((item,index)=> (
-            <div
+
+            
+
+          coins.map((item,index)=> (
+            <>
+            { item != "NOT"?
+            (<div
               key={index}
               onClick={()=>{
-                navigate("/depositcrypto", {state:item.symbol.toUpperCase()});
+                navigate("/depositcrypto", {state:item.toUpperCase()});
               }}
               className="block p-2 cursor-pointer"
             >
               <div className="flex items-center">
                 <FaCircle />
-                <p>
-                  {item.symbol}
-                  <span className="text-sm text-slate-500">{item.name}</span>
+                <p style={{fontWeight:"bold",paddingLeft:"10px"}}>
+                  {item}
+                  <span className="text-sm text-slate-500" style={{fontWeight:"normal"}}>{item}</span>
                 </p>
               </div>
-            </div>
-          ))
+            </div>):
+
+(<div
+  key={index}
+  
+  className="block p-2 cursor-pointer"
+>
+  <div className="flex items-center">
+    <FaCircle />
+    <p className="text-slate-500" style={{fontWeight:"bold",paddingLeft:"10px"}}>
+      {item}
+      <span className="text-sm text-slate-500" style={{fontWeight:"normal"}}>{item}</span>
+    </p>
+  </div>
+</div>)
           
+            }
+          </>
+        
+        ))
+          
+
+
+
           }
         </div>
       </div>

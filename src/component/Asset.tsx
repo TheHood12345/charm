@@ -54,31 +54,32 @@ export const Asset = () => {
   const userToken = localStorage.getItem("userToken");
 
 
-  const userId = localStorage.getItem("userId");
+  // const userId = localStorage.getItem("userId");
   //const [logout, setLogout] = useState(false);
 
   useEffect(()=>{
-    const checkToken = async()=>{
-      await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
-        userId: userId
-      },{
-        headers: {
-          Authorization: `Bearer ${userToken}`
-        }
-      }).then((response)=>{
-        if(response.data.message == "yes"){
-          localStorage.removeItem("userToken");
-          //setLogout(true);
-          navigate("/login");
-          console.log("logged out");
-        }
-      }).catch((err)=>{
-        console.log("log in or out errot:",err);
-      });
+    const storedTime = localStorage.getItem("startTime");
+    const currentTime = new Date().getTime();
+  
+    if(storedTime){
+      if(24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)) <= 0){
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/login");
+      }else{
+        const timer = setTimeout(()=>{
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/login");
+        },24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)));
+  
+        return clearTimeout(timer);
+      }
+    }else{
+      navigate("/login");
     }
+    },[]);
 
-    checkToken();
-  },[]);
 
   useEffect(() => {
     const fetch1 = async () => {

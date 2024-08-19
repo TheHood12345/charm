@@ -30,11 +30,23 @@ export const Login = () => {
       if (response.data.message == "Welcome back") {
         console.log("Login successful:", response.data);
 
+        const currentTime = new Date().getTime();
+
+        localStorage.removeItem("startTime");
+        localStorage.setItem("startTime",currentTime.toString());
+
         localStorage.removeItem("userToken");
         localStorage.setItem("userToken", response.data.token);
 
         localStorage.removeItem("userId");
         localStorage.setItem("userId", response.data.existingUser._id);
+
+        localStorage.removeItem("referralLink");
+        localStorage.setItem("referralLink", response.data.referralLink);
+
+        localStorage.removeItem("verified");
+        localStorage.setItem("verified", response.data.existingUser.isVerifyKYC);
+        console.log(response.data.isVerifyKYC);
         
         localStorage.removeItem("userCurrency");
         localStorage.setItem("userCurrency", response.data.existingUser.countryCurrency);
@@ -44,7 +56,7 @@ export const Login = () => {
         localStorage.setItem("userAccountName", response.data.existingUser.accountName);
         localStorage.removeItem("userAccountNumber");
         localStorage.setItem("userAccountNumber", response.data.existingUser.accountNumber);
-        navigate("/spot");
+        navigate("/home");
       }
       // Handle successful login (e.g., store tokens, redirect)
     } catch (err) {

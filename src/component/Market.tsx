@@ -15,31 +15,31 @@ export const Market = () => {
     window.scrollTo(0,0);
   },[]);
 
-  const userId = localStorage.getItem("userId");
   const [logout, setLogout] = useState(false);
 
-  useEffect(()=>{
-    const checkToken = async()=>{
-      await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
-        userId: userId
-      },{
-        headers: {
-          Authorization: `Bearer ${userToken}`
-        }
-      }).then((response)=>{
-        if(response.data.message == "yes"){
-          localStorage.removeItem("userToken");
-          setLogout(true);
-          //navigate("/");
-          console.log("logged out");
-        }
-      }).catch((err)=>{
-        console.log("log in or out errot:",err);
-      });
-    }
 
-    checkToken();
-  },[]);
+  useEffect(()=>{
+    const storedTime = localStorage.getItem("startTime");
+    const currentTime = new Date().getTime();
+  
+    if(storedTime){
+      if(24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)) <= 0){
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            setLogout(true);
+      }else{
+        const timer = setTimeout(()=>{
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            setLogout(true);
+        },24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)));
+  
+        return clearTimeout(timer);
+      }
+    }else{
+      setLogout(true);
+    }
+    },[]);
 
   useEffect(()=>{
 

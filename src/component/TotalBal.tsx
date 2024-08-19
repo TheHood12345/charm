@@ -49,37 +49,60 @@ export const TotalBal: React.FC = () => {
   const userToken = localStorage.getItem("userToken");
 
 
-  const userId = localStorage.getItem("userId");
+  //const userId = localStorage.getItem("userId");
   //const [logout, setLogout] = useState(false);
 
   useEffect(()=>{
-    const checkToken = async()=>{
+    const storedTime = localStorage.getItem("startTime");
+    const currentTime = new Date().getTime();
+  
+    if(storedTime){
+      if(24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)) <= 0){
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/");
+      }else{
+        const timer = setTimeout(()=>{
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("startTime");
+            navigate("/");
+        },24 * 60 * 60 * 1000 - (currentTime - parseInt(storedTime, 10)));
+  
+        return clearTimeout(timer);
+      }
+    }else{
+      navigate("/");
+    }
+    },[]);
+
+  // useEffect(()=>{
+  //   const checkToken = async()=>{
       
-      await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
-        userId: userId
-      },{
-        headers: {
-          Authorization: `Bearer ${userToken}`
-        }
-      }).then((response)=>{
-        if(response.data.message == "yes"){
-          localStorage.removeItem("userToken");
-          localStorage.removeItem("userId");
-          //setLogout(true);
-          navigate("/");
-          console.log("logged out");
-        }else{
-          console.log("token not expired.. still logged in");
-        }
-      }).catch((err)=>{
-        console.log("log in or out errot:",err);
-      });
+  //     await axios.post("https://chambsexchange.onrender.com/api/auth/check-logout",{
+  //       userId: userId
+  //     },{
+  //       headers: {
+  //         Authorization: `Bearer ${userToken}`
+  //       }
+  //     }).then((response)=>{
+  //       if(response.data.message == "yes"){
+  //         localStorage.removeItem("userToken");
+  //         localStorage.removeItem("userId");
+  //         //setLogout(true);
+  //         navigate("/");
+  //         console.log("logged out");
+  //       }else{
+  //         console.log("token not expired.. still logged in");
+  //       }
+  //     }).catch((err)=>{
+  //       console.log("log in or out errot:",err);
+  //     });
 
     
-    }
+  //   }
 
-    checkToken();
-  },[]);
+  //   checkToken();
+  // },[]);
 
   useEffect(() => {
     const fetch1 = async () => {
@@ -216,7 +239,7 @@ export const TotalBal: React.FC = () => {
             </div>
             <div className="space-y-2">
               <button className="w-full px-4 py-2 text-left bg-gray-700 text-white rounded-md hover:bg-gray-600">
-                <Link to="/p2p">
+                <Link to="/pp">
                   <div className="flex gap-2">
                     <FaCircle className="mt-1" />
                     <div>
