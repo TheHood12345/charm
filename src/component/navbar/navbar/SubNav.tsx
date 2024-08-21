@@ -18,8 +18,8 @@ export const SubNav = () => {
           <div className="flex justify-center items-center gap-2">
             <FaCircleUser size={30} onClick={toggleDropdown} />
             <div>
-              <p className="font-bold">Wisdom</p>
-              <p className="text-sm">UID:178234564</p>
+              <p className="font-bold">{localStorage.getItem("userAccountName")}</p>
+              {/* <p className="text-sm">UID:178234564</p> */}
             </div>
           </div>
         </div>

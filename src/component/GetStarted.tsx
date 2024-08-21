@@ -2,9 +2,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import pic from "../asset/CHAMBIT 9.jpg";
-import pic1 from "../asset/LOGO.png";
-import pic2 from "../asset/CHAMBIT 9.jpg";
+// import pic from "../asset/TONCOIN 01.jpg";
+// import pic1 from "../asset/TONCOIN 011.jpg";
+// import pic2 from "../asset/TONCOIN PLAY GAMES.jpg";
+// import pic3 from "../asset/tradin (1).jpg";
+import pic from "../asset/TONCOIN 01.jpg";
+import pic1 from "../asset/TONCOIN 011.jpg"
+import pic2 from "../asset/TONCOIN PLAY GAMES.jpg";
 import { MySlider } from "./MySlider";
 import { GainItem } from "./GainItem";
 import { useState } from "react";
@@ -40,28 +44,7 @@ export const GetStarted = () => {
 
   return (
     <div className="bg-gray-950 flex flex-col min-h-screen text-white overflow-hidden">
-      <div className="mt-2 px-2 justify-between w-full text-black py-4 flex items-center">
-        {/* <div className="flex gap-2 justify-center w-full">
-          <Link to="/login" onClick={() => handleLoading("login")}>
-            <button className="px-4 bg-gray-200 text-black py-2 rounded-md">
-              {loading.login ? (
-                <span className="loader">loading</span>
-              ) : (
-                "Login"
-              )}
-            </button>
-          </Link>
-          <Link to="/signup" onClick={() => handleLoading("signup")}>
-            <button className="px-4 bg-gray-200 text-black py-2 rounded-md">
-              {loading.signup ? (
-                <span className="loader">Loadding</span>
-              ) : (
-                "Signup"
-              )}
-            </button>
-          </Link>
-        </div> */}
-      </div>
+      <div className="mt-2 px-2 justify-between w-full text-black py-4 flex items-center"></div>
       <div className="mt-10 px-4 w-full">
         <div className="">
           {/* Slider for mobile screens */}
@@ -79,6 +62,13 @@ export const GetStarted = () => {
                   src={pic1}
                   alt="Slide 2"
                   className="w-full h-auto max-w-sm object-cover"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src={pic2}
+                  alt="Slide 3"
+                  className="w-full h-auto max-w-xs object-cover"
                 />
               </div>
               <div className="flex justify-center">
@@ -106,7 +96,7 @@ export const GetStarted = () => {
           <Link to="/signup" onClick={() => handleLoading("signup")}>
             <button className="px-10 bg-gray-200 text-black py-3 rounded-md">
               {loading.signup ? (
-                <span className="loader">Loading</span>
+                <span className="loader">Loadding</span>
               ) : (
                 "Signup"
               )}

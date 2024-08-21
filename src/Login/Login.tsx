@@ -22,7 +22,7 @@ export const Login = () => {
       const response = await axios.post(
         "https://chambsexchange.onrender.com/api/auth/signin",
         {
-          email,
+          email: email.trim(),
           password,
         }
       );

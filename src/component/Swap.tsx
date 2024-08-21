@@ -5,7 +5,7 @@ import { TbWorldWww } from "react-icons/tb";
 import { GiWantedReward } from "react-icons/gi";
 
 import { useState } from "react";
-import pic from "../asset/LOGO.png";
+import pic from "../asset/TONCOIN 011.jpg";
 import { CgMoreO } from "react-icons/cg";
 
 type LoadingState = {
@@ -27,7 +27,7 @@ const carditem = [
       />
     ),
     title: "Invite Friend",
-    path: "/",
+    path: "/chembster",
     loadingKey: "Invite",
   },
   {
@@ -60,7 +60,7 @@ const carditem = [
       />
     ),
     title: "Play to earn",
-    path: "/",
+    path: "/game",
     loadingKey: "play",
   },
   {

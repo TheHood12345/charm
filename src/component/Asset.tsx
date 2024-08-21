@@ -46,7 +46,7 @@ export const Asset = () => {
   //let [price, setPrice] = useState({symbol:"..",currentPrice:0});
   const [prices, setPrices] = useState([{ symbol: "..", usd: 0, name: "" }]);
 
-  const [p_total, set_p_total] = useState(-1);
+  const [p_total, set_p_total] = useState(0);
   let p_t = 0;
 
   const [checked, setChecked] = useState(false);
@@ -138,11 +138,11 @@ export const Asset = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-950 text-white p-4 overflow-y-auto">
       <div className="w-full max-w-sm min-h-screen mt-20">
-        <div className="py-4 bg-gray-800 rounded-lg flex justify-between items-center p-4 text-lg w-full">
+        <div style={{boxShadow:"10px 10px 10px black",backgroundColor:"transparent"}} className="py-4 bg-gray-800 rounded-lg flex justify-between items-center p-4 text-lg w-full">
           <div>
             <div>
               <h2 className="flex items-center gap-2 text-2xl">
-                Total Equity
+                Total Asset
                 {isVisible.totalEquity ? (
                   <FaEye
                     onClick={() => toggleVisibility("totalEquity")}
@@ -159,7 +159,7 @@ export const Asset = () => {
                 <>
                   <h1>
                     {/*{total_balance} and */}
-                    {p_total} <span>USD</span>
+                    {p_total.toFixed(2)} <span>USD</span>
                   </h1>
                   {/* <p>=--BTC</p> */}
                 </>
@@ -171,7 +171,7 @@ export const Asset = () => {
               </p> */}
             </div>
           </div>
-          <div className="mb-16 text-sm text-green-700">0.00%</div>
+          {/* <div className="mb-16 text-sm text-green-700">0.00%</div> */}
         </div>
         {/* second card */}
         {/* <div className="py-4 bg-gray-800 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2">
@@ -191,25 +191,25 @@ export const Asset = () => {
         </div> */}
         {/* third card */}
         <div className="py-4 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2 gap-4">
-          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-10px 10px 10px green",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/depositdetails">
               <FaTradeFederation className="ml-4" />
               <p className="p-1 text-sm">Deposit</p>
             </Link>
           </div>
-          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-10px 10px 10px red",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/withdrawal">
               <FaTradeFederation className="ml-6" />
               <p className="p-1 text-sm">Withdraw</p>
             </Link>
           </div>
-          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-10px 10px 10px blue",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/swap">
               <FaTradeFederation className="ml-3" />
               <p className="p-1 text-sm">Swap</p>
             </Link>
           </div>
-          <div className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-10px 10px 10px yellow",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="">
               <FaTradeFederation className="ml-3 " />
               <p className="p-1 text-sm">Stake</p>
@@ -219,7 +219,7 @@ export const Asset = () => {
         {/* fourth card */}
         <div className="flex justify-between items-center p-2 text-lg w-full mt-2">
           <div className="flex flex-col w-full">
-            <h1>Crypto</h1>
+            {/* <h1>Crypto</h1> */}
             <div className="flex py-4 items-center gap-2">
               <input
                 type="checkbox"
@@ -297,32 +297,31 @@ export const Asset = () => {
         </div>
         {/* <p>jj</p>qqqqqqqq222222222222222222222222222222222222222222222222222222222222222222222222 */}
 
-        <div style={{marginTop:"0px",width:"100%",paddingRight:"10px",paddingLeft:"10px",paddingBottom:"40px",paddingTop:"10px",backgroundColor:'black'}}>
+        <div style={{marginTop:"0px",width:"100%",paddingBottom:"100px",paddingTop:"10px",backgroundColor:'transparent'}}>
 
           {
             total_values.sort((a,b)=>a.currency.localeCompare(b.currency)).map((v, index)=>(
               
-            <div key={index} style={{display: v.balance==0 && checked==true? "none": "flex"}} className="flex justify-between items-center py-2">
-            <div className="text-sm">
+            <div key={index} style={{display: v.balance==0 && checked==true? "none": "flex", flexDirection:"row",alignItems:"center",boxShadow:"10px 10px 10px black",cursor:"pointer",paddingLeft:"10px",justifyContent: "space-between",width:"100%"}} className="py-2">
+            <div className="text-xl">
               <h2>{v.currency}</h2>
 
               {
 
               prices.map((p)=>(
                 p.symbol.toUpperCase() == v.currency.toUpperCase()? 
-                <span className="text-sm ml-1">{p.name} {/*v.balance.toFixed(2)*/}</span>
+                <span className="text-sm ml-1">{v.balance.toFixed(2)} {/*v.balance.toFixed(2)*/}</span>
               : null
               ))
 
               }
             </div>
-            <div className="flex gap-4 flex justify-between items-center py-5">
-              <h2 style={{color:"green",fontWeight:"bold"}}>{v.balance.toFixed(2)}</h2>
+            <div className="flex flex justify-between items-center py-5">
               {
               prices.map((p)=>(
                             p.symbol.toUpperCase() == v.currency.toUpperCase()?
                             <>
-                            <h5 style={{opacity: "0.7",paddingLeft:"20px",paddingRight:"20px"}} className="bg-green-900">{(p.usd * v.balance).toFixed(2)} USD</h5>
+                            <h5 style={{opacity: "0.7",paddingRight:"10px",fontWeight:"bold"}}>{(p.usd * v.balance).toFixed(2)} USD</h5>
                             <img src={b1} style={{width:"0px",height:"0px"}} onLoad={()=>{
                               let a = p.usd * v.balance;
                               p_t += a;

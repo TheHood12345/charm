@@ -134,8 +134,8 @@ export const SwapComp = () => {
 
           
 
-          <select name="" id="" onClick={()=>{set_coins_loading1(false);}} value={swap_from} onChange={handleSwapFromChange} className="py-2 no_spinner2" style={
-            {backgroundColor:"black",fontWeight:"bold",paddingTop:"20px",paddingBottom:"20px",fontSize:15,width:"50%",border:"none",color:"white"}
+          <select name=""  className="border border-green-500 rounded-medium py-2 no_spinner2" id="" onClick={()=>{set_coins_loading1(false);}} value={swap_from} onChange={handleSwapFromChange} style={
+            {backgroundColor:"black",fontWeight:"bold",paddingTop:"20px",paddingBottom:"20px",fontSize:15,width:"50%",border:'3px solid green',color:"white"}
           }>
             <option selected disabled style={{color:"gray",fontWeight:"bold"}}>Swap From</option>
             {
@@ -156,8 +156,8 @@ export const SwapComp = () => {
           
           </select>
 
-          <input type="number" value={swap_from_amount} placeholder="Amount" onChange={handleSwapFromAmountChange} className="py-2 no_spinner1" style={
-            {backgroundColor:"black",opacity:`${is_amount==false? "0.3": 1}`,paddingTop:"20px",paddingBottom:"20px",fontWeight:"bold",fontSize:15,width:"50%",border:"none",color:"green",paddingLeft:"10px",paddingRight:"10px"}
+          <input type="number"  value={swap_from_amount} placeholder="Amount" onChange={handleSwapFromAmountChange} className="py-2 no_spinner1" style={
+            {backgroundColor:"black",opacity:`${is_amount==false? "0.3": 1}`,paddingTop:"20px",paddingBottom:"20px",fontWeight:"bold",fontSize:15,width:"50%",border:'3px solid green',color:"green",paddingLeft:"10px",paddingRight:"10px"}
           } disabled={is_amount==false? true: false}/>
           
           </div>
@@ -175,7 +175,7 @@ export const SwapComp = () => {
 <div style={{marginTop:"0px",backgroundColor:"transparent"}}  className="bg-gray-700 px-2 py-1 text-white rounded-lg relative mb-4">
 <div  style={{height:"100%",marginBottom:"0px",width:"100%",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}} className="flex justify-between  gap-2 mb-4">
 <select name="" id="" onClick={()=>{set_coins_loading2(false)}} value={swap_to} onChange={handleSwapToChange} className="py-2 no_spinner2" style={
-  {backgroundColor:"black",opacity:`${is_swap_to==false? 0.3: 1}`,paddingTop:"20px",fontWeight:"bold",paddingBottom:"20px",fontSize:15,width:"50%",border:"none",color:"white"}
+  {backgroundColor:"black",opacity:`${is_swap_to==false? 0.3: 1}`,paddingTop:"20px",fontWeight:"bold",paddingBottom:"20px",fontSize:15,width:"50%",border:'3px solid green',color:"white"}
 } disabled={is_swap_to==false? true: false}>
   <option selected disabled>Swap To</option>
   {
@@ -196,7 +196,7 @@ export const SwapComp = () => {
 
 
 <input type="number" value={quote.received.toFixed(5)} className="py-2 no_spinner1" style={
-            {backgroundColor:"black",fontSize:15,fontWeight:"bold",width:"50%",border:"none",color:"yellow",
+            {backgroundColor:"black",fontSize:15,fontWeight:"bold",width:"50%",border:'3px solid green',color:"yellow",
               appearance: "textfield",opacity:"0.3",paddingTop:"20px",paddingBottom:"20px", WebkitAppearance: "none",MozAppearance:"textfield",paddingLeft:"10px",paddingRight:"10px"
             }
           } disabled/>

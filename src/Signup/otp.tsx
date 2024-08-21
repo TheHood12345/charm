@@ -12,6 +12,8 @@ export const Otp = ()=>{
 
     let [res, setRes] = useState();
     let [otpInput, setOtpInput] = useState("");
+
+    let [mess,setMess] = useState("");
     
     let navigate = useNavigate();
 
@@ -33,8 +35,18 @@ export const Otp = ()=>{
           );
           console.log("OTP response:", response.data);
           setRes(response.data.status);
-          if(response.data.status != "FAILED"){
-            await navigate("/");
+          if(response.data.status == "FAILED"){
+            setMess("Otp failed.Check your otp and try again");
+          }
+          if(response.data.status == "PENDING"){
+            navigate("/create_password", {state:{
+            email: location.state.email,
+            country: location.state.country
+          }});
+          }
+          if(response.data.status == "VERIFIED"){
+            //await navigate("/login");
+            setMess("Your account has been already verified");
           }
 
         } catch (err) {
@@ -47,20 +59,24 @@ export const Otp = ()=>{
       const resendOTP = async () => {
         setLoading(true);
     
-        try {
-          const response = await axios.post(
+        
+          axios.post(
             "https://chambsexchange.onrender.com/api/auth/resendotp",
             {
               "email": location.state.email
             }
-          );
-          console.log("OTP response:", response.data);
+          ).then((response)=>{
+            if(response.data.status == "PENDING"){
+              console.log("OTP response:", response.data);
+            }else{
+              console.log("OTP response:", response.data);
+            }
+          }).catch((err)=>{
+            console.log(err);
+          });
+          
 
-        } catch (err) {
-          console.error("Otp failed:", err);
-        } finally {
-          setLoading(false);
-        }
+        
       };
 
     return (
@@ -73,6 +89,7 @@ export const Otp = ()=>{
           
             <input type="text" name="otp" value={otpInput} onChange={handleOptInputChange} style={{backgroundColor: "rgb(6, 10, 23)",color:"orange",fontWeight:"bold",border:"2px solid white",marginTop:"20px",paddingTop:"20px",paddingBottom:"20px",paddingLeft:"20px", paddingRight:"20px", textAlign:"center"}}></input>
 
+            <address>{mess}</address>
             <button
             type="submit"
             style={{width:"50%",marginTop:"30px"}}
