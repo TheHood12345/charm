@@ -141,7 +141,7 @@ export const Asset = () => {
         <div style={{boxShadow:"10px 10px 10px black",backgroundColor:"transparent"}} className="py-4 bg-gray-800 rounded-lg flex justify-between items-center p-4 text-lg w-full">
           <div>
             <div>
-              <h2 className="flex items-center gap-2 text-2xl">
+              <h5 style={{color:"gray"}} className="flex items-center gap-2 text-md">
                 Total Asset
                 {isVisible.totalEquity ? (
                   <FaEye
@@ -154,10 +154,10 @@ export const Asset = () => {
                     title="Show"
                   />
                 )}
-              </h2>
+              </h5>
               {isVisible.totalEquity ? (
                 <>
-                  <h1>
+                  <h1 style={{color:"white",fontWeight:"bold"}}>
                     {/*{total_balance} and */}
                     {p_total.toFixed(2)} <span>USD</span>
                   </h1>
@@ -191,25 +191,25 @@ export const Asset = () => {
         </div> */}
         {/* third card */}
         <div className="py-4 rounded-lg flex justify-between items-center p-2 text-lg w-full mt-2 gap-4">
-          <div style={{boxShadow:"-10px 10px 10px green",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-5px 5px 10px white",backgroundColor:"transparent",border:"2px solid transparent"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/depositdetails">
               <FaTradeFederation className="ml-4" />
               <p className="p-1 text-sm">Deposit</p>
             </Link>
           </div>
-          <div style={{boxShadow:"-10px 10px 10px red",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-5px 5px 10px white",backgroundColor:"transparent",border:"2px solid transparent"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/withdrawal">
               <FaTradeFederation className="ml-6" />
               <p className="p-1 text-sm">Withdraw</p>
             </Link>
           </div>
-          <div style={{boxShadow:"-10px 10px 10px blue",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-5px 5px 10px white",backgroundColor:"transparent",border:"2px solid transparent"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="/swap">
               <FaTradeFederation className="ml-3" />
               <p className="p-1 text-sm">Swap</p>
             </Link>
           </div>
-          <div style={{boxShadow:"-10px 10px 10px yellow",backgroundColor:"black",border:"2px solid black"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
+          <div style={{boxShadow:"-5px 5px 10px white",backgroundColor:"transparent",border:"2px solid transparent"}} className="w-full py-1 flex justify-center bg-gray-800 flex-col items-center rounded-md">
             <Link to="">
               <FaTradeFederation className="ml-3 " />
               <p className="p-1 text-sm">Stake</p>

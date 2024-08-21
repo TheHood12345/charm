@@ -26,10 +26,10 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   let [b_bal,set_b_bal] = useState({currency:"",balance:-1});
   let [s_bal,set_s_bal] = useState({currency:"",balance:-1});
 
-  let [spot_order, set_spot_order] = useState([{tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
+  let [spot_order, set_spot_order] = useState([{tradeType:"",limitPrice:0.1,executionPrice:0.0,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
   
   let [chambsPrice, setChambsPrice] = useState({currentPrice:0});
-  let [singlePrice, setSinglePrice] = useState([{pair:"",_id:"",tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
+  let [singlePrice, setSinglePrice] = useState([{pair:"",_id:"",tradeType:"",executionPrice:0.0,limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
 
   const userToken = localStorage.getItem("userToken");
   const [logout, setLogout] = useState(false);
@@ -40,6 +40,16 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   useEffect(()=>{
     window.scrollTo(0,0);
   },[]);
+
+
+  let [ran,setRan] = useState(Math.random() * 4000);
+
+  useEffect(()=>{
+     setInterval(()=>{
+      setRan(Math.random() * 4000);
+     },1000);
+  },[])
+
 
   useEffect(()=>{
     const minValues = [0,7,14];
@@ -54,7 +64,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
 
       minIndex = (minIndex + 1) % minValues.length;
       maxIndex = (maxIndex + 1) % maxValues.length;
-    }, 1000);
+    }, ran);
 
     return () => clearInterval(intervalId);
   },[]);
@@ -99,7 +109,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   }
 
   const fetchPending1 = async()=>{
-    await axios.get("https://chambsexchange.onrender.com/api/spot/spot-order/chambs",{
+    await axios.get("https://chambsexchange.onrender.com/api/spot/all-spot-orders/chambs",{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -274,7 +284,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   // },[spot_order1,batchSize]);
 
   useEffect(()=>{
-    axios.get(`https://chambsexchange.onrender.com/api/spot/spot-orders`,{
+    axios.get(`https://chambsexchange.onrender.com/api/spot/all-spot-orders/chambs`,{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -302,7 +312,7 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
   
 
   useEffect(()=>{
-    axios.get("https://chambsexchange.onrender.com/api/spot/spot-order/chambs",{
+    axios.get("https://chambsexchange.onrender.com/api/spot/all-spot-orders/chambs",{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -374,13 +384,21 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
               <div className="mt-4">
 
                 {
-                  spot_order.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                  spot_order.sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
                     <>
                     {
                       item.asset == "CHAMBS" && item.tradeType == "sell" && index < index_max && index > index_min?
                       <div key={index} className="flex justify-between ">
-                        <h1  style={{color:"red",fontWeight:"bold",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600" onClick={()=>{setAmount(item.limitPrice.toFixed(3))}}>{item.limitPrice.toFixed(3)}</h1>
-                        <p  style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600 bg-red-500" onClick={()=>{set_chambs_value(item.amount.toFixed(1))}}>{item.amount.toFixed(1)}</p>
+                        <h1 onClick={()=>{
+                          if(tradeType == "buy"){
+                            setLimitPrice(item.executionPrice);
+                          }
+                        }} style={{color:"red",fontWeight:"bold",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600">{item.executionPrice.toFixed(4)}</h1>
+                        <p onClickCapture={()=>{
+                          if(tradeType == "buy"){
+                            setAmount(item.amount.toFixed(1));
+                          }
+                        }} style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600 bg-red-500" onClick={()=>{set_chambs_value(item.amount.toFixed(1))}}>{item.amount.toFixed(1)}</p>
                       </div>:
                       null
                     }
@@ -398,14 +416,22 @@ let [t_change,set_t_change] = useState({priceChange:-1,currentPrice:-1});
             <div className="bg-black">
 
               {
-                spot_order.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                spot_order.sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
                   <>
                   {
                     item.asset == "CHAMBS" && item.tradeType == "buy" && index < index_max && index > index_min?
                     (
                     <div key={index} className="flex justify-between ">
-                      <h1 style={{color:"green",fontWeight:"bold",backgroundColor:"rgba(0,128,0,0.1)"}}  className="text-green-600 bg-green-500">{item.limitPrice.toFixed(3)}</h1>
-                      <p style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(0,128,0,0.1)"}} className="text-green-600  bg-green-500">{item.amount.toFixed(1)}</p>
+                      <h1 style={{color:"green",fontWeight:"bold",backgroundColor:"rgba(0,128,0,0.1)"}} onClick={()=>{
+                        if(tradeType == "sell"){
+                          setLimitPrice(item.executionPrice);
+                        }
+                      }}  className="text-green-600 bg-green-500">{item.executionPrice.toFixed(4)}</h1>
+                      <p style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(0,128,0,0.1)"}} onClick={()=>{
+                        if(tradeType == "sell"){
+                          setAmount(item.amount.toFixed(1));
+                        }
+                      }} className="text-green-600  bg-green-500">{item.amount.toFixed(1)}</p>
                     </div>)
                     :
                     null

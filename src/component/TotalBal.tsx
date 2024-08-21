@@ -182,8 +182,8 @@ export const TotalBal: React.FC = () => {
         <div className="py-4 rounded-lg flex justify-between items-center mt-4 p-5 text-lg w-full mb-2">
           <div>
             <div>
-              <h2 className="flex items-center gap-2">
-                Total Assets{" "}
+              <h2 style={{color:"gray"}} className="flex items-center gap-2">
+                Total Asset{" "}
                 <span onClick={toggleVisibility} className="cursor-pointer">
                   {isHidden ? <FaRegEyeSlash /> : <FaRegEye />}
                 </span>
@@ -209,7 +209,7 @@ export const TotalBal: React.FC = () => {
                   </p>
                 ))}
 
-              <h1>
+              <h1 style={{color:"white",fontWeight:"bold"}}>
                 {isHidden
                   ? "****"
                   : //: user.isAuthenticated

@@ -33,9 +33,10 @@ export const Game = () => {
           <h1 className="text-3xl font-extrabold mb-2 animate-bounce">
             Play to Earn!
           </h1>
-          <p className="text-md pl-2 ">
+          <address>New games uploaded weekly</address>
+          {/* <p className="text-md pl-2 ">
             Get ready for some exciting games and earn rewards.
-          </p>
+          </p> */}
         </motion.div>
 
         <motion.div
@@ -45,11 +46,11 @@ export const Game = () => {
           className="bg-slate-900 mt-6 py-6 rounded-md p-4 shadow-lg"
         >
           <h1 className="text-3xl font-bold text-white mb-4">
-            <span className="text-green-700 text-2xl ">Game</span> Listing
+            <span className="text-green-700 text-xl "> Upcoming Listings..</span> 
           </h1>
           <ul className="space-y-3 ">
             <li className="py-4 p-1 font-semibold  text-xl rounded-md underline cursor-pointer hover:text-white transition-colors duration-300 bg-orange-600 ">
-              <a href="https://spin-theta.vercel.app"> Spin Gaming</a>
+              <a href="https://spin-theta.vercel.app" style={{textDecoration:"none"}}> Spin Wheel</a>
             </li>
             <li className="py-4 p-1  text-xl rounded-md underline cursor-pointer hover:text-white transition-colors duration-300 bg-green-600 ">
               Tap & Earn

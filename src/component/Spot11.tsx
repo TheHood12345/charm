@@ -29,10 +29,10 @@ export const Spot11 = () => {
   let [b_bal,set_b_bal] = useState({currency:"",balance:-1});
   let [s_bal,set_s_bal] = useState({currency:"",balance:-1});
 
-  let [spot_order, set_spot_order] = useState([{tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
+  let [spot_order, set_spot_order] = useState([{tradeType:"",executionPrice:0.0,limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z"}]);
   
   let [chambsPrice, setChambsPrice] = useState({currentPrice:0});
-  let [singlePrice, setSinglePrice] = useState([{pair:"",tradeType:"",limitPrice:0.1,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z",_id:""}]);
+  let [singlePrice, setSinglePrice] = useState([{pair:"",tradeType:"",limitPrice:0.1,executionPrice:0.0,amount:1.1,asset:"",createdAt:"2024-08-10T22:05:42.948Z",_id:""}]);
 
   const [index_min,set_index_min] = useState<number>(0);
   const [index_max,set_index_max] = useState<number>(4);
@@ -42,7 +42,13 @@ export const Spot11 = () => {
   const [logout] = useState(false);
 
 
+  let [ran,setRan] = useState(Math.random() * 4000);
 
+  useEffect(()=>{
+     setInterval(()=>{
+      setRan(Math.random() * 4000);
+     },1000);
+  },[])
 
   useEffect(()=>{
     const minValues = [0,7,14];
@@ -51,13 +57,15 @@ export const Spot11 = () => {
     let minIndex = 0;
     let maxIndex = 0;
 
+    
+
     const intervalId = setInterval(()=>{
       set_index_min(minValues[minIndex]);
       set_index_max(maxValues[maxIndex]);
 
       minIndex = (minIndex + 1) % minValues.length;
       maxIndex = (maxIndex + 1) % maxValues.length;
-    }, 1000);
+    }, ran);
 
     return () => clearInterval(intervalId);
   },[]);
@@ -106,7 +114,7 @@ export const Spot11 = () => {
 
 
   const fetchSpot1 = async()=>{
-    axios.get(`https://chambsexchange.onrender.com/api/spot/spot-orders`,{
+    axios.get(`https://chambsexchange.onrender.com/api/spot/all-spot-orders/${location.state.choosen_coin.symbol}`,{
     headers:{
       Authorization: `Bearer ${userToken}`
     }
@@ -122,7 +130,7 @@ export const Spot11 = () => {
   
 
   const fetchPending1 = async()=>{
-    await axios.get(`https://chambsexchange.onrender.com/api/spot/spot-order/${location.state.choosen_coin.symbol}`,{
+    await axios.get(`https://chambsexchange.onrender.com/api/spot/all-spot-orders/${location.state.choosen_coin.symbol}`,{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -348,13 +356,21 @@ export const Spot11 = () => {
               <div className="mt-4">
 
                 {
-                  spot_order.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                  spot_order.sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
                     <>
                     {
                       item.asset == location.state.choosen_coin.symbol.toUpperCase() && item.tradeType == "sell" && index < index_max && index > index_min?
                       <div key={index} className="flex justify-between ">
-                        <h1  style={{color:"red",fontWeight:"bold",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600">{item.limitPrice.toFixed(3)}</h1>
-                        <p  style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600 bg-red-500">{item.amount.toFixed(1)}</p>
+                        <h1 onClick={()=>{
+                          if(tradeType == "buy"){
+                            setLimitPrice(item.executionPrice);
+                          }
+                        }} style={{color:"red",fontWeight:"bold",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600">{item.executionPrice.toFixed(4)}</h1>
+                        <p  onClick={()=>{
+                          if(tradeType == "buy"){
+                            setAmount(item.amount);
+                          }
+                        }}  style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600 bg-red-500">{item.amount.toFixed(1)}</p>
                       </div>:
                       null
                     }
@@ -372,14 +388,22 @@ export const Spot11 = () => {
             <div className="bg-black">
 
               {
-                spot_order.slice(-10).sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                spot_order.sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
                   <>
                   {
                     item.asset == location.state.choosen_coin.symbol.toUpperCase() && item.tradeType == "buy" && index < index_max && index > index_min?
                     (
                       <div key={index} className="flex justify-between ">
-                        <h1 style={{color:"green",fontWeight:"bold",backgroundColor:"rgba(0,128,0,0.1)"}}  className="text-green-600 bg-green-500">{item.limitPrice.toFixed(3)}</h1>
-                        <p style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(0,128,0,0.1)"}} className="text-green-600  bg-green-500">{item.amount.toFixed(1)}</p>
+                        <h1 onClick={()=>{
+                          if(tradeType == "sell"){
+                            setLimitPrice(item.executionPrice);
+                          }
+                        }} style={{color:"green",fontWeight:"bold",backgroundColor:"rgba(0,128,0,0.1)"}}  className="text-green-600 bg-green-500">{item.executionPrice.toFixed(4)}</h1>
+                        <p onClick={()=>{
+                          if(tradeType == "sell"){
+                            setAmount(item.amount);
+                          }
+                        }} style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(0,128,0,0.1)"}} className="text-green-600  bg-green-500">{item.amount.toFixed(1)}</p>
                       </div>):
                     null
                   }
