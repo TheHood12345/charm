@@ -410,7 +410,12 @@ function Codes(){
           </>
         )}/>
 
-          <Route  index path="/login" element={<Login/>} />
+          <Route  index path="/login" element={
+            <>
+              <Login/>
+              <Footer />
+            </>
+            } />
           <Route  index path="/otp" element={<Otp/>} />
           <Route  index path="/forgot-password" element={<ForgotPassword/>} />
           <Route  index path="/forgot-password-success" element={<ForgotPasswordSuccess/>}/>

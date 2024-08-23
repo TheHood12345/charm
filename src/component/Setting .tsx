@@ -21,22 +21,22 @@ export const Setting = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-white overflow-hidden ">
-      <div className="bg-[#1DD55E] text-white w-full h-auto py-4 p-2">
+      <div className="bg-green-600 text-white w-full h-auto py-4 p-2">
         <div className="flex justify-between">
-          <Link to="/subhead">
+          <Link to="/subhead" style={{fontWeight:"bold"}}>
             <FaArrowLeftLong className="items-start" />
           </Link>
           <button onClick={()=>{
             localStorage.removeItem("userToken");
             localStorage.removeItem("startTime");
-            navigate("/");
-          }} className="bg-black text-white px-4 border-none rounded-md items-center py-2">
+            navigate("/login");
+          }} style={{fontWeight:"bold"}} className="bg-black text-white px-4 border-none rounded-md items-center py-2">
             logout
           </button>
         </div>
         <div className="flex justify-center flex-col items-center">
           <img src={pic} alt="Profile" className="w-20 h-auto rounded-full" />
-          <h1 className="text-slate-800">{localStorage.getItem("userAccountName")}</h1>
+          <h1 className="text-slate-800" style={{fontWeight:"bold"}}>{localStorage.getItem("userAccountName")}</h1>
           {/* <p className="text-slate-800 mb-4">umorenism@gmail.com</p> */}
         </div>
       </div>

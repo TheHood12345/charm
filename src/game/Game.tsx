@@ -2,8 +2,12 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { Footer } from "../component/footer/Footer";
 import { TbMessageCircleCancel } from "react-icons/tb";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export const Game = () => {
+  
+  const [coming1,setComing1] = useState(false);
+
   return (
     <div className="flex flex-col h-screen bg-gray-950">
       {/* Header */}
@@ -33,7 +37,7 @@ export const Game = () => {
           <h1 className="text-3xl font-extrabold mb-2 animate-bounce">
             Play to Earn!
           </h1>
-          <address>New games uploaded weekly</address>
+          <address style={{fontWeight:"bold"}}>New games uploaded weekly</address>
           {/* <p className="text-md pl-2 ">
             Get ready for some exciting games and earn rewards.
           </p> */}
@@ -45,16 +49,21 @@ export const Game = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="bg-slate-900 mt-6 py-6 rounded-md p-4 shadow-lg"
         >
-          <h1 className="text-3xl font-bold text-white mb-4">
-            <span className="text-green-700 text-xl "> Upcoming Listings..</span> 
+          <h1 className="text-3xl font-bold text-white mb-4" >
+            <span className="text-green-700 text-xl " style={{backgroundImage:"linear-gradient(to right, red,blue)",color:"transparent",backgroundClip:"text"}}> Upcoming Listings..</span> 
           </h1>
           <ul className="space-y-3 ">
-            <li className="py-4 p-1 font-semibold  text-xl rounded-md underline cursor-pointer hover:text-white transition-colors duration-300 bg-orange-600 ">
-              <a href="https://spin-theta.vercel.app" style={{textDecoration:"none"}}> Spin Wheel</a>
-            </li>
-            <li className="py-4 p-1  text-xl rounded-md underline cursor-pointer hover:text-white transition-colors duration-300 bg-green-600 ">
-              Tap & Earn
-            </li>
+            <div onClick={()=>{
+              setComing1(!coming1);
+            }}  className="py-4 p-1 font-semibold bg-gradient-to-r from-red-400 to-blue-500 text-md rounded-md cursor-pointer hover:text-white transition-colors duration-300 bg-orange-600 ">
+               Spin Wheel <span style={{color:"green",fontWeight:"bold"}} className="text-sm">{coming1 == true? "Coming soon": null}</span>
+            </div>
+            <div  className="py-4 p-1 bg-gradient-to-r from-red-400 to-blue-500 text-md rounded-md cursor-pointer hover:text-white transition-colors duration-300 bg-green-600 ">
+              <a href="https://t.me/lemonfibot" target="_blank" style={{textDecoration:"underline"}}>
+              Tap king
+              </a>
+              
+            </div>
           </ul>
         </motion.div>
         {/* scroll */}

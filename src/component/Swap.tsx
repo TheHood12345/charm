@@ -92,8 +92,8 @@ const carditem = [
         className="border border-white rounded-full text-[#1DD55E]"
       />
     ),
-    title: "support",
-    path: "/",
+    title: "Quick support",
+    path: "https://t.me/chambsteam",  
     loadingKey: "support",
   },
 ];
@@ -153,23 +153,88 @@ export const Swap = () => {
                   ></path>
                 </svg>
               </div>
-            ) : (
-              <>
-                {index == 4 ? (
-                  <a
+           ) : //  (
+            //   <>
+            //     {item.title == "Instant Loan" ? (
+            //       <a style={{paddingLeft:"20px",paddingRight:"20px"}}
+            //         href="https://lemonfi.app/"
+            //         target="_blank"
+            //         className="text-sm"
+            //       >
+            //         {item.icon}
+            //       </a>
+            //     ) :
+            //     item.title == "Quick support" ?
+            //     (
+            //       <a style={{paddingLeft:"20px",paddingRight:"20px"}}
+            //         href="https://t.me/chambsteam"
+            //         target="_blank"
+            //         className="text-sm"
+            //       >
+            //         {item.icon}
+            //       </a>
+            //     )
+            //     :
+            //     (
+            //       <div className="text-sm">{item.icon}</div>
+            //     )}
+
+            //     <>
+            //     {
+            //       item.title == "Instant Loan" ?
+            //       (<a href="https://lemonfi.app/" style={{paddingLeft:"20px",paddingRight:"20px"}} target="_blank">{item.title}</a>):
+                   
+            //       item.title == "Quick support" ?
+            //       (<a href="https://t.me/chambsteam" style={{paddingLeft:"20px",paddingRight:"20px"}} target="_blank">{item.title}</a>)
+            //       : 
+            //       (<p className="text-sm">{item.title}</p>)
+            //     }
+            //     </>
+
+                
+            //   </>
+            // )
+            <>
+            { item.title == "Instant Loan" ?
+            (
+            <a style={{padding:"10px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+              <a style={{paddingLeft:"20px",paddingRight:"20px"}}
                     href="https://lemonfi.app/"
-                    // target="_blank"
+                    target="_blank"
                     className="text-sm"
                   >
                     {item.icon}
                   </a>
-                ) : (
-                  <div className="text-sm">{item.icon}</div>
-                )}
+                  <p className="text-sm" style={{fontStyle:"italic"}}>{item.title}</p>
+            </a>
+            ):
 
-                <p className="text-sm">{item.title}</p>
-              </>
-            )}
+            item.title == "Quick support" ?
+            (<a style={{padding:"10px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+              <a style={{paddingLeft:"20px",paddingRight:"20px"}}
+                    href="https://t.me/chambsteam"
+                    target="_blank"
+                    className="text-sm"
+                  >
+                    {item.icon}
+                  </a>
+                  <p className="text-sm">{item.title}</p>
+            </a>
+            ):
+
+            (<a style={{padding:"10px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+              <div style={{paddingLeft:"20px",paddingRight:"20px"}}
+                    className="text-sm"
+                  >
+                    {item.icon}
+                  </div>
+                  <p className="text-sm">{item.title}</p>
+            </a>
+            )
+          
+          }
+            </>
+            }
           </div>
         ))}
       </div>

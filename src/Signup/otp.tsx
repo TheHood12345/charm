@@ -6,19 +6,18 @@ import { useNavigate } from "react-router-dom";
 export const Otp = ()=>{
 
     let [loading, setLoading] = useState(false);
+    let [load1, setLoad1] = useState(false);
     let location = useLocation();
-    // let {formData} = location.state;
-    // let userId = useState(localStorage.getItem("userId"));
-
-    let [res, setRes] = useState();
-    let [otpInput, setOtpInput] = useState("");
+    
+    let [otpInput, setOtpInput] = useState(0);
 
     let [mess,setMess] = useState("");
+    let [res,setRes] = useState("");
     
     let navigate = useNavigate();
 
     const handleOptInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-      setOtpInput(e.target.value);
+      setOtpInput(Number(e.target.value));
     };
 
 
@@ -29,24 +28,21 @@ export const Otp = ()=>{
           const response = await axios.post(
             "https://chambsexchange.onrender.com/api/auth/verify-otp",
             {
-              email: location.state.email,
-              otp: otpInput
+              userId: location.state.userId,
+              otp: otpInput.toString()
             }
           );
           console.log("OTP response:", response.data);
-          setRes(response.data.status);
+          
           if(response.data.status == "FAILED"){
             setMess("Otp failed.Check your otp and try again");
           }
           if(response.data.status == "PENDING"){
-            navigate("/create_password", {state:{
-            email: location.state.email,
-            country: location.state.country
-          }});
+            setMess("Please Check your otp and try again");
           }
           if(response.data.status == "VERIFIED"){
-            //await navigate("/login");
-            setMess("Your account has been already verified");
+            setMess("Your account has been verified successfully");
+            await navigate("/create_password", {state: {email: location.state.email}});
           }
 
         } catch (err) {
@@ -57,19 +53,21 @@ export const Otp = ()=>{
       };
 
       const resendOTP = async () => {
-        setLoading(true);
-    
+        setLoad1(true);
+  
+        setMess("");
+        setRes("")
         
           axios.post(
             "https://chambsexchange.onrender.com/api/auth/resendotp",
             {
-              "email": location.state.email
+              "email": location.state.email,
+              "userId": location.state.userId
             }
           ).then((response)=>{
-            if(response.data.status == "PENDING"){
-              console.log("OTP response:", response.data);
-            }else{
-              console.log("OTP response:", response.data);
+            setLoad1(false);
+            if(response.data.status == "SUCCESS"){
+              setRes(`Otp resent to your email ${location.state.email}`);
             }
           }).catch((err)=>{
             console.log(err);
@@ -87,24 +85,23 @@ export const Otp = ()=>{
             <address>Enter the OTP in the box below</address>
           </div>
           
-            <input type="text" name="otp" value={otpInput} onChange={handleOptInputChange} style={{backgroundColor: "rgb(6, 10, 23)",color:"orange",fontWeight:"bold",border:"2px solid white",marginTop:"20px",paddingTop:"20px",paddingBottom:"20px",paddingLeft:"20px", paddingRight:"20px", textAlign:"center"}}></input>
-
-            <address>{mess}</address>
+            <input type="text" name="otp" className="no_spinner1" value={otpInput} onChange={handleOptInputChange} style={{backgroundColor: "rgb(6, 10, 23)",color:"orange",fontWeight:"bold",border:"2px solid white",marginTop:"20px",paddingTop:"20px",paddingBottom:"20px",paddingLeft:"20px", paddingRight:"20px", textAlign:"center"}}></input>
+            <p style={{color:"green",marginTop:"10px"}}>{res}</p>
+            <p style={{color:"red",marginTop:"10px"}}>{mess}</p>
             <button
             type="submit"
-            style={{width:"50%",marginTop:"30px"}}
+            style={{width:"50%",marginTop:"30px", opacity: `${loading == true? "0.3": "1"}`}}
             disabled={loading}
             onClick={enterOtp}
             className="w-full bg-blue-600 rounded-lg py-2 mb-2 text-xl text-white font-bold cursor-pointer hover:bg-orange-500"
             >
-            {loading ? "Creating Account..." : "Complete"}
+            {loading ? "Please wait.." : "Send"}
             </button>
             
-            <p style={{color:"red",marginTop:"10px"}}>{res == "FAILED"? "OTP Failed.. Retry": ""}</p>
+            
             
             <p className="py-2 text-center">
-            Didn't receive email?{" "}
-            <button onClick={resendOTP} type="submit" className="text-orange-500">{"Resend OTP"}</button>
+            <button disabled={load1} onClick={resendOTP} type="submit" style={{opacity: `${load1 == true? "0.3": "1"}`}} className="text-orange-500">{load1 == true? "Resending OTP.  Please wait.." : "Resend OTP"}</button>
             </p>
             
 

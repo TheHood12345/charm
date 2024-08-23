@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoMdHeadset } from "react-icons/io";
 import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { BeatLoader } from "react-spinners"; // Ensure this package is installed
 
 export const SecondAdd = () => {
@@ -29,6 +29,15 @@ export const SecondAdd = () => {
   const decrementPaymentTime = () => setPaymentTime(paymentTime - 1);
 
   const [amount, setAmount] = useState(0);
+
+  const userToken = localStorage.getItem("userToken");
+  const  navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!userToken){
+      navigate("/login");
+    }
+  },[]);
 
   // Simulate a loading action
   const handleNextClick = async () => {

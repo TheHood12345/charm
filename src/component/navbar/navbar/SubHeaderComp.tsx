@@ -4,10 +4,20 @@ import { RowCard } from "./RowCard";
 import { Reward } from "./Reward";
 import { Latcard } from "./Latcard";
 import { SubNav } from "./SubNav";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SubHeaderComp = () => {
 
+  const navigate = useNavigate();
   const verified = localStorage.getItem("verified");
+  const userToken = localStorage.getItem("userToken");
+
+  useEffect(()=>{
+    if(!userToken){
+      navigate("/login");
+    }
+  },[]);
 
   return (
     <>

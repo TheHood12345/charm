@@ -5,37 +5,53 @@ import { useNavigate, useLocation} from "react-router-dom";
 
 export const CreatePassword = () => {
 
+
+  
+
   const [loading,setIsLoading] = useState(false);
 
 
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [userName, setUserName] = useState("");
   const [ps,setPs] = useState("");
 
-  
+  const [mes,setMes] = useState("");
 
+  const handleUserName = (e: ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+  };
   const handlePs = (e: ChangeEvent<HTMLInputElement>) => {
     setPs(e.target.value);
   };
 
   const createAccount = async()=>{
     setIsLoading(true);
-    await axios.post("",{
-      email: location.state.email.trim(),
-      country: location.state.country.trim(),
+    await axios.post("https://chambsexchange.onrender.com/api/auth/set-password",{
+      email: location.state.email,
+      userName: userName.trim(),
       password: ps.trim()
-    }).then((response)=>{
+    })
+    .then((response)=>{
+
       console.log("registration success: ",response.data);
       setIsLoading(false);
       
-      if(response.data.status == "SUCCESS"){
-        navigate("/home");
+      if(response.data.message == "Signup successful"){
+        setMes("account created");
+        navigate("/login");
       }
-    }).catch((err)=>{
-      console.log("registeration faild: ", err)
+      if(response.data.data.message == "Username is already taken, please choose another one."){
+        setMes("User name already exist");
+      }
+    })
+    .catch((err)=>{
+      setIsLoading(false);
+      console.log("registration faild: ", err)
     });
   }
+
  
 
 
@@ -47,12 +63,24 @@ export const CreatePassword = () => {
         <div className="flex justify-center mb-6">
           <img src={logo} alt="Logo" className="h-[50px]" />
         </div>
-        <h1 className="text-2xl mt-3 font-bold text-center">
+        <h1 className="text-2xl py-4 mt-3 font-bold text-center">
           Create your Password
         </h1>
-          <div className="mb-4" style={{paddingTop:"30px"}}>
+
+          <div className="mb-4">
             <input
-              type="password" style={{paddingTop:"20px",paddingBottom:"20px",color:"white"}}
+              type="text"
+              name="userName"
+              placeholder="Create a user name"
+              value={userName}
+              onChange={handleUserName}
+              className="w-full py-2 rounded-md border bg-transparent p-2 outline-none hover:border-green-400"
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              type="password"
               name="password"
               placeholder="Password"
               value={ps}
@@ -60,7 +88,8 @@ export const CreatePassword = () => {
               className="w-full py-2 rounded-md border bg-transparent p-2 outline-none hover:border-green-400"
             />
           </div>
-          <p>{ps}</p>
+
+          <center><address>{mes}</address></center>
        
           {
             loading == false?
@@ -75,7 +104,7 @@ export const CreatePassword = () => {
           type="submit" style={{opacity:"0.3"}}
           className="w-full bg-[#1DD55E] rounded-lg py-2 mb-2 text-xl text-white font-bold cursor-pointer hover:bg-orange-500"
         >
-          "Creating account..."
+          Creating account..
         </button>)
           }
           

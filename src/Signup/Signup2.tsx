@@ -16,8 +16,6 @@ const [con,setCon] = useState("");
 
 const navigate = useNavigate();
 
-  
-
   const handleEmail =(e: ChangeEvent<HTMLInputElement>)=>{
     setEmail(e.target.value);
     console.log(email);
@@ -42,7 +40,7 @@ const navigate = useNavigate();
     console.log(`country: ${con}, email: ${email}`);
     setIsLoading(true);
     await axios.post("https://chambsexchange.onrender.com/api/auth/request-otp",{
-        email: email,
+        email: email.trim(),
         country: con
     },{
         headers: {
@@ -50,8 +48,8 @@ const navigate = useNavigate();
         }
     }).then((response)=>{
         setIsLoading(false);
-        console.log(response.data);
-        navigate("/otp", {state:{email: email}});
+        console.log("user data is:  ", response.data);
+        navigate("/otp", {state:{email: response.data.data.email,userId: response.data.data.userId}});
       }
       ).catch((e)=>{
             setIsLoading(false);
@@ -181,7 +179,7 @@ const navigate = useNavigate();
           type="submit" style={{opacity:"0.3"}}
           className="w-full bg-[#1DD55E] rounded-lg py-2 mb-2 text-xl text-white font-bold cursor-pointer hover:bg-orange-500"
         >
-          "Submitting details..."
+          Submitting details...
         </button>
           }
           

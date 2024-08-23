@@ -68,6 +68,12 @@ export const PostAdd = () => {
         console.log(err)});
   }
 
+  useEffect(()=>{
+    if(!userToken){
+      navigate("/login");
+    }
+  },[]);
+
 
   const buyAd = async()=>{
     setLoading(true);

@@ -39,16 +39,20 @@ export const Spot11 = () => {
 
   const userToken = localStorage.getItem("userToken");
 
-  const [logout] = useState(false);
+  //const [logout] = useState(false);
+
+  const [expired1,setExpired1] = useState(false);
 
 
-  let [ran,setRan] = useState(Math.random() * 4000);
+  // let [ran,setRan] = useState(Math.random() * 4000);
 
-  useEffect(()=>{
-     setInterval(()=>{
-      setRan(Math.random() * 4000);
-     },1000);
-  },[])
+  // useEffect(()=>{
+  //   const interval = setInterval(()=>{
+  //     setRan(Math.random() * 4000);
+  //    },1000);
+
+  //    return ()=> clearInterval(interval);
+  // },[ran])
 
   useEffect(()=>{
     const minValues = [0,7,14];
@@ -65,7 +69,7 @@ export const Spot11 = () => {
 
       minIndex = (minIndex + 1) % minValues.length;
       maxIndex = (maxIndex + 1) % maxValues.length;
-    }, ran);
+    }, 3000);
 
     return () => clearInterval(intervalId);
   },[]);
@@ -90,7 +94,8 @@ export const Spot11 = () => {
         return clearTimeout(timer);
       }
     }else{
-      navigate("/");
+      //navigate("/");
+      setExpired1(true);
     }
     },[]);
 
@@ -130,7 +135,7 @@ export const Spot11 = () => {
   
 
   const fetchPending1 = async()=>{
-    await axios.get(`https://chambsexchange.onrender.com/api/spot/all-spot-orders/${location.state.choosen_coin.symbol}`,{
+    await axios.get(`https://chambsexchange.onrender.com/api/spot/spot-order/${location.state.choosen_coin.symbol}`,{
       headers:{
         Authorization: `Bearer ${userToken}`
       }
@@ -160,7 +165,7 @@ export const Spot11 = () => {
       amount: amount,
       tradeType: tradeType,
       orderType: orderType,
-      limitPrice: limitPrice,
+      limitPrice: limitPrice.toFixed(4),
       amountType: amountType
     },
   {
@@ -318,7 +323,7 @@ export const Spot11 = () => {
       <div className="flex justify-between items-center">
           <button className="bg-green-500 hover:bg-orange-500 px-10 py-2 rounded-md">Spot</button>
           {
-            logout == false?
+            expired1 == false?
             (<Link to="/pp">
             <button className="bg-transparent border border-green-500 b-green-500 hover:bg-green-500 px-10 py-2 rounded-md">P2P</button>
           </Link>):
@@ -356,21 +361,21 @@ export const Spot11 = () => {
               <div className="mt-4">
 
                 {
-                  spot_order.sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                  spot_order.sort((a,b)=> b.limitPrice - a.limitPrice/*new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()*/).map((item,index)=>(
                     <>
                     {
                       item.asset == location.state.choosen_coin.symbol.toUpperCase() && item.tradeType == "sell" && index < index_max && index > index_min?
                       <div key={index} className="flex justify-between ">
                         <h1 onClick={()=>{
                           if(tradeType == "buy"){
-                            setLimitPrice(item.executionPrice);
+                            setLimitPrice(item.limitPrice);
                           }
-                        }} style={{color:"red",fontWeight:"bold",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600">{item.executionPrice.toFixed(4)}</h1>
+                        }} style={{color:"red",fontWeight:"bold",backgroundColor:"rgba(128,0,0,0.5)"}} className="text-red-600 text-sm">{item.limitPrice.toFixed(4)}</h1>
                         <p  onClick={()=>{
                           if(tradeType == "buy"){
                             setAmount(item.amount);
                           }
-                        }}  style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(128,0,0,0.1)"}} className="text-red-600 bg-red-500">{item.amount.toFixed(1)}</p>
+                        }}  style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(128,0,0,0.5)"}} className="text-red-600 text-sm bg-red-500">{chambsPrice.currentPrice < 2 ? item.amount.toFixed(6) :item.amount.toFixed(3)}</p>
                       </div>:
                       null
                     }
@@ -388,7 +393,7 @@ export const Spot11 = () => {
             <div className="bg-black">
 
               {
-                spot_order.sort((a,b)=> new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((item,index)=>(
+                spot_order.sort((a,b)=> b.limitPrice - a.limitPrice/*new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()*/).map((item,index)=>(
                   <>
                   {
                     item.asset == location.state.choosen_coin.symbol.toUpperCase() && item.tradeType == "buy" && index < index_max && index > index_min?
@@ -396,14 +401,14 @@ export const Spot11 = () => {
                       <div key={index} className="flex justify-between ">
                         <h1 onClick={()=>{
                           if(tradeType == "sell"){
-                            setLimitPrice(item.executionPrice);
+                            setLimitPrice(item.limitPrice);
                           }
-                        }} style={{color:"green",fontWeight:"bold",backgroundColor:"rgba(0,128,0,0.1)"}}  className="text-green-600 bg-green-500">{item.executionPrice.toFixed(4)}</h1>
+                        }} style={{color:"green",fontWeight:"bold",backgroundColor:"rgba(0,128,0,0.5)"}}  className="text-green-600 text-sm bg-green-500">{item.limitPrice.toFixed(4)}</h1>
                         <p onClick={()=>{
                           if(tradeType == "sell"){
                             setAmount(item.amount);
                           }
-                        }} style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(0,128,0,0.1)"}} className="text-green-600  bg-green-500">{item.amount.toFixed(1)}</p>
+                        }} style={{color:"white",fontWeight:"bold",paddingLeft:"12px",backgroundColor:"rgba(0,128,0,0.5)"}} className="text-green-600 text-sm bg-green-500">{chambsPrice.currentPrice < 2 ? item.amount.toFixed(6) :item.amount.toFixed(3)}</p>
                       </div>):
                     null
                   }
@@ -539,8 +544,16 @@ export const Spot11 = () => {
               </div>
             </div> */}
 
-            <div className="mt-4">
-              <button
+            <div className="mt-4">  
+            {
+                expired1 == true?
+                (<Link to="/login" style={{fontWeight:"bold",paddingLeft:"20px",paddingRight:"20px"}}
+                className={`${buy==true? "bg-green-700": "bg-red-700"} w-full py-2 rounded-md text-white transition duration-200 ease-in-out transform hover:scale-10`}
+                
+              >
+                {"LOGIN"}
+              </Link>):
+              (<button
                 onClick={
                     makeSpot
                 } style={{fontWeight:"bold",opacity:`${isBuying==true ? 0.3: 1}`}}
@@ -548,7 +561,8 @@ export const Spot11 = () => {
                 disabled={isBuying}
               >
                 {isBuying==true ? "Processing Request" : buy==true? "BUY": "SELL"}
-              </button>
+              </button>)
+              }
             </div>
           </div>
         </div>
@@ -556,7 +570,7 @@ export const Spot11 = () => {
 
 
         {
-          logout == false?
+          expired1 == false?
           (<div style={{marginTop:"40px",width:"100%",paddingRight:"10px",paddingLeft:"10px",paddingBottom:"40px",paddingTop:"40px",backgroundColor:'black'}}>
           <div style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <h2 style={{textAlign:"end",cursor:"pointer",color: "white",paddingLeft:"20px",paddingRight:"20px",borderRadius:"5px",fontWeight:"bold"}}>Assets</h2>

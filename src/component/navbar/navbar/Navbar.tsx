@@ -24,7 +24,7 @@ export const Navbar = () => {
           <FaCircleUser size={25} onClick={handleopen} />
         </div>
         {open ? (
-          <div className="absolute top-[60px] left-0 bg-white text-slate-800 py-4 p-2 flex flex-col m-2 rounded-lg min-w-[80%]">
+          <div style={{color:"white"}} className="absolute top-[60px] left-0 bg-black text-slate-800 py-4 p-2 flex flex-col m-2 rounded-lg min-w-[80%]">
             <Link to="/login" className="py-2 font-bold">
               Login
             </Link>

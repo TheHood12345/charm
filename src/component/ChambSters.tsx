@@ -4,6 +4,7 @@ import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { IoMdHeadset } from "react-icons/io";
 import { TfiGift } from "react-icons/tfi";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 interface TimeRemaining {
@@ -33,6 +34,17 @@ export const ChambSters = () => {
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(calculateTimeRemaining());
   const [chal,setChal] = useState("Join challenge");
 
+  const [notify1,setNotify1] = useState(false);
+
+  const navigate = useNavigate();
+  const userToken = localStorage.getItem("userToken");
+
+  useEffect(()=>{
+    if(!userToken){
+      navigate("/login");
+    }
+  },[]);
+
 
 
   useEffect(() => {
@@ -54,6 +66,7 @@ export const ChambSters = () => {
 
   return (
     <div className="relative min-h-screen" >
+      
       {/* Header */}
       <div className="py-3 fixed top-0 w-full bg-gray-950 z-10 flex justify-between items-center p-2 text-white">
         <Link to="/subhead">
@@ -64,7 +77,8 @@ export const ChambSters = () => {
       </div>
 
       <div className="text-white bg-slate-950  mt-20 min-h-screen lg:hidden">
-        
+        <div
+        style={{width:"100%",paddingBottom:"20px",paddingTop:"20px",backgroundColor:"rgba(0,0,0,0.9)",display:`${notify1 == true? "flex": "none"}`,position:"fixed",flexDirection:"row",alignItems:"center",justifyContent:"center",color:"green",fontWeight:"bold"}}>Copied successfully !!</div>
         
 
         <div className=" px-4 p-2">
@@ -148,7 +162,7 @@ export const ChambSters = () => {
             </p>
           </div>
 
-          <div style={{paddingBottom:"200px"}}  className="flex hover:bg-blue-400 cursor-pointer bg-slate-800 rounded-md py-2 mt-2 p-2">
+          <div style={{paddingBottom:"200px"}}  className="flex cursor-pointer bg-slate-800 rounded-md py-2 mt-2 p-2">
             <div className="flex items-center justify-between  p-1 flex-col">
               <h1 className="flex items-center text-xl font-bold gap-2">
                 <TfiGift size={20} />
@@ -158,7 +172,14 @@ export const ChambSters = () => {
                 Invite a minimum of 3 friends and family to join chambit, completing a minimum of 10 transactions and above before the next distribution date.
               </p>
               <hr/>
-              <p className="mt-4 underline text-blue-500">
+              <p className="mt-4 underline text-blue-500" onClick={()=>{
+                navigator.clipboard.writeText(`${localStorage.getItem("referralLink")}`).then(()=>{
+                  setNotify1(true);
+                  setTimeout(()=>{
+                      setNotify1(false);
+                  },2000);
+                });
+              }}>
                 {localStorage.getItem("referralLink")}
               </p>
             </div>

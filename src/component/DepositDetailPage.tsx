@@ -84,7 +84,14 @@ export const DepositDetailPage = () => {
           </div>
           <div className="p-2 mt-4">
             {blockchain.map((item, index) => (
-              <div
+              
+              <>
+              {
+                location.state == "CHAMBS".toUpperCase() && item.name == "solana".toLowerCase() ?
+
+                null:
+
+              (<div
                 key={index}
                 onClick={() => {
                   navigate("/depositview", {
@@ -99,7 +106,12 @@ export const DepositDetailPage = () => {
                 <p key={index} className="text-sm font-semibold mb-4">
                   {item.name}
                 </p>
-              </div>
+              </div>)
+
+
+
+                }
+              </>
             ))}
           </div>
         </div>

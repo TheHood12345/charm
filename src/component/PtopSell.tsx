@@ -15,6 +15,12 @@ export const PtopSell = () => {
   // };
   const userToken = localStorage.getItem("userToken");
 
+  useEffect(()=>{
+    if(!userToken){
+      navigate("/login");
+    }
+  },[]);  
+
   const [ads, set_ads] = useState({ads:[{adType:"",assetToTrade:"",amount:12,status:"",priceMargin:10,userName:"",tradeRate:0,currencyCode: "",orderLimit:{min:0,max:0},_id:0,adStatus: ""}]});
 
   useEffect(()=>{

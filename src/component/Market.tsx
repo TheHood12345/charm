@@ -90,7 +90,7 @@ export const Market = () => {
         {
           coins.map((coin,index)=>(
 
-            <Link to={logout == false? `/spot11?pair=${coin.symbol.toUpperCase()}/USDT`: "/login"} state={{"choosen_coin":coin}} key={index} style={{marginLeft:"10px",display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginTop:"20px"}} className="flex justify-around pb-2 items-center w-full">
+            <Link to={logout == false? `/spot11?pair=${coin.symbol.toUpperCase()}/USDT`: `/spot11?pair=${coin.symbol.toUpperCase()}/USDT`} state={{"choosen_coin":coin}} key={index} style={{marginLeft:"10px",display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginTop:"20px"}} className="flex justify-around pb-2 items-center w-full">
                 <h4 style={{width:"40%"}}>
                   <div>{coin.symbol.toUpperCase()}/USDT</div>
                 {/* <div>volume</div> */}

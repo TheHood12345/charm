@@ -4,7 +4,7 @@ import { IoMdHeadset } from "react-icons/io";
 import logo from "../asset/NEWLOGO-removebg-preview (1).png";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { MdArrowDropDown } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const Advert = () => {
@@ -19,6 +19,14 @@ export const Advert = () => {
   const [is_sell,set_is_sell] = useState(true);
 
   const [assetList,setAssetList] = useState([""]);
+
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!userToken){
+      navigate("/login");
+    }
+  },[]);
 
 
   // const [ads,setAds] = useState({
